@@ -8,4 +8,14 @@ class WorldMap():
     def __init__(self, image):
         self.src_image = pygame.image.load(image)
 
-background = pygame.image.load('bg.png')
+class EventController():
+    def handleEvents(self):
+        event_list = pygame.event.get() 
+
+        for event in event_list:
+            if event.type == pygame.MOUSEBUTTONUP:
+                clicked_pos = pygame.mouse.get_pos()
+
+                # TODO: Check for event collision and handle
+
+game_running = 1
