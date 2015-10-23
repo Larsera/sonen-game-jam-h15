@@ -73,17 +73,17 @@ class World():
                     self.world[i][j] = 5
 
     # Populate desert with pyramid
-        target = 1
-        count = 0
-        x = 0
-        y = 0
-        while target != 0 and target < 50:
-            x = random.randint(0, self.size_x)
-            y = random.randint(0, self.size_y)
-            target = self.world[y][x]
-            count = count + 1
+        # target = 1
+        # count = 0
+        # x = 0
+        # y = 0
+        # while target != 0 and target < 50:
+        #     x = random.randint(0, self.size_x)
+        #     y = random.randint(0, self.size_y)
+        #     target = self.world[y][x]
+        #     count = count + 1
 
-        self.world[y][x] = 6
+        # self.world[y][x] = 6
 
 
     def test(self):
@@ -103,7 +103,7 @@ class World():
                     print "@",
                 if self.world[i][j] == 6:
                     print "^",
-                    print ""
+            print ""
 
 
     def draw(self):

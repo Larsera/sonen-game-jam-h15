@@ -11,15 +11,16 @@ class Character():
         self.screen = screen
         src_image = pygame.image.load(image)
         self.image = src_image.convert()
-		self.health = 100
-		self.poisoned = 0
+        self.position = position
+	self.health = 100
+	self.poisoned = 0
         self.alive = True
         self.damage = 10
 
         self.position = position
     
     def draw(self):
-        self.screen.blit(self.image, position)
+        self.screen.blit(self.image, self.position)
 
     def update(self):
         self.position = self.position
@@ -62,7 +63,5 @@ class Character():
         if chance + tile.danger_chance >= 60:
             found_danger()
             chance -= CHANCE_DEC
-
-    # def update():
 
 

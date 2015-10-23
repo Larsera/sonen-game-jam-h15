@@ -25,8 +25,7 @@ class Block(pygame.sprite.Sprite):
 
 
 events = EventController()
-worldpath = os.path.join('img', 'tileset.jpg')
-world = World(32, 32, worldpath, screen)
+world = World(32, 32, os.path.join('img', 'tileset.jpg'), screen)
 character = Character(os.path.join('img', 'character.png'), (10, 10), screen)
 
 running = 1
