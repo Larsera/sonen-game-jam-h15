@@ -1,5 +1,6 @@
 import pygame
 import random
+from tiles import Tile
 from pygame.locals import *
 from pygame import Rect
 
