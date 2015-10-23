@@ -16,7 +16,7 @@ class EventController():
 
 class Block(pygame.sprite.Sprite):
     def __init__(self, image, width, height):
-        pygame.sprrite.Sprite.__init__(self)
+        pygame.sprite.Sprite.__init__(self)
         self.src_image = pygame.image.load(image)
         self.image = self.src_image.convert()
 
