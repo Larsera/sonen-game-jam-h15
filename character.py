@@ -28,7 +28,8 @@ class Character():
         self.position = self.position
 
     def move(self, direction):
-        self.position = (0,0)
+        # TEST
+        self.position += (1,1)
 
     def take_damage(self, dmg, poison):
         if poison == True:
