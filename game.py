@@ -7,6 +7,7 @@ clock = pygame.time.Clock()
 class WorldMap():
     def __init__(self, image):
         self.src_image = pygame.image.load(image)
+        self.image = self.src_image.convert()
 
 class EventController():
     def handleEvents(self):
@@ -18,4 +19,10 @@ class EventController():
 
                 # TODO: Check for event collision and handle
 
-game_running = 1
+class Block(pygame.sprite.Sprite):
+    def __init__(self, image, width, height):
+        pygame.sprrite.Sprite.__init__(self)
+        self.src_image = pygame.image.load(image)
+        self.image = self.src_image.convert()
+
+# TODO: Game loop
