@@ -1,5 +1,8 @@
-import pygame, math, sys
+import pygame, math, sys, os
 from pygame.locals import *
+
+from world import *
+from character import *
 
 screen = pygame.display.set_mode((1366, 768))
 clock = pygame.time.Clock()
@@ -20,4 +23,17 @@ class Block(pygame.sprite.Sprite):
         self.src_image = pygame.image.load(image)
         self.image = self.src_image.convert()
 
-# TODO: Game loop
+
+events = EventController()
+worldpath = os.path.join('img', 'tileset.jpg')
+world = World(32, 32, worldpath, screen)
+character = Character(os.path.join('img', 'character.png'), (10, 10), screen)
+
+running = 1
+while running:
+    events.handleEvents()
+    character.update()
+    world.draw()
+    character.draw()
+
+pygame.quit()

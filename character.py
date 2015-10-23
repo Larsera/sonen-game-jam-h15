@@ -9,13 +9,16 @@ class Character():
 
     def __init__(self, image, position, screen):
         self.screen = screen
-        self.src_image = pygame.image.load(image)
+        src_image = pygame.image.load(image)
         self.image = src_image.convert()
 
         self.position = position
     
     def draw(self):
         self.screen.blit(self.image, position)
+
+    def update(self):
+        self.position = self.position
 
     def move(self, direction):
         self.position = (0,0)
