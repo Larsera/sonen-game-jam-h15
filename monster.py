@@ -1,9 +1,9 @@
 
 class Monster(self):
 
-    def __init__(self, (hp, dmg, acp, ven), name):
+    def __init__(self, name="none", hp=1, acp=1, ven=False, dmg_min=0, dmg_max=0):
         self.hp = hp
-        self.damage = dmg
+        self.damage = range(dmg_min, dmg_max)
         self.action_points = acp
         self.venomous = ven
         self.name = name
