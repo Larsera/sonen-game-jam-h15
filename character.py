@@ -12,7 +12,7 @@ class Character():
         src_image = pygame.image.load(image)
         self.image = src_image.convert()
         self.position = position
-	    self.health = 100
+	self.health = 100
     	self.poisoned = 0
         self.hunger = 100
         self.thirst = 100
@@ -28,6 +28,10 @@ class Character():
 
     def update(self):
         self.position = self.position
+        if self.hunger <= 0: self.alive = False
+        if self.thirst <= 0: self.alive = False
+        if self.health <= 0: self.alive = False
+
 
     # def move(self, direction):
     #     # TEST

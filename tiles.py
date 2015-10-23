@@ -1,5 +1,5 @@
 
-class Tile(self):
+class Tile():
 
     def __init__(self, (au, dc, sc, ic, wc), name):
         self.actions_used = au
