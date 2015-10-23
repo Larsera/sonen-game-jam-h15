@@ -11,6 +11,8 @@ class Character():
         self.screen = screen
         src_image = pygame.image.load(image)
         self.image = src_image.convert()
+        self.hunger = 100
+        self.thirst = 100
 		self.health = 100
 		self.poisoned = 0
         self.alive = True
