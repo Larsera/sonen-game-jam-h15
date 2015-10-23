@@ -77,12 +77,14 @@ class World():
 
 		# Populate desert with pyramid
 		target = 1
+		count = 0
 		x = 0
 		y = 0
-		while target != 0:
+		while target != 0 and < 50:
 			x = random.randint(0, self.size_x)
 			y = random.randint(0, self.size_y)
 			target = self.world[y][x]
+			count = count + 1
 
 		self.world[y][x] = 6
 
