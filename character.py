@@ -14,6 +14,8 @@ class Character():
         self.position = position
 	self.health = 100
 	self.poisoned = 0
+        self.hunger = 100
+        self.thirst = 100
         self.alive = True
         self.damage = 10
 
