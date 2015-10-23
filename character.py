@@ -27,9 +27,8 @@ class Character():
     def update(self):
         self.position = self.position
 
-    def move(self, direction):
-        # TEST
-        self.position += (1,1)
+    # def move(self, direction):
+    #     # TEST
 
     def take_damage(self, dmg, poison):
         if poison == True:
