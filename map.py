@@ -7,10 +7,8 @@ import os
 TILE_W = 32
 TILE_H = 32
 
-TILESETFILE = "tmp"
-
 class Map():
-	def __init__(self, size_x, size_y, screen):
+	def __init__(self, size_x, size_y, image, screen):
 		random.seed()
 		self.screen = screen
 		self.size_x = size_x
@@ -19,7 +17,7 @@ class Map():
 		self.scrolling = False
 
 #Need tilset
-		self.load_tileset(TILESETFILE)
+		self.load_tileset(image)
 		self.createmap()
 
 	def scroll(self, rel):
@@ -29,7 +27,7 @@ class Map():
 				self.offset[0] + rel[0],
 				self.offset[1] + rel[1])
 
-	def load_tileset(self, image="tileset.bmp"):
+	def load_tileset(self, image):
 		self.tileset = pygame.image.load(os.path.join("img", image)).convert()
 		self.rect = self.tileset.get_rect()
 
