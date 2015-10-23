@@ -12,12 +12,14 @@ class Character():
         src_image = pygame.image.load(image)
         self.image = src_image.convert()
         self.position = position
-	self.health = 100
-	self.poisoned = 0
+	    self.health = 100
+    	self.poisoned = 0
         self.hunger = 100
         self.thirst = 100
         self.alive = True
         self.damage = 10
+        self.actions = 5
+        self.remaining_actions = self.actions
 
         self.position = position
     
@@ -45,6 +47,8 @@ class Character():
     def is_alive(self):
         return self.alive
 
+    def get_actions(self):
+        return self.remaining_actions
 
     def search(self, tile):
         random.seed()
