@@ -11,6 +11,10 @@ class Character():
         self.screen = screen
         src_image = pygame.image.load(image)
         self.image = src_image.convert()
+		self.health = 100
+		self.poisoned = 0
+        self.alive = True
+        self.damage = 10
 
         self.position = position
     
@@ -22,6 +26,22 @@ class Character():
 
     def move(self, direction):
         self.position = (0,0)
+
+    def take_damage(self, dmg, poison):
+        if poison == True:
+            self.poisoned = self.poisoned + 1
+
+        self.health -= dmg
+
+        if self.health <= 0:
+            self.alive = False
+
+    def deal_damage(self, creature):
+        creature.take_damage(self.damage)
+
+    def is_alive(self):
+        return self.alive
+
 
     def search(self, tile):
         random.seed()
