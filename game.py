@@ -19,6 +19,8 @@ class Game():
         self.screen = pygame.Surface((RES_X - config.SIDEBAR_WIDTH, RES_Y - config.DOWNBAR_HEIGHT))
         self.clock = pygame.time.Clock()
 
+        self.turns_survd = 0
+
         self.TILE_GRID_WIDTH = self.screen.get_width()/config.TILE_W
         self.TILE_GRID_HEIGHT = self.screen.get_height()/config.TILE_H
         self.sounds = sound_player()
@@ -59,6 +61,7 @@ class Game():
                     self.newturn()
 
     def newturn(self):
+        self.turns_survd += 1
         self.character.update()
 
     def run(self):
