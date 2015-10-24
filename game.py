@@ -66,12 +66,27 @@ class Game():
             elif self.dirbtn.w_rect.collidepoint(clicked_pos):
                 self.character.move('W', self.world.get_cur_tile(self.character.position))
 
+        def handleKeyEvent(event):
+            if event.key == pygame.K_ESCAPE:
+                pygame.quit()
+            elif event.key == pygame.K_w or event.key == pygame.K_UP:
+                self.character.move('N', self.world.get_cur_tile(self.character.position))
+
+            elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
+                self.character.move('S', self.world.get_cur_tile(self.character.position))
+
+            elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+                self.character.move('E', self.world.get_cur_tile(self.character.position))
+
+            elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
+                self.character.move('W', self.world.get_cur_tile(self.character.position))
+
         for event in event_list:
             if event.type == pygame.MOUSEBUTTONUP:
                 handleMouseEvent(event)
 
             elif event.type == pygame.KEYUP:
-                pygame.quit()
+                handleKeyEvent(event)
 
             elif event.type == config.COMBAT:
                 self.state = "combat"
