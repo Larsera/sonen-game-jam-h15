@@ -37,6 +37,7 @@ SOUND_HIT = "hit.wav"
 SOUND_GAMEOVER = "gameover.wav"
 
 #images
+TILES = os.path.join('img', 'tilegrid.png')
 SIDEBAR = os.path.join('img', 'panel_crystallized.png')
 BUTTON = os.path.join('img', 'button_crystallized.png')
 STATS = os.path.join('img', 'tileset_old.jpg')

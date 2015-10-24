@@ -22,7 +22,7 @@ class Game():
         self.TILE_GRID_WIDTH = self.screen.get_width()/config.TILE_W
         self.TILE_GRID_HEIGHT = self.screen.get_height()/config.TILE_H
         self.sounds = sound_player()
-        self.world = World(self.TILE_GRID_HEIGHT, self.TILE_GRID_WIDTH, os.path.join('img', 'testgrid.png'), self.screen)
+        self.world = World(self.TILE_GRID_HEIGHT, self.TILE_GRID_WIDTH, TILES, self.screen)
         self.character = Character(os.path.join('img', 'character.png'), (10, 10), self.screen)
 
         self.sidebar = Sidebar(_screen, config.SIDEBAR) 
