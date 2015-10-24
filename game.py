@@ -19,11 +19,11 @@ class Game():
         self.screen = pygame.Surface((RES_X - config.SIDEBAR_WIDTH, RES_Y - config.DOWNBAR_HEIGHT))
         self.clock = pygame.time.Clock()
 
-        self.TILE_GRID_WIDTH = self.screen.get_width()/config.TILE_W
-        self.TILE_GRID_HEIGHT = self.screen.get_height()/config.TILE_H
-        self.sounds = sound_player()
-        self.world = World(self.TILE_GRID_HEIGHT, self.TILE_GRID_WIDTH, TILES, self.screen)
-        self.character = Character(os.path.join('img', 'character.png'), (10, 10), self.screen)
+        self.TILE_GRID_WIDTH        = self.screen.get_width()/config.TILE_W
+        self.TILE_GRID_HEIGHT       = self.screen.get_height()/config.TILE_H
+        self.sounds                 = sound_player()
+        self.world                  = World(self.TILE_GRID_HEIGHT, self.TILE_GRID_WIDTH, TILES, self.screen)
+        self.character              = Character(os.path.join('img', 'character.png'), (10, 10), self.screen)
 
         self.sidebar                = Sidebar(_screen, config.SIDEBAR) 
         self.button_search          = Button(self.sidebar, 5, config.BUTTON, "Search")
@@ -34,7 +34,9 @@ class Game():
         self.stats                  = Stats(self.sidebar, 1, config.STATS, self.character)
 
 # downbar = Downbar(_screen,os.path.join('img', 'tileset_old.jpg'))
-        self.dirbtn = DirectionButtons(_screen, 50, 630, os.path.join('img', 'tileset_old.jpg'))
+        self.dirbtn = DirectionButtons(_screen, 50,
+                RES_Y - (config.DIRBTN_SIZE * 3 + config.DIRBTN_PADDING*2), 
+                os.path.join('img', 'tileset_old.jpg'))
     
     def handleEvents(self):
         event_list = pygame.event.get() 
