@@ -30,15 +30,15 @@ class Tile():
 
     def create_monster_id_dict(self, monster_list):
         for c, m in monster_list:
-            cnt = 1
+            cnt = 0
             while cnt < c:
-                self.monster_dict[self.tot_monster_chance + cnt] = m
                 cnt += 1
+                self.monster_dict[self.tot_monster_chance + cnt] = m
 
             self.tot_monster_chance += c
 
 # TODO: real values
-def get_tile(ident, monster_list=[(0, Monster())]):
+def get_tile(ident, monster_list=[(1, Monster())]):
     return {0 : Tile((0, 0, 0, 0, 0, 0), "empty desert", monster_list),
             1 : Tile((0, 0, 0, 0, 0, 0), "big rock", monster_list),
             2 : Tile((0, 0, 0, 0, 0, 0), "small rock", monster_list),
