@@ -1,6 +1,7 @@
 import random
 import pygame
 import config
+import combat_handler
 from pygame.locals import *
 from pygame import Rect
 
@@ -34,7 +35,7 @@ class Character():
         self.screen.blit(self.image, x, y)
 
     def update(self):
-        self.position = self.position
+        self.remaining_actions = self.actions
 
         for i in self.food:
             if self.hunger + i.amount <= 100:
@@ -50,28 +51,47 @@ class Character():
         if self.thirst <= 0: self.alive = False
         if self.health <= 0: self.alive = False
 
+    def dec_rem_act(self, amount):
+        a = self.remaining_actions - amount
+        if a == 0:
+            pygame.event.post(pygame.USEREVENT, {1 : "newturn"})
+        elif a > 0:
+            self.remaining_actions = a
+        else:
+            return False
+
+        return True
+
+
     def defend(self):
+        self.dec_rem_act(1)
         return -self.deal_damage()
 
     def flee(self):
+        self.dec_rem_act(1)
         random.seed()
         if random.randint(1, 10) == 7:
             return 1
         else:
             return 0
 
-    def move(self, direction):
-        x, y = self.position
-        if direction == 'N':
-            x -= 1
-        elif direction == 'S':
-            x += 1
-        elif direction == 'w':
-            y -= 1
-        elif direction == 'E':
-            y += 1
+    def move(self, direction, curtile):
+        if self.dec_rem_act(curtile.actions_used):
+            x, y = self.position
+            if direction == 'N':
+                x -= 1
+            elif direction == 'S':
+                x += 1
+            elif direction == 'w':
+                y -= 1
+            elif direction == 'E':
+                y += 1
 
-        self.position = x, y
+            self.position = x, y
+            return True
+
+        else:
+            return False
             
 
     def take_damage(self, dmg, poison):
@@ -87,6 +107,7 @@ class Character():
             self.alive = False
 
     def deal_damage(self):
+        self.dec_rem_act(1)
         random.seed()
         return random.randint(self.min_damage, self.max_damage)
 
@@ -113,7 +134,7 @@ class Character():
             chance -= config.CHANCE_DEC
 
         if chance + tile.danger_chance >= 60:
-            found_danger()
+            found_danger(tile)
             chance -= config.CHANCE_DEC
 
     def find_food(self, foodstuff):
@@ -125,5 +146,6 @@ class Character():
     def find_medicine(self, medication):
         self.medicine.append(medication)
 
-    #def found_danger(self):
-        
+    def found_danger(self, tile):
+        pygame.event.post(pygame.USEREVENT, {1 :"combat"})
+        combat(self, tile.get_monster)

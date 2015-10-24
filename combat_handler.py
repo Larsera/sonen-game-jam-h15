@@ -1,5 +1,4 @@
-from character import Character
-from monster import Monster
+import pygame
 
 class combat():
 
@@ -8,8 +7,17 @@ class combat():
         self.mon = mon
 
         while not self.combat_turn:
-            if not self.char.is_alive() or not self.mon.is_alive():
+            if not self.char.is_alive():
+                pygame.event.post(pygame.USEREVENT, {1 :"gameover"})
                 break
+            elif not self.mon.is_alive():
+                pygame.event.post(pygame.USEREVENT, {1 : "normal",
+                                                     2 : "win"})
+            else:
+                if self.char.remaining_actions == 0 and self.mon.remaining_actions == 0:
+                    pygame.event.post(pygame.USEREVENT, {1 : "newturn"})
+                    self.mon.update()
+
 
     def combat_turn(self):
         if self.char.action_points_left > 0:
