@@ -52,16 +52,21 @@ class Game():
                 pygame.quit()
             elif event.type == pygame.USEREVENT:
                 if event.dict[1] == "startcombat":
-                    state = "combat"
+                    self.state = "combat"
                 elif event.dict[1] == "gameover":
-                    state = "gameover"
+                    self.state = "gameover"
+                elif event.dict[1] == "newturn":
+                    self.newturn()
+
+    def newturn(self):
+        self.character.update()
+
     def run(self):
         running = 1
         self.state = "normal" 
         while running:
             self.screen.fill((255, 204, 102))
             self.handleEvents()
-            self.character.update()
             self.world.draw()
             self.sidebar.draw()
             if self.state == "normal":

@@ -15,7 +15,7 @@ class combat():
                                                      2 : "win"})
             else:
                 if self.char.remaining_actions == 0 and self.mon.remaining_actions == 0:
-                    pygame.event.post(pygame.USEREVENT, {1 : "new_turn"})
+                    pygame.event.post(pygame.USEREVENT, {1 : "newturn"})
                     self.mon.update()
 
 
