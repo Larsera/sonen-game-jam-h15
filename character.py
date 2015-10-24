@@ -51,12 +51,24 @@ class Character():
         if self.thirst <= 0: self.alive = False
         if self.health <= 0: self.alive = False
 
+    def dec_rem_act(self, amount):
+        a = self.remaining_actions - amount
+        if a == 0:
+            pygame.event.post(pygame.USEREVENT, {1 : "newturn"})
+        elif a > 0:
+            self.remaining_actions = a
+        else:
+            return False
+
+        return True
+
+
     def defend(self):
-        self.remaining_actions -= 1
+        self.dec_rem_act(1)
         return -self.deal_damage()
 
     def flee(self):
-        self.remaining_actions -= 1
+        self.dec_rem_act(1)
         random.seed()
         if random.randint(1, 10) == 7:
             return 1
@@ -64,7 +76,7 @@ class Character():
             return 0
 
     def move(self, direction, curtile):
-        if self.remaining_actions >= curtile.actions_used:
+        if self.dec_rem_act(curtile.actions_used):
             x, y = self.position
             if direction == 'N':
                 x -= 1
@@ -74,8 +86,6 @@ class Character():
                 y -= 1
             elif direction == 'E':
                 y += 1
-                
-            self.remaining_actions -= curtile.actions_used
 
             self.position = x, y
             return True
@@ -97,7 +107,7 @@ class Character():
             self.alive = False
 
     def deal_damage(self):
-        self.remaining_actions -= 1
+        self.dec_rem_act(1)
         random.seed()
         return random.randint(self.min_damage, self.max_damage)
 
