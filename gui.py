@@ -100,8 +100,9 @@ class Stats():
 class Console():
     def __init__(self, surface):
         self.surface = surface
-        self.string_1= "Try find some water, ya old baboon!"
-        self.string_2= "Old text"
+        self.string_1 = "Try find some water, ya old baboon!"
+        self.string_2 = "Old text"
+        self.string_3 = "Olderest text"
         self.rect = pygame.Rect(self.surface.get_width() - config.SIDEBAR_WIDTH - config.CONSOLE_WIDTH - config.CONSOLE_PADDING,
                 self.surface.get_height() - config.DOWNBAR_HEIGHT + config.CONSOLE_PADDING,
                 config.CONSOLE_WIDTH,
@@ -110,6 +111,7 @@ class Console():
         self.font = pygame.font.Font(None, config.CONSOLE_FONT_SIZE)
         self.text_1 = self.font.render(self.string_1, 1,(255,255,255))
         self.text_2 = self.font.render(self.string_2, 1,(128,128,128))
+        self.text_3 = self.font.render(self.string_3, 1,(64,64,64))
     
     def draw(self):
         pygame.draw.rect(self.surface, (255,255,255), self.rect, config.CONSOLE_OUTLINE)
@@ -119,8 +121,11 @@ class Console():
         self.surface.blit(self.text_1, tmp)
         tmp.top += config.CONSOLE_TEXT_PADDING
         self.surface.blit(self.text_2, tmp)
+        tmp.top += config.CONSOLE_TEXT_PADDING
+        self.surface.blit(self.text_3, tmp)
     
     def push_text(self, string):
+        self.string_3 = self.string_2
         self.string_2 = self.string_1
         self.string_1 = string
 
