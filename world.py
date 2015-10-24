@@ -106,6 +106,7 @@ class World():
 
 
     def draw(self):
+        random.seed(5)
         for y in range(self.size_x):
             for x in range(self.size_y):
                 id = self.world[x][y]
@@ -118,6 +119,7 @@ class World():
                     dest.top += self.offset[1]
 
                 self.screen.blit(self.tileset, dest, src)
+        random.seed()
 
 
 # world = World(80, 40, 1)
