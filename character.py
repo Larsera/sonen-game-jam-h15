@@ -12,12 +12,13 @@ class Character():
         src_image = pygame.image.load(image)
         self.image = src_image.convert()
         self.position = position
-	self.health = 100
+        self.health = 100
     	self.poisoned = 0
         self.hunger = 100
         self.thirst = 100
         self.alive = True
-        self.damage = 10
+        self.max_damage = 10
+        self.min_damage = 5
         self.actions = 5
         self.weapom = None
         self.remaining_actions = self.actions
@@ -47,7 +48,8 @@ class Character():
             self.alive = False
 
     def deal_damage(self, creature):
-        creature.take_damage(self.damage)
+        random.seed()
+        return random.randint(self.min_damage, self.max_damage)
 
     def is_alive(self):
         return self.alive

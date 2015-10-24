@@ -15,6 +15,7 @@ class Monster():
 
     def take_damage(self, dmg):
         self.hp -= dmg
+        return self.dead()
 
     def is_alive(self):
         return self.alive
@@ -24,8 +25,6 @@ class Monster():
             self.alive = False
             self.action_points = 0
 
-        return not self.alive
-
     def deal_damage(self):
         random.seed()
         return random.randint(self.dmg_min, self.dmg_max)
@@ -34,11 +33,11 @@ class Monster():
         random.seed()
         return random.randint(0, self.venomous)
 
-def get_monster(ident):
-    return {"rattle_snake" : Monster(name="Rattle Snake", hp=20, ven=7, dmg_min=1, dmg_max=5, rarity=5, acp=3),
-            "small_scorpion" : Monster(name="Small Scorpion", hp=5, dmg_min=1, dmg_max=2, ven=10, rarity=7),
-            "big_scorpion" : Monster(name="Big Scorpion", hp=15, dmg_min=3, dmg_max=5, rarity=3, acp=5),
-            "road_runner" : Monster(name="Road Runner", hp=7, rarity=6, acp=15),
-            "coyote" : Monster(name="Coyote", hp=25, dmg_min=5, dmg_max=10, rarity=10, acp=7)}[ident]
+    def get_monster(ident):
+        return {"rattle_snake" : Monster(name="Rattle Snake", hp=20, ven=7, dmg_min=1, dmg_max=5, rarity=5, acp=3),
+                "small_scorpion" : Monster(name="Small Scorpion", hp=5, dmg_min=1, dmg_max=2, ven=10, rarity=7),
+                "big_scorpion" : Monster(name="Big Scorpion", hp=15, dmg_min=3, dmg_max=5, rarity=3, acp=5),
+                "road_runner" : Monster(name="Road Runner", hp=7, rarity=6, acp=15),
+                "coyote" : Monster(name="Coyote", hp=25, dmg_min=5, dmg_max=10, rarity=10, acp=7)}.get(ident)
 
 
