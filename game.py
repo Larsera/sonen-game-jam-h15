@@ -38,11 +38,11 @@ events = EventController()
 world = World(TILE_GRID_HEIGHT, TILE_GRID_WIDTH, os.path.join('img', 'testgrid.png'), screen)
 character = Character(os.path.join('img', 'character.png'), (10, 10), screen)
 
-sidebar = Sidebar(_screen, os.path.join('img', 'tileset_old.jpg')) 
-button = Button(sidebar, 5, os.path.join('img', 'tileset.png'), "Attack")
-button2 = Button(sidebar, 6, os.path.join('img', 'tileset_old.jpg'), "Research")
-button3 = Button(sidebar, 7, os.path.join('img', 'tileset_old.jpg'), "DIE!")
-stats = Stats(sidebar, 1, os.path.join('img', 'tileset_old.jpg'), character)
+sidebar = Sidebar(_screen, config.SIDEBAR) 
+button = Button(sidebar, 5, config.BUTTON, "Attack")
+button2 = Button(sidebar, 6, config.BUTTON2, "Research")
+button3 = Button(sidebar, 7, config.BUTTON3, "DIE!")
+stats = Stats(sidebar, 1, config.STATS, character)
 
 running = 1
 while running:

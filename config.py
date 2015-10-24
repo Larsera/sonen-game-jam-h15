@@ -1,3 +1,5 @@
+import os
+
 #Tile
 TILE_W = TILE_H = 32
 
@@ -20,3 +22,10 @@ TILE_HEIGHT = 32
 #sounds:
 SOUND_HIT = "hit.wav"
 SOUND_GAMEOVER = "gameover.wav"
+
+#images
+SIDEBAR = os.path.join('img', 'panel_crystallized.png')
+BUTTON = os.path.join('img', 'tileset.png')
+BUTTON2 = os.path.join('img', 'tileset_old.jpg')
+BUTTON3 = os.path.join('img', 'tileset_old.jpg')
+STATS = os.path.join('img', 'tileset_old.jpg')
