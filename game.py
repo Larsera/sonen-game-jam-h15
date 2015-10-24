@@ -40,6 +40,7 @@ sidebar = Sidebar(screen, os.path.join('img', 'tileset_old.jpg'))
 button = Button(sidebar, 1, os.path.join('img', 'tileset.png'), "Attack")
 button2 = Button(sidebar, 2, os.path.join('img', 'tileset_old.jpg'), "Research")
 button3 = Button(sidebar, 3, os.path.join('img', 'tileset_old.jpg'), "DIE!")
+stats = Button(sidebar, 3, os.path.join('img', 'tileset_old.jpg'), "DIE!")
 running = 1
 while running:
     screen.fill((255, 204, 102)) 
