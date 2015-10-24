@@ -29,7 +29,7 @@ class item_foodstuff():
         self.name = name
         self.amount = amount
 
-class item_medicin():
+class item_medicine():
 
     def __init__(self, name, hp_restore=0, antidote=False, hydration=0, hunger=0):
         self.name = name
