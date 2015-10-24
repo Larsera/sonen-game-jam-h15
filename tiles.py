@@ -12,9 +12,10 @@ class Tile():
 #monster_list = list of tuples (c, m)
 #c = chance
 #m = monster
-    def __init__(self, (au, dc, sc, ic, wc), name, monster_list):
+#min_monster_chance: higher = less chance of monster
+    def __init__(self, (au, dc, sc, ic, wc), name, monster_list, min_monster_chance=0):
         self.monster_dict = {}
-        self.tot_monster_chance = 0
+        self.tot_monster_chance = min_monster_chance
         self.actions_used = au
         self.danger_chance = dc
         self.shadow_chance = sc
@@ -23,10 +24,10 @@ class Tile():
         self.name = name
         self.create_monster_id_dict(monster_list)
 
-    def get_monster(self, min_chance=1):
+    def get_monster(self):
         random.seed()
-        c = random.randint(min_chance, self.tot_monster_chance)
-        return self.monster_dict[c]
+        c = random.randint(1, self.tot_monster_chance)
+        return self.monster_dict.get(c)
 
     def create_monster_id_dict(self, monster_list):
         for c, m in monster_list:
