@@ -1,5 +1,3 @@
-from character import Character
-from monster import Monster
 import pygame
 
 class combat():
