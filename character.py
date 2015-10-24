@@ -34,7 +34,7 @@ class Character():
         y *= config.TILE_H
         self.screen.blit(self.image, x, y)
 
-    def update(self):
+    def update(self, curtile):
         self.remaining_actions = self.actions
 
         for i in self.food:
@@ -88,6 +88,7 @@ class Character():
                 y += 1
 
             self.position = x, y
+            self.draw()
             return True
 
         else:
@@ -121,20 +122,20 @@ class Character():
         random.seed()
         chance = random.randint(0, 100)
 
-        if chance + tile.shadow_chance >= 50:
-            found_shadow()
+        if chance >= 100 - tile.shadow_chance*10:
+            tile.found_shadow()
             chance -= config.CHANCE_DEC
 
-        if chance + tile.water_chance >= 75:
+        if chance >= 100 - tile.water_chance*10:
             found_water()
             chance -= config.CHANCE_DEC
 
-        if chance + tile.item_chance >= 90:
+        if chance >= 100 - tile.item_chance*10:
             found_item()
             chance -= config.CHANCE_DEC
 
-        if chance + tile.danger_chance >= 60:
-            found_danger(tile)
+        if chance >= 100 - tile.danger_chance:
+            self.found_danger(tile)
             chance -= config.CHANCE_DEC
 
     def find_food(self, foodstuff):
@@ -149,3 +150,4 @@ class Character():
     def found_danger(self, tile):
         pygame.event.post(pygame.USEREVENT, {1 :"combat"})
         combat(self, tile.get_monster)
+
