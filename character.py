@@ -1,9 +1,7 @@
 import random
 import pygame
 import config
-import combat_handler
-from pygame.locals import *
-from pygame import Rect
+from combat_handler import combat
 
 class Character():
 
@@ -54,7 +52,8 @@ class Character():
     def dec_rem_act(self, amount):
         a = self.remaining_actions - amount
         if a == 0:
-            pygame.event.post(pygame.USEREVENT, {1 : "newturn"})
+            newturn = pygame.event.Event(config.NEWTURN)
+            pygame.event.post(newturn)
         elif a > 0:
             self.remaining_actions = a
         else:
@@ -82,7 +81,7 @@ class Character():
                 y -= 1
             elif direction == 'S':
                 y += 1
-            elif direction == 'w':
+            elif direction == 'W':
                 x -= 1
             elif direction == 'E':
                 x += 1
@@ -148,6 +147,7 @@ class Character():
         self.medicine.append(medication)
 
     def found_danger(self, tile):
-        pygame.event.post(pygame.USEREVENT, {1 :"combat"})
+        combatevent = pygame.event.Event(config.COMBAT)
+        pygame.event.post(combatevent)
         combat(self, tile.get_monster)
 

@@ -1,4 +1,5 @@
 import pygame
+import config
 
 class combat():
 
@@ -8,14 +9,16 @@ class combat():
 
         while not self.combat_turn:
             if not self.char.is_alive():
-                pygame.event.post(pygame.USEREVENT, {1 :"gameover"})
+                gameover = pygame.event.Event(config.GAMEOVER)
+                pygame.event.post(gameover)
                 break
             elif not self.mon.is_alive():
-                pygame.event.post(pygame.USEREVENT, {1 : "normal",
-                                                     2 : "win"})
+                win = pygame.event.Event(config.WIN)
+                pygame.event.post(win)
             else:
                 if self.char.remaining_actions == 0 and self.mon.remaining_actions == 0:
-                    pygame.event.post(pygame.USEREVENT, {1 : "newturn"})
+                    newturn = pygame.event.Event(config.NEWTURN)
+                    pygame.event.post(newturn)
                     self.mon.update()
 
 
