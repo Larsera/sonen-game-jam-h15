@@ -27,31 +27,35 @@ class Game():
         self.world = World(self.TILE_GRID_HEIGHT, self.TILE_GRID_WIDTH, TILES, self.screen)
         self.character = Character(os.path.join('img', 'character.png'), (10, 10), self.screen)
 
-        self.sidebar = Sidebar(_screen, config.SIDEBAR) 
-        self.button_search = Button(self.sidebar, 5, config.BUTTON, "Search")
-        self.button_drink_antidote = Button(self.sidebar, 6, config.BUTTON, "Drink antidote")
-        self.button_attack = Button(self.sidebar, 5, config.BUTTON, "Attack")
-        self.button_defend = Button(self.sidebar, 6, config.BUTTON, "Defend")
-        self.button_flee = Button(self.sidebar, 7, config.BUTTON, "Flee")
-
-        self.stats = Stats(self.sidebar, 1, config.STATS, self.character)
+        self.sidebar                = Sidebar(_screen, config.SIDEBAR) 
+        self.button_search          = Button(self.sidebar, 5, config.BUTTON, "Search")
+        self.button_drink_antidote  = Button(self.sidebar, 6, config.BUTTON, "Drink antidote")
+        self.button_attack          = Button(self.sidebar, 5, config.BUTTON, "Attack")
+        self.button_defend          = Button(self.sidebar, 6, config.BUTTON, "Defend")
+        self.button_flee            = Button(self.sidebar, 7, config.BUTTON, "Flee")
+        self.stats                  = Stats(self.sidebar, 1, config.STATS, self.character)
 
 # downbar = Downbar(_screen,os.path.join('img', 'tileset_old.jpg'))
         self.dirbtn = DirectionButtons(_screen, 50, 630, os.path.join('img', 'tileset_old.jpg'))
-
+    
     def handleEvents(self):
         event_list = pygame.event.get() 
 
+        def handleMouseEvent(event): 
+                clicked_pos = pygame.mouse.get_pos()
+                
+                if self.button_search.get_surface_mapped_rect(_screen).collidepoint(clicked_pos): 
+                    print "Clicked: search"
+                elif self.button_drink_antidote.get_surface_mapped_rect(_screen).collidepoint(clicked_pos): 
+                    print "Clicked: drink_antidote"
+
         for event in event_list:
             if event.type == pygame.MOUSEBUTTONUP:
-                clicked_pos = pygame.mouse.get_pos()
-                print "Click = ", clicked_pos
-                print "pos   = ", self.button_search.rect
-                if self.button_search.rect.collidepoint(clicked_pos): 
-                    print "Clicked: search"
-                        # TODO: Check for event collision and handle
+                handleMouseEvent(event)
+
             elif event.type == pygame.KEYUP:
                 pygame.quit()
+
             elif event.type == pygame.USEREVENT:
                 if event.dict[1] == "startcombat":
                     self.state = "combat"
