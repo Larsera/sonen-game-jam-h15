@@ -32,7 +32,7 @@ class Sidebar():
     def draw(self):
         # sidebar_rect = self.background.get_rect()
         self.surface.blit(self.image, (0,0))
-        pygame.draw.rect(self.surface, self.color, self.rect, config.BUTTON_PADDING)
+        pygame.draw.rect(self.surface, self.color, self.rect, config.SIDEBAR_OUTLINE)
     def get_surface(self):
         return self.surface
 
@@ -43,7 +43,7 @@ class Button():
 
     def __init__(self, element, position, image, text):
         self.surface = element.get_surface()
-        self.rect = (config.SIDEBAR_PADDING, position * config.SIDEBAR_UNIT_HEIGHT + (position*config.SIDEBAR_PADDING), config.SIDEBAR_WIDTH - (2*config.SIDEBAR_PADDING), config.BUTTON_HEIGHT) 
+        self.rect = pygame.Rect(config.SIDEBAR_PADDING, position * config.SIDEBAR_UNIT_HEIGHT + (position*config.SIDEBAR_PADDING), config.SIDEBAR_WIDTH - (2*config.SIDEBAR_PADDING), config.BUTTON_HEIGHT) 
 
         src_image = pygame.image.load(image)
         self.image = src_image.convert()
@@ -53,7 +53,7 @@ class Button():
         self.text = self.font.render(text, 1,(255,255,255))
 
     def draw(self):
-        pygame.draw.rect(self.surface, (255,255,255), self.rect, config.BUTTON_PADDING)
+        pygame.draw.rect(self.surface, (255,255,255), self.rect, config.BUTTON_OUTLINE)
         self.surface.blit(self.image, self.rect)
         self.surface.blit(self.text, self.rect)
 
@@ -74,7 +74,7 @@ class Stats():
         self.text_hunger = self.font.render("Hunger:    " + str(character.hunger), 1,(255,255,255))
 
     def draw(self):
-        pygame.draw.rect(self.surface, (255,255,255), self.rect, config.TEXT_PADDING)
+        pygame.draw.rect(self.surface, (255,255,255), self.rect, config.STATS_OUTLINE)
         self.surface.blit(self.image, self.rect)
         tmp = pygame.Rect(self.rect)
         self.surface.blit(self.text_health, tmp)

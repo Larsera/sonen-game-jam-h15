@@ -12,23 +12,42 @@ RES_Y = 768
 pygame.init()
 _screen = pygame.display.set_mode((RES_X, RES_Y))
 
+class Game():
 # This is the surface we are rendering to
-screen = pygame.Surface((RES_X - config.SIDEBAR_WIDTH, RES_Y - config.DOWNBAR_HEIGHT))
-clock = pygame.time.Clock()
 
-TILE_GRID_WIDTH = screen.get_width()/config.TILE_W
-TILE_GRID_HEIGHT = screen.get_height()/config.TILE_H
+    def init(self):
+        self.screen = pygame.Surface((RES_X - config.SIDEBAR_WIDTH, RES_Y - config.DOWNBAR_HEIGHT))
+        self.clock = pygame.time.Clock()
 
-global state
+        self.TILE_GRID_WIDTH = self.screen.get_width()/config.TILE_W
+        self.TILE_GRID_HEIGHT = self.screen.get_height()/config.TILE_H
+        self.sounds = sound_player()
+        self.world = World(self.TILE_GRID_HEIGHT, self.TILE_GRID_WIDTH, os.path.join('img', 'testgrid.png'), self.screen)
+        self.character = Character(os.path.join('img', 'character.png'), (10, 10), self.screen)
 
-class EventController():
+        self.sidebar = Sidebar(_screen, config.SIDEBAR) 
+        self.button_search = Button(self.sidebar, 5, config.BUTTON, "Search")
+        self.button_drink_antidote = Button(self.sidebar, 6, config.BUTTON, "Drink antidote")
+        self.button_attack = Button(self.sidebar, 5, config.BUTTON, "Attack")
+        self.button_defend = Button(self.sidebar, 6, config.BUTTON, "Defend")
+        self.button_flee = Button(self.sidebar, 7, config.BUTTON, "Flee")
+
+        self.stats = Stats(self.sidebar, 1, config.STATS, self.character)
+
+# downbar = Downbar(_screen,os.path.join('img', 'tileset_old.jpg'))
+        self.dirbtn = DirectionButtons(_screen, 50, 630, os.path.join('img', 'tileset_old.jpg'))
+
     def handleEvents(self):
         event_list = pygame.event.get() 
 
         for event in event_list:
             if event.type == pygame.MOUSEBUTTONUP:
                 clicked_pos = pygame.mouse.get_pos()
-                # TODO: Check for event collision and handle
+                print "Click = ", clicked_pos
+                print "pos   = ", self.button_search.rect
+                if self.button_search.rect.collidepoint(clicked_pos): 
+                    print "Clicked: search"
+                        # TODO: Check for event collision and handle
             elif event.type == pygame.KEYUP:
                 pygame.quit()
             elif event.type == pygame.USEREVENT:
@@ -36,57 +55,36 @@ class EventController():
                     state = "combat"
                 elif event.dict[1] == "gameover":
                     state = "gameover"
+    def run(self):
+        running = 1
+        self.state = "normal" 
+        while running:
+            self.screen.fill((255, 204, 102))
+            self.handleEvents()
+            self.character.update()
+            self.world.draw()
+            self.sidebar.draw()
+            if self.state == "normal":
+                self.button_search.draw()
+                self.button_drink_antidote.draw()
+            elif self.state == "combat":
+                self.button_attack.draw()
+                self.button_defend.draw()
+                self.button_flee.draw()
+            #button3.draw()
+            self.stats.draw()
+            # character.draw()
+            self.sidebar.blit()
 
+            # downbar.draw()
+            # downbar.blit()
 
-class Block(pygame.sprite.Sprite):
-    def __init__(self, image, width, height):
-        pygame.sprite.Sprite.__init__(self)
-        self.src_image = pygame.image.load(image)
-        self.image = self.src_image.convert()
+            self.dirbtn.draw()
+            _screen.blit(self.screen, (0, 0))
+            pygame.display.flip()
 
-sounds = sound_player()
-events = EventController()
-world = World(TILE_GRID_HEIGHT, TILE_GRID_WIDTH, os.path.join('img', 'testgrid.png'), screen)
-character = Character(os.path.join('img', 'character.png'), (10, 10), screen)
+        pygame.quit()
 
-sidebar = Sidebar(_screen, config.SIDEBAR) 
-button_search = Button(sidebar, 5, config.BUTTON, "Search")
-button_drink_antidote = Button(sidebar, 6, config.BUTTON, "Drink antidote")
-button_attack = Button(sidebar, 5, config.BUTTON, "Attack")
-button_defend = Button(sidebar, 6, config.BUTTON, "Defend")
-button_flee = Button(sidebar, 7, config.BUTTON, "Flee")
-
-stats = Stats(sidebar, 1, config.STATS, character)
-
-# downbar = Downbar(_screen,os.path.join('img', 'tileset_old.jpg'))
-dirbtn = DirectionButtons(_screen, 50, 630, os.path.join('img', 'tileset_old.jpg'))
-
-state = "normal"
-
-running = 1
-while running:
-    screen.fill((255, 204, 102))
-    events.handleEvents()
-    character.update()
-    world.draw()
-    sidebar.draw()
-    if state == "normal":
-        button_search.draw()
-        button_drink_antidote.draw()
-    elif state == "combat":
-        button_attack.draw()
-        button_defend.draw()
-        button_flee.draw()
-    #button3.draw()
-    stats.draw()
-    # character.draw()
-    sidebar.blit()
-
-    # downbar.draw()
-    # downbar.blit()
-
-    dirbtn.draw()
-    _screen.blit(screen, (0, 0))
-    pygame.display.flip()
-
-pygame.quit()
+game = Game()
+game.init()
+game.run()
