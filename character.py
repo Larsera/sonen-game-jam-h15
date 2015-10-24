@@ -19,6 +19,7 @@ class Character():
         self.alive = True
         self.damage = 10
         self.actions = 5
+        self.weapom = None
         self.remaining_actions = self.actions
 
         self.position = position
