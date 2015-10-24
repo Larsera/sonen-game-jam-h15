@@ -6,6 +6,7 @@ SIDEBAR_PADDING = 20
 BUTTON_PADDING = 7
 BUTTON_HEIGHT = 32
 STATS_HEIGHT = 128
+TEXT_PADDING = 10
 # class Gui():
 #     gui_event_handler = 0
      
@@ -65,7 +66,7 @@ class Button():
 
 class Stats():
 
-    def __init__(self, element, position, image, text):
+    def __init__(self, element, position, image, character):
         self.surface = element.get_surface()
         self.rect = (SIDEBAR_PADDING, position * SIDEBAR_UNIT_HEIGHT + (position*SIDEBAR_PADDING), SIDEBAR_WIDTH - (2*SIDEBAR_PADDING), STATS_HEIGHT) 
 
@@ -74,11 +75,16 @@ class Stats():
         self.image = pygame.transform.scale(self.image, (SIDEBAR_WIDTH - (2*SIDEBAR_PADDING), STATS_HEIGHT))
 
         self.font = pygame.font.Font(None, 32)
-        self.text = self.font.render(text, 1,(255,255,255))
+        self.text_health = self.font.render(str(character.health), 1,(255,255,255))
+        self.text_thirst = self.font.render(str(character.thirst), 1,(255,255,255))
+        self.text_hunger = self.font.render(str(character.hunger), 1,(255,255,255))
 
     def draw(self):
         pygame.draw.rect(self.surface, (255,255,255), self.rect, BUTTON_PADDING)
         self.surface.blit(self.image, self.rect)
-        self.surface.blit(self.text, self.rect)
+        tmp = pygame.Rect(self.rect)
+        self.surface.blit(self.text_health, tmp)
+        tmp.top += TEXT_PADDING
+        self.surface.blit(self.text_thirst, tmp)
  
     # def draw(
