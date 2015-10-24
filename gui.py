@@ -68,16 +68,24 @@ class Stats():
         self.surface = element.get_surface()
         self.rect = (config.SIDEBAR_PADDING, position * config.SIDEBAR_UNIT_HEIGHT + (position*config.SIDEBAR_PADDING), config.SIDEBAR_WIDTH - (2*config.SIDEBAR_PADDING), config.STATS_HEIGHT) 
 
+        self.character = character
         src_image = pygame.image.load(image)
         self.image = src_image.convert()
         self.image = pygame.transform.scale(self.image, (config.SIDEBAR_WIDTH - (2*config.SIDEBAR_PADDING), config.STATS_HEIGHT))
 
         self.font = pygame.font.Font(None, 32)
-        self.text_health = self.font.render("Health:    " + str(character.health), 1,(255,255,255))
-        self.text_thirst = self.font.render("Hydration: " + str(character.thirst), 1,(255,255,255))
-        self.text_hunger = self.font.render("Hunger:    " + str(character.hunger), 1,(255,255,255))
+        self.text_health = self.font.render("Health:        " + str(character.health), 1,(255,255,255))
+        self.text_thirst = self.font.render("Hydration:     " + str(character.thirst), 1,(255,255,255))
+        self.text_hunger = self.font.render("Hunger:        " + str(character.hunger), 1,(255,255,255))
+        self.text_action = self.font.render("Action Points: " + str(character.actions), 1,(255,255,255))
 
     def draw(self):
+
+        self.text_health = self.font.render("Health:        " + str(self.character.health), 1,(255,255,255))
+        self.text_thirst = self.font.render("Hydration:     " + str(self.character.thirst), 1,(255,255,255))
+        self.text_hunger = self.font.render("Hunger:        " + str(self.character.hunger), 1,(255,255,255))
+        self.text_action = self.font.render("Action Points: " + str(self.character.actions), 1,(255,255,255))
+        
         pygame.draw.rect(self.surface, (255,255,255), self.rect, config.STATS_OUTLINE)
         self.surface.blit(self.image, self.rect)
         tmp = pygame.Rect(self.rect)
@@ -86,6 +94,8 @@ class Stats():
         self.surface.blit(self.text_thirst, tmp)
         tmp.top += config.TEXT_PADDING
         self.surface.blit(self.text_hunger, tmp)
+        tmp.top += config.TEXT_PADDING
+        self.surface.blit(self.text_action, tmp)
 
 class Console():
     def __init__(self, surface):
