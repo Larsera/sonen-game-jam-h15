@@ -23,6 +23,7 @@ class Character():
         self.food = []
         self.drink = []
         self.medicine = []
+        self.turn_survd = 1
 
         self.position = position
 
@@ -34,6 +35,7 @@ class Character():
 
     def update(self, curtile):
         self.remaining_actions = self.actions
+        self.turn_survd += 1
 
         for i in self.food:
             if self.hunger + i.amount <= 100:

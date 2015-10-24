@@ -77,6 +77,7 @@ class Stats():
         self.text_thirst = self.font.render("Hydration:     " + str(character.thirst), 1,(255,255,255))
         self.text_hunger = self.font.render("Hunger:        " + str(character.hunger), 1,(255,255,255))
         self.text_action = self.font.render("Action Points: " + str(character.remaining_actions), 1,(255,255,255))
+        self.text_turn   = self.font.render("turn number:   " + str(character.turn_survd), 1,(255,255,255))
 
     def draw(self, character):
 
@@ -84,6 +85,7 @@ class Stats():
         self.text_thirst = self.font.render("Hydration:     " + str(character.thirst), 1,(255,255,255))
         self.text_hunger = self.font.render("Hunger:        " + str(character.hunger), 1,(255,255,255))
         self.text_action = self.font.render("Action Points: " + str(character.remaining_actions), 1,(255,255,255))
+        self.text_turn   = self.font.render("turn number:   " + str(character.turn_survd), 1,(255,255,255))
         
         pygame.draw.rect(self.surface, (255,255,255), self.rect, config.STATS_OUTLINE)
         self.surface.blit(self.image, self.rect)
@@ -95,6 +97,8 @@ class Stats():
         self.surface.blit(self.text_hunger, tmp)
         tmp.top += config.TEXT_PADDING
         self.surface.blit(self.text_action, tmp)
+        tmp.top += config.TEXT_PADDING
+        self.surface.blit(self.text_turn, tmp)
 
 class Console():
     def __init__(self, surface):
