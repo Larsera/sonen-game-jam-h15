@@ -59,9 +59,7 @@ class Button():
 
     def get_surface_mapped_rect(self, transform_surface):
         r = self.rect.copy()
-        e = transform_surface.get_width() - r.width
-        print e 
-        r.left += e - config.SIDEBAR_PADDING*2 
+        r.left += (transform_surface.get_width() - r.width) - config.SIDEBAR_PADDING*2 
         return r 
 
 
