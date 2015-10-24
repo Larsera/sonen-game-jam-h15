@@ -5,6 +5,7 @@ from character import *
 from gui import *
 from sounds import *
 from combat_handler import *
+from tiles import get_tile
 import config
 
 RES_X = 1366
@@ -50,8 +51,9 @@ class Game():
                 elif self.button_drink_antidote.get_surface_mapped_rect(_screen).collidepoint(clicked_pos): 
                     print "Clicked: drink_antidote"
 
-                elif self.dirbtn.n_rect.collidepoint(clicked_pos): 
-                    print "Clicked: north"
+                elif self.dirbtn.n_rect.collidepoint(clicked_pos):
+                    x, y = self.character.position
+                    self.character.move('N', get_tile(self.world.world[x][y]))
 
                 elif self.dirbtn.s_rect.collidepoint(clicked_pos): 
                     print "Clicked: south"
@@ -79,7 +81,7 @@ class Game():
 
     def newturn(self):
         self.turns_survd += 1
-        self.character.update()
+        #self.character.update()
 
     def run(self):
         running = 1
@@ -98,7 +100,7 @@ class Game():
                 self.button_flee.draw()
             #button3.draw()
             self.stats.draw()
-            # character.draw()
+            self.character.draw()
             self.sidebar.blit()
 
             # downbar.draw()
