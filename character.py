@@ -1,7 +1,7 @@
 import random
 import pygame
 import config
-from combat_handler import *
+import combat_handler
 from pygame.locals import *
 from pygame import Rect
 
