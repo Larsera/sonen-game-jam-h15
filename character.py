@@ -21,6 +21,9 @@ class Character():
         self.actions = 5
         self.weapom = None
         self.remaining_actions = self.actions
+        self.food = []
+        self.drink = []
+        self.medicine = []
 
         self.position = position
 
@@ -32,6 +35,17 @@ class Character():
 
     def update(self):
         self.position = self.position
+
+        for i in self.food:
+            if self.hunger + i.amount <= 100:
+                self.hunger += i.amount
+                self.food.remove(i)
+
+        for i in self.drink:
+            if self.thirst + i.hdr <= 100:
+                self.thirst += i.hdr
+                self.drink.remove(i)
+
         if self.hunger <= 0: self.alive = False
         if self.thirst <= 0: self.alive = False
         if self.health <= 0: self.alive = False
@@ -102,4 +116,12 @@ class Character():
             found_danger()
             chance -= config.CHANCE_DEC
 
+    def find_food(self, foodstuff):
+        self.food.append(foodstuff)
+
+    def find_drink(self, hydration):
+        self.drink.append(hydration)
+
+    def find_medicine(self, medication):
+        self.medicine.append(medication)
 
