@@ -59,11 +59,8 @@ class Button():
 
     def get_surface_mapped_rect(self, transform_surface):
         r = self.rect.copy()
-        e = transform_surface.get_width() - r.width
-        print e 
-        r.left += e - config.SIDEBAR_PADDING*2 
+        r.left += (transform_surface.get_width() - r.width) - config.SIDEBAR_PADDING*2 
         return r 
-
 
 class Stats():
 
@@ -76,11 +73,18 @@ class Stats():
         self.image = pygame.transform.scale(self.image, (config.SIDEBAR_WIDTH - (2*config.SIDEBAR_PADDING), config.STATS_HEIGHT))
 
         self.font = pygame.font.Font(None, 32)
-        self.text_health = self.font.render("Health:    " + str(character.health), 1,(255,255,255))
-        self.text_thirst = self.font.render("Hydration: " + str(character.thirst), 1,(255,255,255))
-        self.text_hunger = self.font.render("Hunger:    " + str(character.hunger), 1,(255,255,255))
+        self.text_health = self.font.render("Health:        " + str(character.health), 1,(255,255,255))
+        self.text_thirst = self.font.render("Hydration:     " + str(character.thirst), 1,(255,255,255))
+        self.text_hunger = self.font.render("Hunger:        " + str(character.hunger), 1,(255,255,255))
+        self.text_action = self.font.render("Action Points: " + str(character.remaining_actions), 1,(255,255,255))
 
-    def draw(self):
+    def draw(self, character):
+
+        self.text_health = self.font.render("Health:        " + str(character.health), 1,(255,255,255))
+        self.text_thirst = self.font.render("Hydration:     " + str(character.thirst), 1,(255,255,255))
+        self.text_hunger = self.font.render("Hunger:        " + str(character.hunger), 1,(255,255,255))
+        self.text_action = self.font.render("Action Points: " + str(character.remaining_actions), 1,(255,255,255))
+        
         pygame.draw.rect(self.surface, (255,255,255), self.rect, config.STATS_OUTLINE)
         self.surface.blit(self.image, self.rect)
         tmp = pygame.Rect(self.rect)
@@ -89,6 +93,40 @@ class Stats():
         self.surface.blit(self.text_thirst, tmp)
         tmp.top += config.TEXT_PADDING
         self.surface.blit(self.text_hunger, tmp)
+        tmp.top += config.TEXT_PADDING
+        self.surface.blit(self.text_action, tmp)
+
+class Console():
+    def __init__(self, surface):
+        self.surface = surface
+        self.string_1 = "Try find some water, ya old baboon!"
+        self.string_2 = "Old text"
+        self.string_3 = "Olderest text"
+        self.rect = pygame.Rect(self.surface.get_width() - config.SIDEBAR_WIDTH - config.CONSOLE_WIDTH - config.CONSOLE_PADDING,
+                self.surface.get_height() - config.DOWNBAR_HEIGHT + config.CONSOLE_PADDING,
+                config.CONSOLE_WIDTH,
+                config.DOWNBAR_HEIGHT - config.CONSOLE_PADDING * 2)
+
+        self.font = pygame.font.Font(None, config.CONSOLE_FONT_SIZE)
+        self.text_1 = self.font.render(self.string_1, 1,(255,255,255))
+        self.text_2 = self.font.render(self.string_2, 1,(128,128,128))
+        self.text_3 = self.font.render(self.string_3, 1,(64,64,64))
+    
+    def draw(self):
+        pygame.draw.rect(self.surface, (255,255,255), self.rect, config.CONSOLE_OUTLINE)
+        tmp = pygame.Rect(self.rect)
+        tmp.top += 10
+        tmp.left += 10
+        self.surface.blit(self.text_1, tmp)
+        tmp.top += config.CONSOLE_TEXT_PADDING
+        self.surface.blit(self.text_2, tmp)
+        tmp.top += config.CONSOLE_TEXT_PADDING
+        self.surface.blit(self.text_3, tmp)
+    
+    def push_text(self, string):
+        self.string_3 = self.string_2
+        self.string_2 = self.string_1
+        self.string_1 = string
 
 class DirectionButtons():
     def __init__(self, surface, x, y, image):

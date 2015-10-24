@@ -34,6 +34,7 @@ class Game():
         self.button_defend          = Button(self.sidebar, 6, config.BUTTON, "Defend")
         self.button_flee            = Button(self.sidebar, 7, config.BUTTON, "Flee")
         self.stats                  = Stats(self.sidebar, 1, config.STATS, self.character)
+        self.console                = Console(_screen)
 
 # downbar = Downbar(_screen,os.path.join('img', 'tileset_old.jpg'))
         self.dirbtn = DirectionButtons(_screen, 50,
@@ -98,7 +99,7 @@ class Game():
                 self.button_defend.draw()
                 self.button_flee.draw()
             #button3.draw()
-            self.stats.draw()
+            self.stats.draw(self.character)
             self.character.draw()
             self.sidebar.blit()
 
@@ -106,6 +107,7 @@ class Game():
             # downbar.blit()
 
             self.dirbtn.draw()
+            self.console.draw()
             _screen.blit(self.screen, (0, 0))
             pygame.display.flip()
 
