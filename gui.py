@@ -5,7 +5,7 @@ SIDEBAR_UNIT_HEIGHT = 32
 SIDEBAR_PADDING = 20
 BUTTON_PADDING = 7
 BUTTON_HEIGHT = 32
-STATS_HEIGHT = 96
+STATS_HEIGHT = 128
 # class Gui():
 #     gui_event_handler = 0
      
@@ -67,7 +67,7 @@ class Stats():
 
     def __init__(self, element, position, image, text):
         self.surface = element.get_surface()
-        self.rect = (SIDEBAR_PADDING, position * SIDEBAR_UNIT_HEIGHT + (position*SIDEBAR_PADDING), SIDEBAR_WIDTH - (2*SIDEBAR_PADDING), BUTTON_HEIGHT) 
+        self.rect = (SIDEBAR_PADDING, position * SIDEBAR_UNIT_HEIGHT + (position*SIDEBAR_PADDING), SIDEBAR_WIDTH - (2*SIDEBAR_PADDING), STATS_HEIGHT) 
 
         src_image = pygame.image.load(image)
         self.image = src_image.convert()
