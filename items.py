@@ -1,21 +1,22 @@
 
 class weapon():
 
-   TYPE = {"stick" : Weapon("Stick", desc="A thin stick. Not very effective."),
-            "sharp_rock" : Weapon("Sharp rock", dmg=2, 
-                desc="Better than a stick, but you have to get too close for comfort."),
-            "pointy_stick" : Weapon("Pointy stick", dmg=3,
-                desc="A sharpened stick. Perfect for poking things."),
-            "plusone_mace" : Weapon("+1 Mace", dmg=4,
-                desc="A bottle of mace."),
-            "warped_blade" : Weapon("Warped blade", dmg=5,
-                desc="Not to be confused with the Vorpal blade.")
-            }
 
     def __init__(self, name, dmg=1, desc=""):
         self.name = name
         self.dmg = dmg
         self.desc = desc
+
+    def get_weapon(ident):
+        return {"stick" : weapon("Stick", desc="A thin stick. Not very effective."),
+            "sharp_rock" : weapon("Sharp rock", dmg=2, 
+            desc="Better than a stick, but you have to get too close for comfort."),
+            "pointy_stick" : weapon("Pointy stick", dmg=3,
+            desc="A sharpened stick. Perfect for poking things."),
+            "plusone_mace" : weapon("+1 Mace", dmg=4,
+            desc="A bottle of mace."),
+            "warped_blade" : weapon("Warped blade", dmg=5,
+            desc="Not to be confused with the Vorpal blade.")}.get(ident)
 
 class item_hydration():
 
@@ -25,9 +26,16 @@ class item_hydration():
 
 class item_foodstuff():
 
-    def __init__(self, name, amount):
+    def __init__(self, name, amount, hdr):
         self.name = name
         self.amount = amount
+        self.hdr = hdr
+
+    def get_foodstuff(ident):
+        return {"raw_meat" : item_foodstuff("Raw meat", 40, 0),
+                "cactus_piece" : item_foodstuff("Cactus piece", 30, 20),
+                "granola_bar" : item_foodstuff("Granola bar", 50, 0)}.get(ident)
+
 
 class item_medicine():
 

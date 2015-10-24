@@ -79,8 +79,8 @@ class World():
         x = 0
         y = 0
         while target != 0 and target < 50:
-            x = random.randint(0, self.size_x)
-            y = random.randint(0, self.size_y)
+            x = random.randint(0, self.size_x - 1)
+            y = random.randint(0, self.size_y - 1)
             target = self.world[x][y]
             count = count + 1
 
