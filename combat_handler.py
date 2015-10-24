@@ -1,11 +1,14 @@
 import pygame
 import config
+import text
 
 class combat():
 
-    def __init__(self, char, mon):
+    def __init__(self, char, mon, console):
         self.char = char
         self.mon = mon
+        self.console = console
+        console.push_text(text.monster[mon.name])
 
     def do_combat_turn(self, cmd):
         self.combat_turn(cmd)
