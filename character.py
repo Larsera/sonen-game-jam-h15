@@ -125,3 +125,5 @@ class Character():
     def find_medicine(self, medication):
         self.medicine.append(medication)
 
+    def found_danger(self):
+        

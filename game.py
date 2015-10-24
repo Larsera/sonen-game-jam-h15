@@ -3,6 +3,8 @@ from pygame.locals import *
 from world import *
 from character import *
 from gui import *
+from sounds import *
+from combat_handler import *
 import config
 
 RES_X = 1366
@@ -25,8 +27,12 @@ class EventController():
             if event.type == pygame.MOUSEBUTTONUP:
                 clicked_pos = pygame.mouse.get_pos()
                 # TODO: Check for event collision and handle
-            if event.type == pygame.KEYUP:
+            elif event.type == pygame.KEYUP:
                 pygame.quit()
+            elif event.type == pygame.USEREVENT:
+                if event.dict[1] == "startcombat":
+                    
+
 
 class Block(pygame.sprite.Sprite):
     def __init__(self, image, width, height):
@@ -34,22 +40,23 @@ class Block(pygame.sprite.Sprite):
         self.src_image = pygame.image.load(image)
         self.image = self.src_image.convert()
 
+sounds = sound_player()
 events = EventController()
 world = World(TILE_GRID_HEIGHT, TILE_GRID_WIDTH, os.path.join('img', 'testgrid.png'), screen)
 character = Character(os.path.join('img', 'character.png'), (10, 10), screen)
 
-sidebar = Sidebar(_screen, os.path.join('img', 'tileset_old.jpg')) 
-button = Button(sidebar, 5, os.path.join('img', 'tileset.png'), "Attack")
-button2 = Button(sidebar, 6, os.path.join('img', 'tileset_old.jpg'), "Research")
-button3 = Button(sidebar, 7, os.path.join('img', 'tileset_old.jpg'), "DIE!")
-stats = Stats(sidebar, 1, os.path.join('img', 'tileset_old.jpg'), character)
+sidebar = Sidebar(_screen, config.SIDEBAR) 
+button = Button(sidebar, 5, config.BUTTON, "Attack")
+button2 = Button(sidebar, 6, config.BUTTON, "Research")
+button3 = Button(sidebar, 7, config.BUTTON, "DIE!")
+stats = Stats(sidebar, 1, config.STATS, character)
 
 # downbar = Downbar(_screen,os.path.join('img', 'tileset_old.jpg'))
 dirbtn = DirectionButtons(_screen, 50, 630, os.path.join('img', 'tileset_old.jpg'))
 
 running = 1
 while running:
-    screen.fill((255, 204, 102)) 
+    screen.fill((255, 204, 102))
     events.handleEvents()
     character.update()
     world.draw()
