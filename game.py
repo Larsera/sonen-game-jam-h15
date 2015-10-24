@@ -33,7 +33,7 @@ class Game():
         self.button_attack          = Button(self.sidebar, 5, config.BUTTON, "Attack")
         self.button_defend          = Button(self.sidebar, 6, config.BUTTON, "Defend")
         self.button_flee            = Button(self.sidebar, 7, config.BUTTON, "Flee")
-        self.stats                  = Stats(self.sidebar, 1, config.STATS, self.character)
+        self.stats                  = Stats(self.sidebar, 1, config.STATS)
         self.console                = Console(_screen)
 
 # downbar = Downbar(_screen,os.path.join('img', 'tileset_old.jpg'))
@@ -79,12 +79,27 @@ class Game():
                     self.combat.do_combat_turn(3)
 
 
+        def handleKeyEvent(event):
+            if event.key == pygame.K_ESCAPE:
+                pygame.quit()
+            elif event.key == pygame.K_w or event.key == pygame.K_UP:
+                self.character.move('N', self.world.get_cur_tile(self.character.position))
+
+            elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
+                self.character.move('S', self.world.get_cur_tile(self.character.position))
+
+            elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+                self.character.move('E', self.world.get_cur_tile(self.character.position))
+
+            elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
+                self.character.move('W', self.world.get_cur_tile(self.character.position))
+
         for event in event_list:
             if event.type == pygame.MOUSEBUTTONUP:
                 handleMouseEvent(event)
 
             elif event.type == pygame.KEYUP:
-                pygame.quit()
+                handleKeyEvent(event)
 
             elif event.type == config.COMBAT:
                 self.state = "combat"
