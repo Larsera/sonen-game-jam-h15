@@ -5,7 +5,7 @@ from character import *
 from gui import *
 
 pygame.init()
-_screen = pygame.display.set_mode((1366, 768))
+_screen = pygame.display.set_mode((1920, 1080))
 # This is the surface we are rendering to
 screen = pygame.Surface(_screen.get_size())
 clock = pygame.time.Clock()
