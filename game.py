@@ -81,7 +81,7 @@ class Game():
 
     def newturn(self):
         self.turns_survd += 1
-        #self.character.update()
+        self.character.update(self.world.get_cur_tile(self.character.position))
 
     def run(self):
         running = 1
