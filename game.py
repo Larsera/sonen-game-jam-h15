@@ -7,8 +7,8 @@ from sounds import *
 from combat_handler import *
 import config
 
-RES_X = 1366
-RES_Y = 768
+RES_X = 1660
+RES_Y = 900
 pygame.init()
 _screen = pygame.display.set_mode((RES_X, RES_Y))
 
