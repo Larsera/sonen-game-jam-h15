@@ -57,6 +57,13 @@ class Button():
         self.surface.blit(self.image, self.rect)
         self.surface.blit(self.text, self.rect)
 
+    def get_surface_mapped_rect(self, transform_surface):
+        r = self.rect.copy()
+        e = transform_surface.get_width() - r.width
+        print e 
+        r.left += e - config.SIDEBAR_PADDING*2 
+        return r 
+
 
 class Stats():
 
