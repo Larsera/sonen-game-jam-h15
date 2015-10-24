@@ -46,8 +46,21 @@ class Game():
                 
                 if self.button_search.get_surface_mapped_rect(_screen).collidepoint(clicked_pos): 
                     print "Clicked: search"
+
                 elif self.button_drink_antidote.get_surface_mapped_rect(_screen).collidepoint(clicked_pos): 
                     print "Clicked: drink_antidote"
+
+                elif self.dirbtn.n_rect.collidepoint(clicked_pos): 
+                    print "Clicked: north"
+
+                elif self.dirbtn.s_rect.collidepoint(clicked_pos): 
+                    print "Clicked: south"
+
+                elif self.dirbtn.e_rect.collidepoint(clicked_pos): 
+                    print "Clicked: east"
+
+                elif self.dirbtn.w_rect.collidepoint(clicked_pos): 
+                    print "Clicked: west"
 
         for event in event_list:
             if event.type == pygame.MOUSEBUTTONUP:

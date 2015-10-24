@@ -108,6 +108,8 @@ class DirectionButtons():
         pygame.draw.rect(self.surface, (255,255,255), self.s_rect, config.DIRBTN_OUTLINE)
         pygame.draw.rect(self.surface, (255,255,255), self.e_rect, config.DIRBTN_OUTLINE)
         
+    def get_north_rect(self):
+        return self.n.rect
 
 class Downbar():
     def __init__(self, surface, image):
