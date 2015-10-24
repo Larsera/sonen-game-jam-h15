@@ -32,7 +32,7 @@ class Sidebar():
     def draw(self):
         # sidebar_rect = self.background.get_rect()
         self.surface.blit(self.image, (0,0))
-        pygame.draw.rect(self.surface, self.color, self.rect, config.SIDEBAR_OUTLINE)
+        # pygame.draw.rect(self.surface, self.color, self.rect, config.SIDEBAR_OUTLINE)
     def get_surface(self):
         return self.surface
 
@@ -50,10 +50,10 @@ class Button():
         self.image = pygame.transform.scale(self.image, (config.SIDEBAR_WIDTH - (2*config.SIDEBAR_PADDING), config.BUTTON_HEIGHT))
 
         self.font = pygame.font.Font(None, 32)
-        self.text = self.font.render(text, 1,(255,255,255))
+        self.text = self.font.render(text, 1,config.BUTTON_TEXT_COLOR)
 
     def draw(self):
-        pygame.draw.rect(self.surface, (255,255,255), self.rect, config.BUTTON_OUTLINE)
+        pygame.draw.rect(self.surface, config.BUTTON_OUTLINE_COLOR, self.rect, config.BUTTON_OUTLINE)
         self.surface.blit(self.image, self.rect)
         self.surface.blit(self.text, self.rect)
 
@@ -64,7 +64,7 @@ class Button():
 
 class Stats():
 
-    def __init__(self, element, position, image, character):
+    def __init__(self, element, position, image):
         self.surface = element.get_surface()
         self.rect = (config.SIDEBAR_PADDING, position * config.SIDEBAR_UNIT_HEIGHT + (position*config.SIDEBAR_PADDING), config.SIDEBAR_WIDTH - (2*config.SIDEBAR_PADDING), config.STATS_HEIGHT) 
 
@@ -73,6 +73,8 @@ class Stats():
         self.image = pygame.transform.scale(self.image, (config.SIDEBAR_WIDTH - (2*config.SIDEBAR_PADDING), config.STATS_HEIGHT))
 
         self.font = pygame.font.Font(None, 32)
+
+    def update(self, character):
         self.text_health = self.font.render("Health:        " + str(character.health), 1,(255,255,255))
         self.text_thirst = self.font.render("Hydration:     " + str(character.thirst), 1,(255,255,255))
         self.text_hunger = self.font.render("Hunger:        " + str(character.hunger), 1,(255,255,255))
@@ -80,14 +82,10 @@ class Stats():
         self.text_turn   = self.font.render("turn number:   " + str(character.turn_survd), 1,(255,255,255))
 
     def draw(self, character):
+        self.update(character)
 
-        self.text_health = self.font.render("Health:        " + str(character.health), 1,(255,255,255))
-        self.text_thirst = self.font.render("Hydration:     " + str(character.thirst), 1,(255,255,255))
-        self.text_hunger = self.font.render("Hunger:        " + str(character.hunger), 1,(255,255,255))
-        self.text_action = self.font.render("Action Points: " + str(character.remaining_actions), 1,(255,255,255))
-        self.text_turn   = self.font.render("turn number:   " + str(character.turn_survd), 1,(255,255,255))
-        
         pygame.draw.rect(self.surface, (255,255,255), self.rect, config.STATS_OUTLINE)
+
         self.surface.blit(self.image, self.rect)
         tmp = pygame.Rect(self.rect)
         self.surface.blit(self.text_health, tmp)

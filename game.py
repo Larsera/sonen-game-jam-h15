@@ -32,7 +32,7 @@ class Game():
         self.button_attack          = Button(self.sidebar, 5, config.BUTTON, "Attack")
         self.button_defend          = Button(self.sidebar, 6, config.BUTTON, "Defend")
         self.button_flee            = Button(self.sidebar, 7, config.BUTTON, "Flee")
-        self.stats                  = Stats(self.sidebar, 1, config.STATS, self.character)
+        self.stats                  = Stats(self.sidebar, 1, config.STATS)
         self.console                = Console(_screen)
 
 # downbar = Downbar(_screen,os.path.join('img', 'tileset_old.jpg'))
