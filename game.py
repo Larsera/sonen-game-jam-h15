@@ -40,8 +40,8 @@ character = Character(os.path.join('img', 'character.png'), (10, 10), screen)
 
 sidebar = Sidebar(_screen, config.SIDEBAR) 
 button = Button(sidebar, 5, config.BUTTON, "Attack")
-button2 = Button(sidebar, 6, config.BUTTON2, "Research")
-button3 = Button(sidebar, 7, config.BUTTON3, "DIE!")
+button2 = Button(sidebar, 6, config.BUTTON, "Research")
+button3 = Button(sidebar, 7, config.BUTTON, "DIE!")
 stats = Stats(sidebar, 1, config.STATS, character)
 
 running = 1

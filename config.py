@@ -25,7 +25,5 @@ SOUND_GAMEOVER = "gameover.wav"
 
 #images
 SIDEBAR = os.path.join('img', 'panel_crystallized.png')
-BUTTON = os.path.join('img', 'tileset.png')
-BUTTON2 = os.path.join('img', 'tileset_old.jpg')
-BUTTON3 = os.path.join('img', 'tileset_old.jpg')
+BUTTON = os.path.join('img', 'button_crystallized.png')
 STATS = os.path.join('img', 'tileset_old.jpg')
