@@ -36,7 +36,10 @@ events = EventController()
 world = World(TILE_GRID_HEIGHT, TILE_GRID_WIDTH, os.path.join('img', 'testgrid.png'), screen)
 character = Character(os.path.join('img', 'character.png'), (10, 10), screen)
 
-sidebar = Sidebar(screen) 
+sidebar = Sidebar(screen, os.path.join('img', 'tileset_old.jpg')) 
+button = Button(sidebar, 1, os.path.join('img', 'tileset.png'), "Attack")
+button2 = Button(sidebar, 2, os.path.join('img', 'tileset_old.jpg'), "Research")
+button3 = Button(sidebar, 3, os.path.join('img', 'tileset_old.jpg'), "DIE!")
 running = 1
 while running:
     screen.fill((255, 204, 102)) 
@@ -44,8 +47,11 @@ while running:
     character.update()
     world.draw()
     sidebar.draw()
+    button.draw()
+    button2.draw()
+    button3.draw()
     # character.draw()
-
+    sidebar.blit()
     _screen.blit(screen, (0,0))
     pygame.display.flip()
 
