@@ -32,7 +32,7 @@ class Character():
         x, y = self.position
         x *= config.TILE_W
         y *= config.TILE_H
-        self.screen.blit(self.image, x, y)
+        self.screen.blit(self.image, (x, y))
 
     def update(self, curtile):
         self.remaining_actions = self.actions
