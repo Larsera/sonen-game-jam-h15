@@ -5,6 +5,8 @@ TILE_W = TILE_H = 32
 
 #Character:
 CHANCE_DEC = 20
+WATER_DEC = 20
+HUNGER_DEC
 
 #Gui:
 SIDEBAR_WIDTH = 256

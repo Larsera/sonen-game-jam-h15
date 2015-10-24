@@ -19,6 +19,7 @@ class Tile():
         self.actions_used = au
         self.danger_chance = dc
         self.shadow_chance = sc
+        self.shadow = False
         self.item_chance = ic
         self.water_chance = wc
         self.name = name
@@ -38,6 +39,9 @@ class Tile():
                 self.monster_dict[self.tot_monster_chance + cnt] = m
 
             self.tot_monster_chance += c
+
+    def found_shadow(self):
+        self.shadow = True
 
 
 def get_tile(ident, monster_list=[(1, Monster())]):

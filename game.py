@@ -24,6 +24,7 @@ class Game():
         self.sounds                 = sound_player()
         self.world                  = World(self.TILE_GRID_HEIGHT, self.TILE_GRID_WIDTH, TILES, self.screen)
         self.character              = Character(os.path.join('img', 'character.png'), (10, 10), self.screen)
+        self.turns_survd            = 0
 
         self.sidebar                = Sidebar(_screen, config.SIDEBAR) 
         self.button_search          = Button(self.sidebar, 5, config.BUTTON, "Search")
@@ -78,6 +79,7 @@ class Game():
                     self.newturn()
 
     def newturn(self):
+        self.turns_survd += 1
         self.character.update()
 
     def run(self):
