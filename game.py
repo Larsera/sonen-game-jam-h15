@@ -3,6 +3,7 @@ from pygame.locals import *
 from world import *
 from character import *
 from gui import *
+import config
 
 RES_X = 1366
 RES_Y = 768
@@ -13,10 +14,8 @@ _screen = pygame.display.set_mode((RES_X, RES_Y))
 screen = pygame.Surface((RES_X - SIDEBAR_WIDTH, RES_Y - 130))
 clock = pygame.time.Clock()
 
-TILE_WIDTH = 32
-TILE_HEIGHT = 32
-TILE_GRID_WIDTH = screen.get_width()/TILE_WIDTH
-TILE_GRID_HEIGHT = screen.get_height()/TILE_HEIGHT
+TILE_GRID_WIDTH = screen.get_width()/config.TILE_W
+TILE_GRID_HEIGHT = screen.get_height()/config.TILE_H
 
 class EventController():
     def handleEvents(self):
@@ -58,7 +57,7 @@ while running:
     stats.draw()
     # character.draw()
     sidebar.blit()
-    _screen.blit(screen, (0,0))
+    _screen.blit(screen, (0, 0))
     pygame.display.flip()
 
 pygame.quit()

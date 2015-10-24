@@ -22,7 +22,8 @@ class Tile():
         self.item_chance = ic
         self.water_chance = wc
         self.name = name
-        self.create_monster_id_dict(monster_list)
+        self.searches_left = 3
+        self.create_monster_id_dict(create_monster_touples(monster_list, dc))
 
     def get_monster(self):
         random.seed()
@@ -38,13 +39,23 @@ class Tile():
 
             self.tot_monster_chance += c
 
-    def get_tile(self, ident, monster_list=[(1, Monster())]):
-        return {0 : Tile((1, 3, 2, 2, 1), "empty desert", monster_list),
-                1 : Tile((2, 5, 10, 3, 2), "big rock", monster_list),
-                2 : Tile((2, 4, 5, 3, 3), "small rock", monster_list),
-                3 : Tile((3, 2, 3, 1, 3), "jagged rock", monster_list),
-                4 : Tile((1, 7, 7, 4, 10), "oasis", monster_list),
-                5 : Tile((1, 4, 8, 7, 5), "abandoned camp", monster_list),
-                6 : Tile((1, 10, 10, 9, 4), "pyramid", monster_list)}.get(ident)
+
+def get_tile(ident, monster_list=[(1, Monster())]):
+    return {0 : Tile((1, 3, 2, 2, 1), "empty desert", monster_list),
+            1 : Tile((2, 5, 10, 3, 2), "big rock", monster_list),
+            2 : Tile((2, 4, 5, 3, 3), "small rock", monster_list),
+            3 : Tile((3, 2, 3, 1, 3), "jagged rock", monster_list),
+            4 : Tile((1, 7, 7, 4, 10), "oasis", monster_list),
+            5 : Tile((1, 4, 8, 7, 5), "abandoned camp", monster_list),
+            6 : Tile((1, 10, 10, 9, 4), "pyramid", monster_list)}.get(ident)
 
 
+def create_monster_touples(monster_list, d):
+    ml = []
+    random.seed()
+    for mon in monster_list:
+        ant = random.randint(0, 10)
+        if ant > mon.rarity - d:
+            ml.append((11 - ant, mon))
+
+    return ml

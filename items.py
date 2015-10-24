@@ -46,6 +46,9 @@ class item_medicine():
         self.hydration = hydration
         self.hunger = hunger
 
+    def get_medicine(ident):
+        return {"antidote" : item_medicine("Antidote", antidote=True)
+
 class item_junk():
 
     def __init__(self, name, bonus):
