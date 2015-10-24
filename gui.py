@@ -73,9 +73,10 @@ class Stats():
         self.image = pygame.transform.scale(self.image, (config.SIDEBAR_WIDTH - (2*config.SIDEBAR_PADDING), config.STATS_HEIGHT))
 
         self.font = pygame.font.Font(None, 32)
-        self.text_health = self.font.render("Health:    " + str(character.health), 1,(255,255,255))
-        self.text_thirst = self.font.render("Hydration: " + str(character.thirst), 1,(255,255,255))
-        self.text_hunger = self.font.render("Hunger:    " + str(character.hunger), 1,(255,255,255))
+        self.text_health = self.font.render("Health:        " + str(character.health), 1,(255,255,255))
+        self.text_thirst = self.font.render("Hydration:     " + str(character.thirst), 1,(255,255,255))
+        self.text_hunger = self.font.render("Hunger:        " + str(character.hunger), 1,(255,255,255))
+        self.text_action = self.font.render("Action Points: " + str(character.actions), 1,(255,255,255))
 
     def draw(self):
         pygame.draw.rect(self.surface, (255,255,255), self.rect, config.STATS_OUTLINE)
@@ -86,6 +87,8 @@ class Stats():
         self.surface.blit(self.text_thirst, tmp)
         tmp.top += config.TEXT_PADDING
         self.surface.blit(self.text_hunger, tmp)
+        tmp.top += config.TEXT_PADDING
+        self.surface.blit(self.text_action, tmp)
 
 class Console():
     def __init__(self, surface):
