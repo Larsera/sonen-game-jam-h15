@@ -1,4 +1,5 @@
 import os
+import pygame
 
 #Tile
 TILE_W = TILE_H = 32
@@ -51,3 +52,9 @@ TILES = os.path.join('img', 'tilegrid.png')
 SIDEBAR = os.path.join('img', 'panel_crystallized.png')
 BUTTON = os.path.join('img', 'button_crystallized.png')
 STATS = os.path.join('img', 'tileset_old.jpg')
+
+#events
+COMBAT = pygame.USEREVENT+1
+NEWTURN = pygame.USEREVENT+2
+WIN = pygame.USEREVENT+3
+GAMEOVER = pygame.USEREVENT+4

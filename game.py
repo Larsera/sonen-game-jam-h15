@@ -59,13 +59,13 @@ class Game():
                 self.character.move('N', self.world.get_cur_tile(self.character.position))
 
             elif self.dirbtn.s_rect.collidepoint(clicked_pos):
-                print "Clicked: south"
+                self.character.move('S', self.world.get_cur_tile(self.character.position))
 
             elif self.dirbtn.e_rect.collidepoint(clicked_pos):
-                print "Clicked: east"
+                self.character.move('E', self.world.get_cur_tile(self.character.position))
 
             elif self.dirbtn.w_rect.collidepoint(clicked_pos):
-                print "Clicked: west"
+                self.character.move('W', self.world.get_cur_tile(self.character.position))
 
         for event in event_list:
             if event.type == pygame.MOUSEBUTTONUP:
@@ -74,17 +74,16 @@ class Game():
             elif event.type == pygame.KEYUP:
                 pygame.quit()
 
-            elif event.type == pygame.USEREVENT:
-                if event.dict[1] == "startcombat":
-                    self.state = "combat"
-                elif event.dict[1] == "gameover":
-                    self.state = "gameover"
-                elif event.dict[1] == "newturn":
-                    self.newturn()
+            elif event.type == config.COMBAT:
+                self.state = "combat"
+            elif event.type == config.GAMEOVER:
+                self.state = "gameover"
+            elif event.type == config.NEWTURN:
+                self.newturn()
 
     def newturn(self):
         self.turns_survd += 1
-        #self.character.update()
+        self.character.update(self.world.get_cur_tile(self.character.position))
 
     def run(self):
         running = 1
