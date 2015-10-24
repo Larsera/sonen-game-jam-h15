@@ -48,9 +48,11 @@ class Game():
 
             if self.button_search.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
                 print "Clicked: search"
+                self.console.push_text("Clicked search")
 
             elif self.button_drink_antidote.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
                 print "Clicked: drink_antidote"
+                self.console.push_text("Antidote")
 
             elif self.dirbtn.n_rect.collidepoint(clicked_pos):
                 self.character.move('N', self.world.get_cur_tile(self.character.position))
@@ -86,6 +88,7 @@ class Game():
         self.state = "normal" 
         while running:
             self.screen.fill((255, 204, 102))
+            _screen.fill((153, 51, 0))
             self.handleEvents()
             self.world.draw()
             self.sidebar.draw()

@@ -112,10 +112,13 @@ class Console():
                 config.DOWNBAR_HEIGHT - config.CONSOLE_PADDING * 2)
 
         self.font = pygame.font.Font(None, config.CONSOLE_FONT_SIZE)
+        self.update_font()
+
+    def update_font(self):
         self.text_1 = self.font.render(self.string_1, 1,(255,255,255))
         self.text_2 = self.font.render(self.string_2, 1,(128,128,128))
         self.text_3 = self.font.render(self.string_3, 1,(64,64,64))
-    
+
     def draw(self):
         pygame.draw.rect(self.surface, (255,255,255), self.rect, config.CONSOLE_OUTLINE)
         tmp = pygame.Rect(self.rect)
@@ -131,6 +134,7 @@ class Console():
         self.string_3 = self.string_2
         self.string_2 = self.string_1
         self.string_1 = string
+        self.update_font()
 
 class DirectionButtons():
     def __init__(self, surface, x, y, image):
