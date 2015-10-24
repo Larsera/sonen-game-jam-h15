@@ -1,7 +1,7 @@
 import pygame
 import random
 import config
-from tiles import Tile
+from tiles import get_tile
 from pygame.locals import *
 from pygame import Rect
 
@@ -19,12 +19,20 @@ class World():
         self.load_tileset(image)
         self.createmap()
 
+        self.tiles = [[None for i in xrange(self.size_x)] for i in xrange(self.size_y)]
+
     def scroll(self, rel):
         if not self.scrolling: return
 
         self.offset = (
                 self.offset[0] + rel[0],
                 self.offset[1] + rel[1])
+
+    def get_cur_tile(self, (x, y)):
+        if self.tiles[x][y] == None:
+            self.tiles[x][y] = get_tile(self.world[x][y])
+
+        return self.tiles[x][y]
 
     def load_tileset(self, image):
         self.tileset = pygame.image.load(image).convert()
