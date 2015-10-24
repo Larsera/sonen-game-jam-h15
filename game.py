@@ -3,6 +3,8 @@ from pygame.locals import *
 from world import *
 from character import *
 from gui import *
+from sounds import *
+from combat_handler import *
 import config
 
 RES_X = 1366
@@ -25,8 +27,12 @@ class EventController():
             if event.type == pygame.MOUSEBUTTONUP:
                 clicked_pos = pygame.mouse.get_pos()
                 # TODO: Check for event collision and handle
-            if event.type == pygame.KEYUP:
+            elif event.type == pygame.KEYUP:
                 pygame.quit()
+            elif event.type == pygame.USEREVENT:
+                if event.dict[1] == "startcombat":
+                    
+
 
 class Block(pygame.sprite.Sprite):
     def __init__(self, image, width, height):
@@ -34,6 +40,7 @@ class Block(pygame.sprite.Sprite):
         self.src_image = pygame.image.load(image)
         self.image = self.src_image.convert()
 
+sounds = sound_player()
 events = EventController()
 world = World(TILE_GRID_HEIGHT, TILE_GRID_WIDTH, os.path.join('img', 'testgrid.png'), screen)
 character = Character(os.path.join('img', 'character.png'), (10, 10), screen)
@@ -46,7 +53,7 @@ stats = Stats(sidebar, 1, os.path.join('img', 'tileset_old.jpg'), character)
 
 running = 1
 while running:
-    screen.fill((255, 204, 102)) 
+    screen.fill((255, 204, 102))
     events.handleEvents()
     character.update()
     world.draw()
