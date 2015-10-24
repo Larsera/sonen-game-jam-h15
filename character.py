@@ -139,5 +139,3 @@ class Character():
     def found_danger(self, tile):
         pygame.event.post(pygame.USEREVENT, {1 :"combat"})
         combat(self, tile.get_monster)
-
-    def 
