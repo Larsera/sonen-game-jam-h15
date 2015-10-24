@@ -16,3 +16,7 @@ TEXT_PADDING = 18
 #Game
 TILE_WIDTH = 32
 TILE_HEIGHT = 32
+
+#sounds:
+SOUND_HIT = "hit.wav"
+SOUND_GAMEOVER = "gameover.wav"
