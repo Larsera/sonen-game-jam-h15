@@ -110,8 +110,9 @@ class World():
             for x in range(self.size_y):
                 id = self.world[x][y]
 
+                variant = config.TILE_H * random.randint(0, 3)
                 dest = Rect(x * config.TILE_W, y * config.TILE_H, config.TILE_W, config.TILE_H)
-                src = Rect(id * config.TILE_W, 0, config.TILE_W, config.TILE_H)
+                src = Rect(id * config.TILE_W, variant, config.TILE_W, variant + config.TILE_H)
                 if self.scrolling:
                     dest.left += self.offset[0]
                     dest.top += self.offset[1]
