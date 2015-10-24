@@ -100,7 +100,7 @@ class Game():
                 self.button_defend.draw()
                 self.button_flee.draw()
             #button3.draw()
-            self.stats.draw()
+            self.stats.draw(self.character)
             self.character.draw()
             self.sidebar.blit()
 
