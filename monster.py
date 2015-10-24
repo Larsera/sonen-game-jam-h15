@@ -7,15 +7,28 @@ class Monster():
         self.dmg_min = dmg_min
         self.dmg_max = dmg_max
         self.action_points = acp
+        self.action_points_left = acp
         self.venomous = ven
         self.name = name
         self.alive = True
         self.rarity = rarity
 
+    def defend(self):
+        return -self.deal_damage()
+
+    def flee(self):
+        random.seed()
+        if random.randint(1, 10) == 7:
+            return 1
+        else:
+            return 0
 
     def take_damage(self, dmg):
+        if dmg < 0:
+            return
+
         self.hp -= dmg
-        return self.dead()
+        self.dead()
 
     def is_alive(self):
         return self.alive

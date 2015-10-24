@@ -13,7 +13,7 @@ class Character():
         self.image = src_image.convert()
         self.position = position
         self.health = 100
-    	self.poisoned = 0
+        self.poisoned = 0
         self.hunger = 100
         self.thirst = 100
         self.alive = True
@@ -24,7 +24,7 @@ class Character():
         self.remaining_actions = self.actions
 
         self.position = position
-    
+
     def draw(self):
         self.screen.blit(self.image, self.position)
 
@@ -34,20 +34,32 @@ class Character():
         if self.thirst <= 0: self.alive = False
         if self.health <= 0: self.alive = False
 
+    def defend(self):
+        return -self.deal_damage()
+
+    def flee(self):
+        random.seed()
+        if random.randint(1, 10) == 7:
+            return 1
+        else:
+            return 0
 
     # def move(self, direction):
     #     # TEST
 
     def take_damage(self, dmg, poison):
-        if poison == True:
-            self.poisoned = self.poisoned + 1
+        if poison > 0:
+            self.poisoned += poison
+
+        if dmg < 0:
+            return
 
         self.health -= dmg
 
         if self.health <= 0:
             self.alive = False
 
-    def deal_damage(self, creature):
+    def deal_damage(self):
         random.seed()
         return random.randint(self.min_damage, self.max_damage)
 
