@@ -2,6 +2,7 @@ import pygame, math, sys, os
 from pygame.locals import *
 from world import *
 from character import *
+from gui import *
 
 pygame.init()
 _screen = pygame.display.set_mode((1366, 768))
@@ -33,12 +34,14 @@ events = EventController()
 world = World(TILE_GRID_HEIGHT, TILE_GRID_WIDTH, os.path.join('img', 'testgrid.png'), screen)
 character = Character(os.path.join('img', 'character.png'), (10, 10), screen)
 
+sidebar = Sidebar(screen, 50, 50, 300, 300)
 running = 1
 while running:
     screen.fill((255, 204, 102)) 
     events.handleEvents()
     character.update()
     world.draw()
+    sidebar.draw()
     # character.draw()
 
     _screen.blit(screen, (0,0))
