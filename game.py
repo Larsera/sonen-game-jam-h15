@@ -11,7 +11,7 @@ pygame.init()
 _screen = pygame.display.set_mode((RES_X, RES_Y))
 
 # This is the surface we are rendering to
-screen = pygame.Surface((RES_X - config.SIDEBAR_WIDTH, RES_Y - 130))
+screen = pygame.Surface((RES_X - config.SIDEBAR_WIDTH, RES_Y - config.DOWNBAR_HEIGHT))
 clock = pygame.time.Clock()
 
 TILE_GRID_WIDTH = screen.get_width()/config.TILE_W
@@ -44,6 +44,9 @@ button2 = Button(sidebar, 6, os.path.join('img', 'tileset_old.jpg'), "Research")
 button3 = Button(sidebar, 7, os.path.join('img', 'tileset_old.jpg'), "DIE!")
 stats = Stats(sidebar, 1, os.path.join('img', 'tileset_old.jpg'), character)
 
+# downbar = Downbar(_screen,os.path.join('img', 'tileset_old.jpg'))
+dirbtn = DirectionButtons(_screen, 50, 630, os.path.join('img', 'tileset_old.jpg'))
+
 running = 1
 while running:
     screen.fill((255, 204, 102)) 
@@ -57,6 +60,11 @@ while running:
     stats.draw()
     # character.draw()
     sidebar.blit()
+
+    # downbar.draw()
+    # downbar.blit()
+
+    dirbtn.draw()
     _screen.blit(screen, (0, 0))
     pygame.display.flip()
 
