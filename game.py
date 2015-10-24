@@ -29,8 +29,8 @@ class EventController():
                 # TODO: Check for event collision and handle
             elif event.type == pygame.KEYUP:
                 pygame.quit()
-            elif event.type == pygame.USEREVENT:
-                if event.dict[1] == "startcombat":
+            #elif event.type == pygame.USEREVENT:
+                #if event.dict[1] == "startcombat":
                     
 
 
@@ -46,13 +46,17 @@ world = World(TILE_GRID_HEIGHT, TILE_GRID_WIDTH, os.path.join('img', 'testgrid.p
 character = Character(os.path.join('img', 'character.png'), (10, 10), screen)
 
 sidebar = Sidebar(_screen, config.SIDEBAR) 
-button = Button(sidebar, 5, config.BUTTON, "Attack")
-button2 = Button(sidebar, 6, config.BUTTON, "Research")
-button3 = Button(sidebar, 7, config.BUTTON, "DIE!")
+button1 = Button(sidebar, 5, config.BUTTON, "Search")
+button2 = Button(sidebar, 6, config.BUTTON, "Drink antidote")
+button3 = Button(sidebar, 5, config.BUTTON, "Attack")
+button4 = Button(sidebar, 6, config.BUTTON, "Defend")
+button5 = Button(sidebar, 7, config.BUTTON, "Flee")
+
 stats = Stats(sidebar, 1, config.STATS, character)
 
 # downbar = Downbar(_screen,os.path.join('img', 'tileset_old.jpg'))
 dirbtn = DirectionButtons(_screen, 50, 630, os.path.join('img', 'tileset_old.jpg'))
+state = "normal"
 
 running = 1
 while running:
@@ -61,9 +65,14 @@ while running:
     character.update()
     world.draw()
     sidebar.draw()
-    button.draw()
-    button2.draw()
-    button3.draw()
+    if state == "normal":
+        button1.draw()
+        button2.draw()
+    elif state == "combat":
+        button3.draw()
+        button4.draw()
+        button5.draw()
+    #button3.draw()
     stats.draw()
     # character.draw()
     sidebar.blit()
