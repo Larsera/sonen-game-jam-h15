@@ -11,7 +11,7 @@ pygame.init()
 _screen = pygame.display.set_mode((RES_X, RES_Y))
 
 # This is the surface we are rendering to
-screen = pygame.Surface((RES_X - SIDEBAR_WIDTH, RES_Y - 130))
+screen = pygame.Surface((RES_X - config.SIDEBAR_WIDTH, RES_Y - 130))
 clock = pygame.time.Clock()
 
 TILE_GRID_WIDTH = screen.get_width()/config.TILE_W

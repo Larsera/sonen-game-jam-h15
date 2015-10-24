@@ -74,11 +74,11 @@ class Stats():
         self.text_hunger = self.font.render(str(character.hunger), 1,(255,255,255))
 
     def draw(self):
-        pygame.draw.rect(self.surface, (255,255,255), self.rect, config.BUTTON_PADDING)
+        pygame.draw.rect(self.surface, (255,255,255), self.rect, config.TEXT_PADDING)
         self.surface.blit(self.image, self.rect)
         tmp = pygame.Rect(self.rect)
         self.surface.blit(self.text_health, tmp)
-        tmp.top += TEXT_PADDING
+        tmp.top += config.TEXT_PADDING
         self.surface.blit(self.text_thirst, tmp)
  
     # def draw(
