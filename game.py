@@ -38,33 +38,32 @@ class Game():
 
 # downbar = Downbar(_screen,os.path.join('img', 'tileset_old.jpg'))
         self.dirbtn = DirectionButtons(_screen, 50,
-                RES_Y - (config.DIRBTN_SIZE * 3 + config.DIRBTN_PADDING*2), 
+                RES_Y - (config.DIRBTN_SIZE * 3 + config.DIRBTN_PADDING*2),
                 os.path.join('img', 'tileset_old.jpg'))
-    
+
     def handleEvents(self):
-        event_list = pygame.event.get() 
+        event_list = pygame.event.get()
 
-        def handleMouseEvent(event): 
-                clicked_pos = pygame.mouse.get_pos()
-                
-                if self.button_search.get_surface_mapped_rect(_screen).collidepoint(clicked_pos): 
-                    print "Clicked: search"
+        def handleMouseEvent(event):
+            clicked_pos = pygame.mouse.get_pos()
 
-                elif self.button_drink_antidote.get_surface_mapped_rect(_screen).collidepoint(clicked_pos): 
-                    print "Clicked: drink_antidote"
+            if self.button_search.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
+                print "Clicked: search"
 
-                elif self.dirbtn.n_rect.collidepoint(clicked_pos):
-                    x, y = self.character.position
-                    self.character.move('N', get_tile(self.world.world[x][y]))
+            elif self.button_drink_antidote.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
+                print "Clicked: drink_antidote"
 
-                elif self.dirbtn.s_rect.collidepoint(clicked_pos): 
-                    print "Clicked: south"
+            elif self.dirbtn.n_rect.collidepoint(clicked_pos):
+                self.character.move('N', self.world.get_cur_tile(self.character.position))
 
-                elif self.dirbtn.e_rect.collidepoint(clicked_pos): 
-                    print "Clicked: east"
+            elif self.dirbtn.s_rect.collidepoint(clicked_pos):
+                print "Clicked: south"
 
-                elif self.dirbtn.w_rect.collidepoint(clicked_pos): 
-                    print "Clicked: west"
+            elif self.dirbtn.e_rect.collidepoint(clicked_pos):
+                print "Clicked: east"
+
+            elif self.dirbtn.w_rect.collidepoint(clicked_pos):
+                print "Clicked: west"
 
         for event in event_list:
             if event.type == pygame.MOUSEBUTTONUP:

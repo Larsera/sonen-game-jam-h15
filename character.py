@@ -79,13 +79,13 @@ class Character():
         if self.dec_rem_act(curtile.actions_used):
             x, y = self.position
             if direction == 'N':
-                x -= 1
-            elif direction == 'S':
-                x += 1
-            elif direction == 'w':
                 y -= 1
-            elif direction == 'E':
+            elif direction == 'S':
                 y += 1
+            elif direction == 'w':
+                x -= 1
+            elif direction == 'E':
+                x += 1
 
             self.position = x, y
             self.draw()
