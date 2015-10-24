@@ -62,7 +62,6 @@ class Button():
         r.left += (transform_surface.get_width() - r.width) - config.SIDEBAR_PADDING*2 
         return r 
 
-
 class Stats():
 
     def __init__(self, element, position, image, character):
@@ -87,6 +86,19 @@ class Stats():
         self.surface.blit(self.text_thirst, tmp)
         tmp.top += config.TEXT_PADDING
         self.surface.blit(self.text_hunger, tmp)
+
+class Console():
+    def __init__(self, surface):
+        self.surface = surface
+        self.currentText = "Try find some water, ya old baboon!"
+        self.rect = pygame.Rect(self.surface.get_width() - config.SIDEBAR_WIDTH - config.CONSOLE_WIDTH - config.CONSOLE_PADDING,
+                self.surface.get_height() - config.DOWNBAR_HEIGHT + config.CONSOLE_PADDING,
+                config.CONSOLE_WIDTH,
+                config.DOWNBAR_HEIGHT - config.CONSOLE_PADDING * 2)
+    
+    def draw(self):
+        pygame.draw.rect(self.surface, (255,255,255), self.rect, config.STATS_OUTLINE)
+
 
 class DirectionButtons():
     def __init__(self, surface, x, y, image):
