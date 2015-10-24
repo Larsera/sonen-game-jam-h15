@@ -1,9 +1,8 @@
 import random
 import pygame
+import config
 from pygame.locals import *
 from pygame import Rect
-
-CHANCE_DEC = 20
 
 class Character():
 
@@ -26,7 +25,10 @@ class Character():
         self.position = position
 
     def draw(self):
-        self.screen.blit(self.image, self.position)
+        x, y = self.position
+        x *= config.TILE_W
+        y *= config.TILE_H
+        self.screen.blit(self.image, x, y)
 
     def update(self):
         self.position = self.position
@@ -44,8 +46,19 @@ class Character():
         else:
             return 0
 
-    # def move(self, direction):
-    #     # TEST
+    def move(self, direction):
+        x, y = self.position
+        if direction == 'N':
+            x -= 1
+        elif direction == 'S':
+            x += 1
+        elif direction == 'w':
+            y -= 1
+        elif direction == 'E':
+            y += 1
+
+        self.position = x, y
+            
 
     def take_damage(self, dmg, poison):
         if poison > 0:
@@ -75,18 +88,18 @@ class Character():
 
         if chance + tile.shadow_chance >= 50:
             found_shadow()
-            chance -= CHANCE_DEC
+            chance -= config.CHANCE_DEC
 
         if chance + tile.water_chance >= 75:
             found_water()
-            chance -= CHANCE_DEC
+            chance -= config.CHANCE_DEC
 
         if chance + tile.item_chance >= 90:
             found_item()
-            chance -= CHANCE_DEC
+            chance -= config.CHANCE_DEC
 
         if chance + tile.danger_chance >= 60:
             found_danger()
-            chance -= CHANCE_DEC
+            chance -= config.CHANCE_DEC
 
 
