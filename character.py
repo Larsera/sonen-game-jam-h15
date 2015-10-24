@@ -18,7 +18,7 @@ class Character():
         self.max_damage = 10
         self.min_damage = 5
         self.actions = 5
-        self.weapom = None
+        self.weapon = None
         self.remaining_actions = self.actions
         self.food = []
         self.drink = []
@@ -34,8 +34,31 @@ class Character():
         self.screen.blit(self.image, (x, y))
 
     def update(self, curtile):
-        self.remaining_actions = self.actions
         self.turn_survd += 1
+
+        self.hunger -= config.HUNGER_DEC
+        self.thirst -= config.WATER_DEC
+
+        if self.hunger >= 70:
+            self.remaining_actions = self.actions
+        elif self.hunger >= 50:
+            self.remaining_actions = self.actions-1
+        elif self.hunger >= 30:
+            self.remaining_actions = self.actions-2
+        elif self.hunger >= 15:
+            self.remaining_actions = self.actions-3
+        else:
+            self.remaining_actions = self.actions-4
+
+        if curtile.water_amount == -1:
+            self.thirst = 100
+        elif curtile.water_amount > 0:
+            nw = 100 - self.thirst
+            nw = nw/10
+            while curtile.water_amount > 0 and nw > 0:
+                self.thirst += 10
+                curtile.water_amount -= 1
+                nw -= 1
 
         for i in self.food:
             if self.hunger + i.amount <= 100:
@@ -47,9 +70,12 @@ class Character():
                 self.thirst += i.hdr
                 self.drink.remove(i)
 
-        if self.hunger <= 0: self.alive = False
-        if self.thirst <= 0: self.alive = False
-        if self.health <= 0: self.alive = False
+        if self.thirst == 0:
+            self.take_damage(20, 0)
+
+        if not self.is_alive():
+            gameover = pygame.event.Event(config.GAMEOVER)
+            pygame.event.post(gameover)
 
     def dec_rem_act(self, amount):
         a = self.remaining_actions - amount
@@ -76,24 +102,54 @@ class Character():
         else:
             return 0
 
-    def move(self, direction, curtile):
-        if self.dec_rem_act(curtile.actions_used):
-            x, y = self.position
-            if direction == 'N':
-                y -= 1
-            elif direction == 'S':
+    def move(self, direction, world):
+        out = False
+        x, y = self.position
+        if direction == 'N':
+            y -= 1
+            if y < 0:
                 y += 1
-            elif direction == 'W':
-                x -= 1
-            elif direction == 'E':
+            else:
+                curtile = world.get_cur_tile((x,y))
+                if self.dec_rem_act(curtile.actions_used):
+                    out = True
+                else:
+                    y += 1
+        elif direction == 'S':
+            y += 1
+            if y > world.size_x - 1:
+                y -= 1
+            else:
+                curtile = world.get_cur_tile((x,y))
+                if self.dec_rem_act(curtile.actions_used):
+                    out = True
+                else:
+                    y -= 1
+        elif direction == 'W':
+            x -= 1
+            if x < 0:
                 x += 1
+            else:
+                curtile = world.get_cur_tile((x,y))
+                if self.dec_rem_act(curtile.actions_used):
+                    out = True
+                else:
+                    x += 1
+        elif direction == 'E':
+            x += 1
+            if x > world.size_y - 1:
+                x -= 1
+            else:
+                curtile = world.get_cur_tile((x,y))
+                if self.dec_rem_act(curtile.actions_used):
+                    out = True
+                else:
+                    x -= 1
 
-            self.position = x, y
-            self.draw()
-            return True
+        self.position = x, y
+        self.draw()
 
-        else:
-            return False
+        return out
             
 
     def take_damage(self, dmg, poison):
@@ -128,11 +184,11 @@ class Character():
             chance -= config.CHANCE_DEC
 
         if chance >= 100 - tile.water_chance*10:
-            found_water()
+            self.found_water(tile)
             chance -= config.CHANCE_DEC
 
         if chance >= 100 - tile.item_chance*10:
-            found_item()
+            #found_item()
             chance -= config.CHANCE_DEC
 
         if chance >= 100 - tile.danger_chance:
@@ -151,5 +207,11 @@ class Character():
     def found_danger(self, tile):
         combatevent = pygame.event.Event(config.COMBAT)
         pygame.event.post(combatevent)
-        combat(self, tile.get_monster)
+
+    def found_water(self, tile):
+        random.seed()
+        if tile.water_chance < 10:
+            tile.water_amount(random.randint(1, tile.water_chance))
+        else:
+            tile.water_amount(-1)
 

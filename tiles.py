@@ -22,6 +22,7 @@ class Tile():
         self.shadow = False
         self.item_chance = ic
         self.water_chance = wc
+        self.water_amount = 0
         self.name = name
         self.searches_left = 3
         self.create_monster_id_dict(create_monster_touples(monster_list, dc))
