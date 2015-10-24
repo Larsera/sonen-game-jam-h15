@@ -81,10 +81,10 @@ class World():
         while target != 0 and target < 50:
             x = random.randint(0, self.size_x - 1)
             y = random.randint(0, self.size_y - 1)
-            target = self.world[x][y]
+            target = self.world[y][x]
             count = count + 1
 
-        self.world[x][y] = 6
+        self.world[y][x] = 6
 
 
     def test(self):
