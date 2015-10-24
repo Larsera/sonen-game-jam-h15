@@ -23,6 +23,8 @@ class EventController():
             if event.type == pygame.MOUSEBUTTONUP:
                 clicked_pos = pygame.mouse.get_pos()
                 # TODO: Check for event collision and handle
+            if event.type == pygame.KEYUP:
+                pygame.quit()
 
 class Block(pygame.sprite.Sprite):
     def __init__(self, image, width, height):
