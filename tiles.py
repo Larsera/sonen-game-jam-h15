@@ -47,3 +47,5 @@ def get_tile(ident, monster_list=[(1, Monster())]):
             4 : Tile((0, 0, 0, 0, 0, 0), "oasis", monster_list),
             5 : Tile((0, 0, 0, 0, 0, 0), "abandoned camp", monster_list),
             6 : Tile((0, 0, 0, 0, 0, 0), "pyramid", monster_list)}[ident]
+
+
