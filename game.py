@@ -49,7 +49,8 @@ class Game():
             
             if self.state == "normal":
                 if self.button_search.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
-                    print "Clicked: search"
+                    curtile = self.world.get_cur_tile(self.character.position)
+                    self.character.search(curtile)
                     self.console.push_text("Clicked search")
 
                 elif self.button_drink_antidote.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
