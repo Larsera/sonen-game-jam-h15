@@ -35,10 +35,10 @@ item = {"raw_meat" : "You strip some raw meat from the dead animal. It's better 
         "cactus_piece" : "You find a cactus, and somehow manage to rip a piece off without getting stung.",
         "granola_bar" : "You find an unopened granola bar in the rubble. It's still good.",
         "antidote" : "You find a bottle of antidote! This should come in handy.",
-        "stick" : "You find an old, dry stick lying on the ground.",
-        "sharp_rock" : "You pick up a rock with a sharp edge. It fits perfectly in your hand.",
-        "pointy_stick" : "You find a pointy stick. Perfect for poking animals in the face.",
-        "plusone_mace" : "A can of mace...? Why would anyone bring that out here?",
-        "warped_blade" : "You find a twisted piece of metal, sharp enough to be considered a blade."}
+        "Stick" : "You find an old, dry stick lying on the ground.",
+        "Sharp Rock" : "You pick up a rock with a sharp edge. It fits perfectly in your hand.",
+        "Pointy Stick" : "You find a pointy stick. Perfect for poking animals in the face.",
+        "Mace +1" : "A can of mace...? Why would anyone bring that out here?",
+        "Warped Blade" : "You find a twisted piece of metal, sharp enough to be considered a blade."}
 
 
