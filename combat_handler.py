@@ -58,6 +58,7 @@ class combat():
             if mon_damage == 1:
                 string = "You stand still, watching as the  " + self.mon.name + " saunters off."
                 self.console.push_text(string)
+                return True
             elif mon_damage == 0:
                 string = "Both you and the " + self.mon.name + " look strangly at each other's laughable attempt to escape."
                 self.console.push_text(string)
@@ -80,6 +81,10 @@ class combat():
                 string = "You hit the " + self.mon.name + " for " + str(a) + " damage."
                 self.console.push_text(string)
                 self.mon.take_damage(a)
+            elif mon_damage == 0:
+                string = "You hit the " + self.mon.name + " for " + str(char_damage-2) + " damage, while it tries to run away. "
+                self.console.push_text(string)
+                self.mon.take_damage(char_damage-2)
             else:
                 string = "You hit the " + self.mon.name + " for " + str(char_damage-2) + " damage."
                 self.console.push_text(string)
