@@ -172,6 +172,7 @@ class Game():
             self.console.draw()
             _screen.blit(self.screen, (0, 0))
             self.splash.draw()
+
             pygame.display.flip()
 
         pygame.quit()
