@@ -20,7 +20,8 @@ monster = {"Rattlesnake" : "A rattlesnake hisses menacingly and shakes its tail 
             "Road Runner" : "You encounter a road runner. It appears to be fleeing from something.",
             "Coyote" : "A starving coyote jumps out in front of you. It bares its fangs and snarls!",
             "Camel" : "A camel! It is probably more afraid of you than you are of it.",
-            "Skink" : "You found a skink! Dinner time!"}
+            "Skink" : "You found a skink! Dinner time!",
+            "Crocodile" : "A crocodile leaps out of the water, snapping at you with its powerful jaws!"}
 
 biome = {0 : "Nothing but sand dunes as far as the eye can see.",
         1 : "The bedrock pokes out from under the sand here. It should be easy to find some shade.",

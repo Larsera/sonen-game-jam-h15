@@ -15,6 +15,8 @@ DEFAULT_MONSTER_LIST = [get_monster("rattlesnake"), get_monster("small_scorpion"
         get_monster("big_scorpion"), get_monster("road_runner"),
         get_monster("coyote"), get_monster("camel"), get_monster("skink")]
 
+OASIS_MONSTER_LIST = DEFAULT_MONSTER_LIST + [get_monster("crocodile")]
+
 CAMP_FOOD_LIST = [get_foodstuff("cactus_piece"), get_foodstuff("granola_bar")]
 CAMP_WEAPON_LIST = [get_weapon("plusone_mace"), get_weapon("warped_blade")]
 DEFAULT_WEAPON_LIST = [get_weapon("stick"), get_weapon("sharp_rock"),
