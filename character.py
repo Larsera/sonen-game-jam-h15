@@ -109,7 +109,7 @@ class Character():
     def flee(self):
         self.dec_rem_act(1)
         random.seed()
-        if random.randint(1, 10) == 7:
+        if random.randint(1, 3) == 1:
             return 1
         else:
             return 0
