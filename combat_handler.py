@@ -34,7 +34,7 @@ class combat():
 
 
     def combat_turn(self, cmd):
-        if self.char.remaining_actions > 0:
+        if self.char.remaining_actions > 0 and cmd > 0:
             char_damage = self.do_action(cmd, self.char)
         else:
             char_damage = 0
