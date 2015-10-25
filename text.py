@@ -1,7 +1,7 @@
 intro = ["\"Get on and I'll show you all the sights of the desert!\" the old ",
         "man proclaimed as he beckoned you to climb onto his tired-looking camel.", 
-        "That was five hours ago. Now you can only watch as the old man rides away.",
-        "Leaving you stranded in the middle of this barren wasteland.",
+        "That was five hours ago. Now you can only watch as the old man rides away, ",
+        "leaving you stranded in the middle of this barren wasteland.",
         "",
         "\"That's what happens when you can't pay!\" you hear him shout angrily",
         " as he disappears behind the dunes."]
