@@ -84,6 +84,10 @@ class Stats():
         self.text_hunger = self.font.render("Hunger:        " + str(character.hunger), 1, config.COLOR_LIGHTEST)
         self.text_action = self.font.render("Action Points: " + str(character.remaining_actions), 1, config.COLOR_LIGHTEST)
         self.text_turn   = self.font.render("Turn number:   " + str(character.turn_survd), 1, config.COLOR_LIGHTEST)
+        if character.weapon is not None:
+            self.text_weapon    = self.font.render("Weapon: " + str(character.weapon.name), 1, config.COLOR_LIGHTEST)
+        else:
+            self.text_weapon    = self.font.render("Weapon: Bare hands", 1, config.COLOR_LIGHTEST)
 
     def draw(self, character):
         self.update(character)
@@ -103,6 +107,8 @@ class Stats():
         self.surface.blit(self.text_action, tmp)
         tmp.top += config.TEXT_PADDING
         self.surface.blit(self.text_turn, tmp)
+        tmp.top += config.TEXT_PADDING
+        self.surface.blit(self.text_weapon, tmp)
 
 class Console():
     def __init__(self, surface):
