@@ -103,13 +103,12 @@ class Tile():
     def found_shadow(self):
         self.shadow = True
 
-
 def get_tile(ident, monster_list=config.DEFAULT_MONSTER_LIST, food_list=config.DEFAULT_FOOD_LIST, hydration_list=config.DEFAULT_HYDRATION_LIST, medicine_list=config.DEFAULT_MEDICINE_LIST, weapon_list=config.DEFAULT_WEAPON_LIST):
     return {0 : Tile((1, 3, 2, 2, 1), "empty desert", (monster_list, food_list, hydration_list, weapon_list, medicine_list)),
             1 : Tile((2, 5, 10, 3, 2), "big rock", (monster_list, food_list, hydration_list, weapon_list, medicine_list), searches_left=4),
             2 : Tile((2, 4, 5, 3, 3), "small rock", (monster_list, food_list, hydration_list, weapon_list, medicine_list), searches_left=4),
             3 : Tile((3, 2, 3, 1, 3), "jagged rock", (monster_list, food_list, hydration_list, weapon_list, medicine_list)),
-            4 : Tile((1, 7, 7, 4, 10), "oasis", (monster_list, food_list, hydration_list, weapon_list, medicine_list), searches_left=5),
+            4 : Tile((1, 7, 7, 4, 10), "oasis", (config.OASIS_MONSTER_LIST, food_list, hydration_list, weapon_list, medicine_list), searches_left=5),
             5 : Tile((1, 4, 8, 7, 5), "abandoned camp", (monster_list, config.CAMP_FOOD_LIST, hydration_list, config.CAMP_WEAPON_LIST, medicine_list), searches_left=10),
             6 : Tile((1, 10, 10, 9, 4), "pyramid", (monster_list, food_list, hydration_list, weapon_list, medicine_list), searches_left=7)}.get(ident)
 
