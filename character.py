@@ -19,8 +19,8 @@ class Character():
         self.hunger = 100
         self.thirst = 100
         self.alive = True
-        self.max_damage = 10
-        self.min_damage = 5
+        self.max_damage = 6
+        self.min_damage = 2
         self.actions = 5
         self.weapon = weapon("Bare Hands", dmg=0)
         self.remaining_actions = self.actions
