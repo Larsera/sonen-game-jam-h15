@@ -14,8 +14,10 @@ class combat():
         console.push_text(text.monster[self.mon.name])
 
     def do_combat_turn(self, cmd):
-        self.combat_turn(cmd)
-        if not self.char.is_alive():
+        if self.combat_turn(cmd):
+            endcombat = pygame.event.Event(config.ENDCOMBAT)
+            pygame.event.post(endcombat)
+        elif not self.char.is_alive():
             gameover = pygame.event.Event(config.GAMEOVER)
             pygame.event.post(gameover)
         elif not self.mon.is_alive():
@@ -51,7 +53,7 @@ class combat():
                 self.mon.take_damage(char_damage-2+mon_damage)
             elif mon_damage > 1:
                 self.mon.take_damage(char_damage-2)
-                self.char.take_damage(mon_damage-2, self.mon.get_venom)
+                self.char.take_damage(mon_damage-2, self.mon.get_venom())
 
         return False
 

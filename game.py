@@ -106,6 +106,9 @@ class Game():
                 self.state = "combat"
                 curtile = self.world.get_cur_tile(self.character.position)
                 self.combat = combat(self.character, curtile.get_monster(), self.console)
+            elif event.type == config.ENDCOMBAT:
+                self.state = "normal"
+                self.combat = None
             elif event.type == config.GAMEOVER:
                 self.state = "gameover"
             elif event.type == config.NEWTURN:
