@@ -139,6 +139,7 @@ class Game():
             if self.state == "normal":
                 self.button_search.draw()
                 self.button_drink_antidote.draw()
+                self.button_end_turn.draw()
             elif self.state == "combat":
                 self.button_attack.draw()
                 self.button_defend.draw()
