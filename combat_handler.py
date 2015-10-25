@@ -59,7 +59,7 @@ class combat():
                 string = "You hit the " + self.mon.name + " for " + str(char_damage-2+mon_damage) + " damage."
                 self.console.push_text(string)
                 self.mon.take_damage(char_damage-2+mon_damage)
-            elif mon_damage > 1:
+            else:
                 string = "You hit the " + self.mon.name + " for " + str(char_damage-2) + " damage."
                 self.console.push_text(string)
                 self.mon.take_damage(char_damage-2)
