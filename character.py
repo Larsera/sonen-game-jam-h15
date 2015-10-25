@@ -163,6 +163,9 @@ class Character():
             if world.world[x][y] != src:
                 console.push_text(text.biome[world.world[x][y]])
 
+            if random.randint(0, 10) == 10:
+                console.push_text(text.flavor[random.randint(0, 7)])
+
         self.position = x, y
         self.draw()
 
