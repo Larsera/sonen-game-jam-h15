@@ -2,7 +2,7 @@ import random
 
 class Monster():
 
-    def __init__(self, name="none", hp=1, acp=1, ven=0, dmg_min=0, dmg_max=1, rarity=0):
+    def __init__(self, name="none", hp=1, acp=1, ven=0, dmg_min=0, dmg_max=1, rarity=0, attack=1, defend=1, flee=1):
         self.hp = hp
         self.dmg_min = dmg_min
         self.dmg_max = dmg_max
@@ -12,6 +12,10 @@ class Monster():
         self.name = name
         self.alive = True
         self.rarity = rarity
+        self.attack = attack
+        self.defend = defend
+        self.flee = flee
+        self.tot = attack+defend+flee
 
     def update(self):
         self.remaining_actions = self.action_points
@@ -50,20 +54,22 @@ class Monster():
         return random.randint(0, self.venomous)
 
     def get_action(self):
-        if self.name == "Skink" or self.name == "Road Runner":
-            return 3
-        elif self.name == "Camel":
+        random.seed()
+        a = random.randint(1, self.tot)
+        if 1 <= a <= self.flee:
+            return 1
+        elif a <= self.defend:
             return 2
         else:
-            return 1
+            return 3
 
 def get_monster(ident):
-    return {"rattlesnake" : Monster(name="Rattlesnake", hp=20, ven=7, dmg_min=1, dmg_max=5, rarity=5, acp=3),
-            "small_scorpion" : Monster(name="Small Scorpion", hp=5, dmg_min=1, dmg_max=2, ven=10, rarity=7),
-            "big_scorpion" : Monster(name="Big Scorpion", hp=15, dmg_min=3, dmg_max=5, rarity=3, acp=5),
-            "road_runner" : Monster(name="Road Runner", hp=7, rarity=6, acp=15),
-            "coyote" : Monster(name="Coyote", hp=25, dmg_min=5, dmg_max=10, rarity=10, acp=7),
-            "camel" : Monster(name="Camel", hp=40, dmg_min=3, dmg_max=6, rarity=2, acp=2),
-            "skink" : Monster(name="Skink", hp=10, dmg_min=1, dmg_max=2, rarity=1, acp=2)}.get(ident)
+    return {"rattlesnake" : Monster(name="Rattlesnake", hp=20, ven=7, dmg_min=1, dmg_max=5, rarity=5, acp=3, attack=7),
+            "small_scorpion" : Monster(name="Small Scorpion", hp=5, dmg_min=1, dmg_max=2, ven=10, rarity=7, attack=10),
+            "big_scorpion" : Monster(name="Big Scorpion", hp=15, dmg_min=3, dmg_max=5, rarity=3, acp=5, attack=5),
+            "road_runner" : Monster(name="Road Runner", hp=7, rarity=6, acp=15, flee=10),
+            "coyote" : Monster(name="Coyote", hp=25, dmg_min=5, dmg_max=10, rarity=10, acp=7, attack=7, defend=3),
+            "camel" : Monster(name="Camel", hp=40, dmg_min=3, dmg_max=6, rarity=2, acp=2, defend=3),
+            "skink" : Monster(name="Skink", hp=10, dmg_min=1, dmg_max=2, rarity=1, acp=2, flee=3)}.get(ident)
 
 

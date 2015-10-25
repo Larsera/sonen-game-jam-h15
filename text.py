@@ -1,10 +1,9 @@
 intro = ["\"Get on and I'll show you all the sights of the desert!\" the old ",
-        "man proclaimed as you climbed onto his tired-looking camel. That ",
-        "was five hours ago. Now, you can only watch as the old man rides ",
-        "away, leaving you stranded in the middle of the barren wasteland.",
-        "",
-        "\"That's what happens when you can't pay!\" you hear him shout ",
-        "angrily as he disappears behind a sand dune."]
+        "man proclaimed as he becons you to climbed onto his tired-looking camel.", 
+        "That was five hours ago. Now you can only watch as the old man rides away.",
+        "Leaving you stranded in the middle of this barren wasteland.",
+        "\"That's what happens when you can't pay!\" you hear him shout angrily",
+        " as he disappears behind the dunes."]
 
 flavor = ["A tumbleweed rolls by. The situation is awkward for everyone involved.",
         "A vulture circles you far above, waiting patiently for your inevitable demise.",
@@ -26,10 +25,10 @@ monster = {"Rattlesnake" : "A rattlesnake hisses menacingly and shakes its tail 
 biome = {0 : "Nothing but sand dunes as far as the eye can see.",
         1 : "The bedrock pokes out from under the sand here. It should be easy to find some shade.",
         2 : "Smaller rocks dot the landscape, making it slighly harder to traverse.",
-        3 : "The ground here is treacherously littered with jagged rocks.",
+        3 : "The ground here is treacherous, littered with jagged rocks.",
         4 : "Plants grow around a spring of water. Watch out for thirsty animals.",
         5 : "An old, abandoned campsite. Hard to tell who was here, or why they left.",
-        6 : "A huge, nondescript pyramid towers above the dunes."}
+        6 : "A huge pyramid towers above the dunes."}
 
 item = {"raw_meat" : "You strip some raw meat from the dead animal. It's better than nothing.",
         "cactus_piece" : "You find a cactus, and somehow manage to rip a piece off without getting stung.",
