@@ -8,10 +8,10 @@ class weapon():
 
 def get_weapon(ident):
     return {"stick" : weapon("Stick"),
-        "sharp_rock" : weapon("Sharp rock", dmg=2),
-        "pointy_stick" : weapon("Pointy stick", dmg=3),
+        "sharp_rock" : weapon("Sharp Rock", dmg=2),
+        "pointy_stick" : weapon("Pointy Stick", dmg=3),
         "plusone_mace" : weapon("+1 Mace", dmg=4),
-        "warped_blade" : weapon("Warped blade", dmg=5)}.get(ident)
+        "warped_blade" : weapon("Warped Blade", dmg=5)}.get(ident)
 
 class item_hydration():
 
@@ -45,10 +45,5 @@ class item_medicine():
         self.hunger = hunger
 
 def get_medicine(ident):
-    return {"antidote" : item_medicine("Antidote", antidote=True)
+    return item_medicine("Antidote", antidote=True)
 
-class item_junk():
-
-    def __init__(self, name, bonus):
-        self.name = name
-        self.bonus = bonus
