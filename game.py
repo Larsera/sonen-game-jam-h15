@@ -8,8 +8,8 @@ from combat_handler import *
 from tiles import get_tile
 import config
 
-RES_X = 1660
-RES_Y = 900
+RES_X = 1366
+RES_Y = 768
 pygame.init()
 _screen = pygame.display.set_mode((RES_X, RES_Y))
 
