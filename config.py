@@ -53,7 +53,7 @@ DIRBTN_OUTLINE_COLOR = COLOR_LIGHTEST
 
 CONSOLE_WIDTH = 800
 CONSOLE_PADDING = 10
-CONSOLE_FONT_SIZE = 28
+CONSOLE_FONT_SIZE = 18
 CONSOLE_OUTLINE  = 5
 CONSOLE_TEXT_PADDING = 34
 
@@ -67,6 +67,7 @@ SOUND_GAMEOVER = "gameover.wav"
 
 #images
 TILES = os.path.join('img', 'tilegrid.png')
+# TILES = os.path.join('img', 'tilegrid_palette.png')
 SIDEBAR = os.path.join('img', 'panel_crystallized.png')
 BUTTON = os.path.join('img', 'button_crystallized.png')
 STATS = os.path.join('img', 'tileset_old.jpg')

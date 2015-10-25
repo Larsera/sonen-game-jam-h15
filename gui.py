@@ -57,7 +57,9 @@ class Button():
         pygame.draw.rect(self.surface, config.BUTTON_OUTLINE_COLOR, self.rect, config.BUTTON_OUTLINE)
         # self.surface.blit(self.image, self.rect)
         self.surface.fill(config.COLOR_DARKEST, self.rect)
-        self.surface.blit(self.text, self.rect)
+        tmp = pygame.Rect(self.rect)
+        tmp.left += 8
+        self.surface.blit(self.text, tmp) 
 
     def get_surface_mapped_rect(self, transform_surface):
         r = self.rect.copy()
@@ -81,17 +83,17 @@ class Stats():
         self.text_thirst = self.font.render("Hydration:     " + str(character.thirst), 1, config.COLOR_LIGHTEST)
         self.text_hunger = self.font.render("Hunger:        " + str(character.hunger), 1, config.COLOR_LIGHTEST)
         self.text_action = self.font.render("Action Points: " + str(character.remaining_actions), 1, config.COLOR_LIGHTEST)
-        self.text_turn   = self.font.render("turn number:   " + str(character.turn_survd), 1, config.COLOR_LIGHTEST)
+        self.text_turn   = self.font.render("Turn number:   " + str(character.turn_survd), 1, config.COLOR_LIGHTEST)
 
     def draw(self, character):
         self.update(character)
-
         pygame.draw.rect(self.surface, config.COLOR_LIGHTEST, self.rect, config.STATS_OUTLINE)
         self.surface.fill(config.COLOR_DARKEST, self.rect)
 
         # self.surface.blit(self.image, self.rect)
 
         tmp = pygame.Rect(self.rect)
+        tmp.left += 8
         self.surface.blit(self.text_health, tmp)
         tmp.top += config.TEXT_PADDING
         self.surface.blit(self.text_thirst, tmp)
@@ -173,6 +175,11 @@ class DirectionButtons():
         sr.left += z
         er.left += z
         wr.left += z
+        
+        nr.top -= 9
+        sr.top -= 9
+        er.top -= 9
+        wr.top -= 9
 
         self.surface.blit(self.text_n, nr)
         self.surface.blit(self.text_s, sr)
