@@ -25,7 +25,7 @@ class Monster():
 
     def flee(self):
         random.seed()
-        if random.randint(1, 10) == 7:
+        if random.randint(1, 3) == 1:
             return 1
         else:
             return 0
