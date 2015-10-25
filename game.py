@@ -25,6 +25,7 @@ class Game():
         self.sounds                 = sound_player()
         self.world                  = World(self.TILE_GRID_HEIGHT, self.TILE_GRID_WIDTH, TILES, self.screen)
         self.character              = Character(os.path.join('img', 'character.png'), (10, 10), self.screen)
+        self.combat                 = None
 
         self.sidebar                = Sidebar(_screen, config.SIDEBAR) 
         self.button_search          = Button(self.sidebar, 5, config.BUTTON, "Search")
@@ -45,26 +46,39 @@ class Game():
 
         def handleMouseEvent(event):
             clicked_pos = pygame.mouse.get_pos()
+            
+            if self.state == "normal":
+                if self.button_search.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
+                    curtile = self.world.get_cur_tile(self.character.position)
+                    self.character.search(curtile)
+                    self.console.push_text("Clicked search")
 
-            if self.button_search.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
-                print "Clicked: search"
-                self.console.push_text("Clicked search")
+                elif self.button_drink_antidote.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
+                    print "Clicked: drink_antidote"
+                    self.console.push_text("Antidote")
 
-            elif self.button_drink_antidote.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
-                print "Clicked: drink_antidote"
-                self.console.push_text("Antidote")
+                elif self.dirbtn.n_rect.collidepoint(clicked_pos):
+                    self.character.move('N', self.world)
 
-            elif self.dirbtn.n_rect.collidepoint(clicked_pos):
-                self.character.move('N', self.world.get_cur_tile(self.character.position))
+                elif self.dirbtn.s_rect.collidepoint(clicked_pos):
+                    self.character.move('S', self.world)
 
-            elif self.dirbtn.s_rect.collidepoint(clicked_pos):
-                self.character.move('S', self.world.get_cur_tile(self.character.position))
+                elif self.dirbtn.e_rect.collidepoint(clicked_pos):
+                    self.character.move('E', self.world)
 
-            elif self.dirbtn.e_rect.collidepoint(clicked_pos):
-                self.character.move('E', self.world.get_cur_tile(self.character.position))
+                elif self.dirbtn.w_rect.collidepoint(clicked_pos):
+                    self.character.move('W', self.world)
 
-            elif self.dirbtn.w_rect.collidepoint(clicked_pos):
-                self.character.move('W', self.world.get_cur_tile(self.character.position))
+            elif self.state == "combat":
+                if self.button_attack.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
+                    self.combat.do_combat_turn(1)
+
+                elif self.button_defend.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
+                    self.combat.do_combat_turn(2)
+
+                elif self.button_flee.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
+                    self.combat.do_combat_turn(3)
+
 
         def handleKeyEvent(event):
             if event.key == pygame.K_ESCAPE:
@@ -90,6 +104,8 @@ class Game():
 
             elif event.type == config.COMBAT:
                 self.state = "combat"
+                curtile = self.world.get_cur_tile(self.character.position)
+                self.combat = combat(self.character, curtile.get_monster(), self.console)
             elif event.type == config.GAMEOVER:
                 self.state = "gameover"
             elif event.type == config.NEWTURN:

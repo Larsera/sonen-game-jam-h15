@@ -1,5 +1,6 @@
 import os
 import pygame
+from monster import get_monster
 
 # Color palette:
 COLOR_DARKEST   = (26, 14, 5)
@@ -9,11 +10,14 @@ COLOR_LIGHTEST  = (203, 163, 136)
 
 # Tile
 TILE_W = TILE_H = 32
+DEFAULT_MONSTER_LIST = [get_monster("rattlesnake"), get_monster("small_scorpion"),
+        get_monster("big_scorpion"), get_monster("road_runner"),
+        get_monster("coyote"), get_monster("camel"), get_monster("skink")]
 
 # Character:
 CHANCE_DEC = 20
-WATER_DEC = 20
-HUNGER_DEC = 20
+WATER_DEC = 10
+HUNGER_DEC = 10
 
 # Gui:
 SIDEBAR_WIDTH = 256

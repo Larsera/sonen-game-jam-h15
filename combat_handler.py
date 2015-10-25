@@ -1,30 +1,36 @@
 import pygame
+from monster import Monster
 import config
+import text
 
 class combat():
 
-    def __init__(self, char, mon):
+    def __init__(self, char, mon, console):
         self.char = char
         self.mon = mon
+        self.console = console
+        print "MONSTER? ",
+        print(type(mon))
+        console.push_text(text.monster[self.mon.name])
 
-        while not self.combat_turn:
-            if not self.char.is_alive():
-                gameover = pygame.event.Event(config.GAMEOVER)
-                pygame.event.post(gameover)
-                break
-            elif not self.mon.is_alive():
-                win = pygame.event.Event(config.WIN)
-                pygame.event.post(win)
-            else:
-                if self.char.remaining_actions == 0 and self.mon.remaining_actions == 0:
-                    newturn = pygame.event.Event(config.NEWTURN)
-                    pygame.event.post(newturn)
-                    self.mon.update()
+    def do_combat_turn(self, cmd):
+        self.combat_turn(cmd)
+        if not self.char.is_alive():
+            gameover = pygame.event.Event(config.GAMEOVER)
+            pygame.event.post(gameover)
+        elif not self.mon.is_alive():
+            win = pygame.event.Event(config.WIN)
+            pygame.event.post(win)
+        else:
+            if self.char.remaining_actions == 0 and self.mon.remaining_actions == 0:
+                newturn = pygame.event.Event(config.NEWTURN)
+                pygame.event.post(newturn)
+                self.mon.update()
 
 
-    def combat_turn(self):
+    def combat_turn(self, cmd):
         if self.char.action_points_left > 0:
-            char_damage = self.do_action(self.char.get_action, self.char)
+            char_damage = self.do_action(cmd, self.char)
         else:
             char_damage = 0
         if self.mon.action_points_left > 0:
