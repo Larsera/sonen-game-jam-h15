@@ -8,7 +8,8 @@ class Character():
     def __init__(self, image, position, screen):
         self.screen = screen
         src_image = pygame.image.load(image)
-        self.image = src_image.convert()
+        # self.image = src_image.convert()
+        self.image = src_image
         self.position = position
         self.health = 100
         self.poisoned = 0
