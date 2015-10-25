@@ -58,6 +58,7 @@ class Game():
         event_list = pygame.event.get()
 
         def handleMouseEvent(event):
+            self.splashing = 0
             clicked_pos = pygame.mouse.get_pos()
             
             if self.state == "normal":
@@ -97,6 +98,7 @@ class Game():
 
 
         def handleKeyEvent(event):
+            self.splashing = 0
             if event.key == pygame.K_ESCAPE:
                 self.running = False
             elif self.state == "normal":
@@ -140,6 +142,7 @@ class Game():
         self.character.update(self.world.get_cur_tile(self.character.position))
 
     def run(self):
+        self.splashing = 1
         self.state = "normal" 
         while self.running:
             self.clock.tick()
@@ -171,7 +174,9 @@ class Game():
             self.dirbtn.draw()
             self.console.draw()
             _screen.blit(self.screen, (0, 0))
-            self.splash.draw()
+            
+            if self.splashing:
+                self.splash.draw()
 
             pygame.display.flip()
 
