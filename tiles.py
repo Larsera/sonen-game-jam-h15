@@ -50,7 +50,7 @@ def get_tile(ident, monster_list=config.DEFAULT_MONSTER_LIST):
             1 : Tile((2, 5, 10, 3, 2), "big rock", monster_list, searches_left=4),
             2 : Tile((2, 4, 5, 3, 3), "small rock", monster_list, searches_left=4),
             3 : Tile((3, 2, 3, 1, 3), "jagged rock", monster_list),
-            4 : Tile((1, 7, 7, 4, 10), "oasis", monster_list, searches_left=5),
+            4 : Tile((1, 7, 7, 4, 10), "oasis", config.OASIS_MONSTER_LIST, searches_left=5),
             5 : Tile((1, 4, 8, 7, 5), "abandoned camp", monster_list, searches_left=10),
             6 : Tile((1, 10, 10, 9, 4), "pyramid", monster_list, searches_left=7)}.get(ident)
 
