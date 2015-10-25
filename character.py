@@ -180,8 +180,12 @@ class Character():
             if world.world[x][y] != src:
                 console.push_text(text.biome[world.world[x][y]])
 
-            if random.randint(0, 10) == 10:
+            i = random.randint(0, 10)
+            if i == 10:
                 console.push_text(text.flavor[random.randint(0, 7)])
+            elif i == 7:
+                self.found_danger(curtile)
+
 
         self.position = x, y
         self.draw()
@@ -243,9 +247,13 @@ class Character():
             chance -= config.CHANCE_DEC
 
     def find_food(self, foodstuff):
+        string = "You found some " + foodstuff.name + "."
+        self.console.push_text(string)
         self.food.append(foodstuff)
 
     def find_drink(self, hydration):
+        string = "You found some " + hydration.name + "."
+        self.console.push_text(string)
         self.drink.append(hydration)
 
     def find_medicine(self, medication):
@@ -276,26 +284,25 @@ class Character():
 #TODO: if time rewrite
     def found_item(self, tile):
         random.seed()
-        if tile.name == "abandoned camp":
-            result = random.randint(1, 4)
-            if result == 1:
-                self.console.push_text("You found some food!")
-                self.find_food(config.CAMP_FOOD_LIST[random.randint(0, 1)])
-            elif result == 2:
-                self.console.push_text("You found a bottle of water!")
-                self.find_drink(items.get_water("water_bottle"))
-            elif result == 3:
-                self.console.push_text(text.item["antidote"])
-                self.find_medicine(items.get_medicine("antidote"))
-            elif result == 4:
-                self.find_weapon(config.CAMP_WEAPON_LIST[random.randint(0, 1)])
-        else:
-            result = random.randint(1, 2)
-            if result == 1:
-                self.console.push_text(text.item["cactus_piece"])
-                self.find_food(items.get_foodstuff("cactus_piece"))
-            else:
-                self.find_weapon(config.DEFAULT_WEAPON_LIST[random.randint(0, 2)])
+        result = random.randint(1, 4)
+        if result == 1:
+            food = tile.get_foodstuff()
+            string = "You found a " + food.name + "."
+            self.console.push_text(string)
+            self.find_food(food)
+        elif result == 2:
+            hydration = tile.get_hydration()
+            string = "You found a " + hydration.name + "."
+            self.console.push_text(string)
+            self.find_drink(hydration)
+        elif result == 3:
+            medicine = tile.get_medicine()
+            string = "You found some " + medicine.name + "."
+            self.console.push_text(string)
+            self.find_medicine(medicine)
+        elif result == 4:
+            weapon = tile.get_weapon()
+            self.find_weapon(weapon)
 
     def use_antidote(self):
         if self.antidote > 0:
