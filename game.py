@@ -11,8 +11,8 @@ from items import get_foodstuff
 import text
 import config
 
-RES_X = 1920
-RES_Y = 1080
+RES_X = 1366
+RES_Y = 768
 pygame.init()
 _screen = pygame.display.set_mode((RES_X, RES_Y))
 

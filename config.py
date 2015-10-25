@@ -14,11 +14,19 @@ TILE_W = TILE_H = 32
 DEFAULT_MONSTER_LIST = [get_monster("rattlesnake"), get_monster("small_scorpion"),
         get_monster("big_scorpion"), get_monster("road_runner"),
         get_monster("coyote"), get_monster("camel"), get_monster("skink")]
-
-CAMP_FOOD_LIST = [get_foodstuff("cactus_piece"), get_foodstuff("granola_bar")]
-CAMP_WEAPON_LIST = [get_weapon("plusone_mace"), get_weapon("warped_blade")]
+DEFAULT_FOOD_LIST = [get_foodstuff("cactus_piece")]
+DEFAULT_HYDRATION_LIST = [get_water("water_bottle")]
+DEFAULT_MEDICINE_LIST = [get_medicine("antidote")]
 DEFAULT_WEAPON_LIST = [get_weapon("stick"), get_weapon("sharp_rock"),
         get_weapon("pointy_stick")]
+
+OASIS_MONSTER_LIST = DEFAULT_MONSTER_LIST + [get_monster("crocodile")]
+
+CAMP_FOOD_LIST = [get_foodstuff("cactus_piece"), get_foodstuff("granola_bar")]
+CAMP_WEAPON_LIST = [get_weapon("plusone_mace")]
+
+PYRAMID_WEAPON_LIST = [get_weapon("warped_blade")]
+
 
 # Character:
 CHANCE_DEC = 20
