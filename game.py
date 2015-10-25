@@ -16,7 +16,7 @@ RES_X = 1366
 RES_Y = 768
 pygame.init()
 _screen = pygame.display.set_mode((RES_X, RES_Y))
-pygame.display.set_caption("Never Ride a Strangers Camel")
+pygame.display.set_caption("Never Ride a Stranger's Camel")
 
 class Game():
 # This is the surface we are rendering to
