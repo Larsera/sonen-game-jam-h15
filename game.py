@@ -113,6 +113,9 @@ class Game():
                 self.state = "gameover"
             elif event.type == config.NEWTURN:
                 self.newturn()
+            elif event.type == config.WIN:
+                self.state = "normal"
+                self.combat = None
 
     def newturn(self):
         self.character.update(self.world.get_cur_tile(self.character.position))
