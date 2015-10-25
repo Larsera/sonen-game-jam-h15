@@ -6,18 +6,21 @@ class weapon():
         self.name = name
         self.dmg = dmg
 
-    def get_weapon(ident):
-        return {"stick" : weapon("Stick"),
-            "sharp_rock" : weapon("Sharp rock", dmg=2),
-            "pointy_stick" : weapon("Pointy stick", dmg=3),
-            "plusone_mace" : weapon("+1 Mace", dmg=4),
-            "warped_blade" : weapon("Warped blade", dmg=5)}.get(ident)
+def get_weapon(ident):
+    return {"stick" : weapon("Stick"),
+        "sharp_rock" : weapon("Sharp rock", dmg=2),
+        "pointy_stick" : weapon("Pointy stick", dmg=3),
+        "plusone_mace" : weapon("+1 Mace", dmg=4),
+        "warped_blade" : weapon("Warped blade", dmg=5)}.get(ident)
 
 class item_hydration():
 
     def __init__(self, name, hdr):
         self.name = name
         self.hydration = hdr
+
+def get_water(ident):
+    return {"water_bottle" : item_hydration("Water Bottle", 80)}.get(ident)
 
 class item_foodstuff():
 
@@ -26,10 +29,10 @@ class item_foodstuff():
         self.amount = amount
         self.hdr = hdr
 
-    def get_foodstuff(ident):
-        return {"raw_meat" : item_foodstuff("Raw meat", 40, 0),
-                "cactus_piece" : item_foodstuff("Cactus piece", 30, 20),
-                "granola_bar" : item_foodstuff("Granola bar", 50, 0)}.get(ident)
+def get_foodstuff(ident):
+    return {"raw_meat" : item_foodstuff("Raw meat", 40, 0),
+            "cactus_piece" : item_foodstuff("Cactus piece", 30, 20),
+            "granola_bar" : item_foodstuff("Granola bar", 50, 0)}.get(ident)
 
 
 class item_medicine():
@@ -41,8 +44,8 @@ class item_medicine():
         self.hydration = hydration
         self.hunger = hunger
 
-    def get_medicine(ident):
-        return {"antidote" : item_medicine("Antidote", antidote=True)
+def get_medicine(ident):
+    return {"antidote" : item_medicine("Antidote", antidote=True)
 
 class item_junk():
 
