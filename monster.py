@@ -70,6 +70,7 @@ def get_monster(ident):
             "road_runner" : Monster(name="Road Runner", hp=7, rarity=6, acp=15, flee=10),
             "coyote" : Monster(name="Coyote", hp=25, dmg_min=5, dmg_max=10, rarity=10, acp=7, attack=7, defend=3),
             "camel" : Monster(name="Camel", hp=40, dmg_min=3, dmg_max=6, rarity=2, acp=2, defend=3),
-            "skink" : Monster(name="Skink", hp=10, dmg_min=1, dmg_max=2, rarity=1, acp=2, flee=3)}.get(ident)
+            "skink" : Monster(name="Skink", hp=10, dmg_min=1, dmg_max=2, rarity=1, acp=2, flee=3),
+            "crocodile" : Monster(name="Crocodile", hp=60, dmg_min=1, dmg_max=25, rarity=10, acp=3, attack=9, defend=2)}.get(ident)
 
 

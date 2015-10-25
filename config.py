@@ -20,6 +20,8 @@ DEFAULT_MEDICINE_LIST = [get_medicine("antidote")]
 DEFAULT_WEAPON_LIST = [get_weapon("stick"), get_weapon("sharp_rock"),
         get_weapon("pointy_stick")]
 
+OASIS_MONSTER_LIST = DEFAULT_MONSTER_LIST + [get_monster("crocodile")]
+
 CAMP_FOOD_LIST = [get_foodstuff("cactus_piece"), get_foodstuff("granola_bar")]
 CAMP_WEAPON_LIST = [get_weapon("plusone_mace")]
 
