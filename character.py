@@ -41,10 +41,10 @@ class Character():
         self.hunger -= config.HUNGER_DEC
         self.thirst -= config.WATER_DEC
 
-        if self.thirst > 0:
+        if self.thirst < 0:
             self.thirst = 0
 
-        if self.hunger > 0:
+        if self.hunger < 0:
             self.hunger = 0
 
         if self.hunger >= 70:
