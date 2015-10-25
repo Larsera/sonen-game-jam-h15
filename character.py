@@ -74,8 +74,10 @@ class Character():
             self.remaining_actions = self.actions-4
 
         if curtile.water_amount == -1:
+            self.console.push_text("You drink from the oasis untill you feel refreshed.")
             self.thirst = 100
         elif curtile.water_amount > 0:
+            self.console.push_text("You drink from the water source, trying to make it last as long as possible.")
             nw = 100 - self.thirst
             nw = nw/10
             while curtile.water_amount > 0 and nw > 0:
@@ -87,11 +89,15 @@ class Character():
             if self.hunger + i.amount <= 100:
                 self.hunger += i.amount
                 self.food.remove(i)
+                string = "You eat " + i.name + ".";
+                self.console.push_text(string)
 
         for i in self.drink:
             if self.thirst + i.hydration <= 100:
                 self.thirst += i.hydration
                 self.drink.remove(i)
+                string = "You drink " + i.name + "."
+                self.console.push_text(string)
 
         if self.thirst == 0:
             self.take_damage(20, 0)
