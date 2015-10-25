@@ -178,6 +178,8 @@ class Game():
             if self.splashing:
                 self.splash.draw()
 
+            if self.state == "gameover":
+                self.splash.game_over()
             pygame.display.flip()
 
         pygame.quit()
