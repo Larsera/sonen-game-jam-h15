@@ -258,7 +258,7 @@ class Character():
                 find_water(get_water("water_bottle"))
             elif result == 3:
                 console.push_text(text.item["antidote"])
-                find_medicine(get_medicine("antidote")
+                find_medicine(get_medicine("antidote"))
             elif result == 4:
                 find_weapon(CAMP_WEAPON_LIST[random.randint(0, 1)], console)
         else:
