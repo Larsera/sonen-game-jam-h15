@@ -15,13 +15,13 @@ flavor = ["A tumbleweed rolls by. The situation is awkward for everyone involved
         "A coyote watches you lazily from a faraway outcropping.",
         "A sudden gust of wind buffets you, getting sand in your eyes and mouth."]
 
-monster = {"rattlesnake" : "A rattlesnake hisses menacingly and shakes its tail at you!",
-            "small_scorpion" : "You almost stepped on a small scorpion! It lashes out at you!",
-            "big_scorpion" : "A large scorpion crawls out from behind a rock, snapping its pincers!",
-            "road_runner" : "You encounter a road runner. It appears to be fleeing from something.",
-            "coyote" : "A starving coyote jumps out in front of you. It bares its fangs and snarls!",
-            "camel" : "A camel! It is probably more afraid of you than you are of it.",
-            "skink" : "You found a skink! Dinner time!"}
+monster = {"Rattlesnake" : "A rattlesnake hisses menacingly and shakes its tail at you!",
+            "Small Scorpion" : "You almost stepped on a small scorpion! It lashes out at you!",
+            "Big Scorpion" : "A large scorpion crawls out from behind a rock, snapping its pincers!",
+            "Road Runner" : "You encounter a road runner. It appears to be fleeing from something.",
+            "Coyote" : "A starving coyote jumps out in front of you. It bares its fangs and snarls!",
+            "Camel" : "A camel! It is probably more afraid of you than you are of it.",
+            "Skink" : "You found a skink! Dinner time!"}
 
 biome = {0 : "Nothing but sand dunes as far as the eye can see.",
         1 : "The bedrock pokes out from under the sand here. It should be easy to find some shade.",

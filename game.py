@@ -118,8 +118,8 @@ class Game():
         running = 1
         self.state = "normal" 
         while running:
-            self.screen.fill((255, 204, 102))
-            _screen.fill((153, 51, 0))
+            self.screen.fill(config.COLOR_DARK)
+            _screen.fill(config.COLOR_DARK)
             self.handleEvents()
             self.world.draw()
             self.sidebar.draw()

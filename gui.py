@@ -13,7 +13,7 @@ import config
 class Sidebar():
      
     def __init__(self, surface, image):
-        self.color = (255, 128, 64)
+        self.color = config.SIDEBAR_OUTLINE_COLOR
         self.parent_surface = surface
         src_image = pygame.image.load(image)
         self.image = src_image.convert()
@@ -26,13 +26,14 @@ class Sidebar():
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
 
         self.surface = pygame.Surface((self.left, self.height))
+        self.surface.fill(config.COLOR_DARK)
         self.place = (self.left, self.top)
         self.rect = (0, self.top, self.width, self.height)
 
     def draw(self):
         # sidebar_rect = self.background.get_rect()
-        self.surface.blit(self.image, (0,0))
-        # pygame.draw.rect(self.surface, self.color, self.rect, config.SIDEBAR_OUTLINE)
+        # self.surface.blit(self.image, (0,0))
+        pygame.draw.rect(self.surface, self.color, self.rect, config.SIDEBAR_OUTLINE)
     def get_surface(self):
         return self.surface
 
@@ -49,12 +50,13 @@ class Button():
         self.image = src_image.convert()
         self.image = pygame.transform.scale(self.image, (config.SIDEBAR_WIDTH - (2*config.SIDEBAR_PADDING), config.BUTTON_HEIGHT))
 
-        self.font = pygame.font.Font(None, 32)
+        self.font = pygame.font.Font(None, config.BUTTON_FONT_SIZE)
         self.text = self.font.render(text, 1,config.BUTTON_TEXT_COLOR)
 
     def draw(self):
         pygame.draw.rect(self.surface, config.BUTTON_OUTLINE_COLOR, self.rect, config.BUTTON_OUTLINE)
-        self.surface.blit(self.image, self.rect)
+        # self.surface.blit(self.image, self.rect)
+        self.surface.fill(config.COLOR_DARKEST, self.rect)
         self.surface.blit(self.text, self.rect)
 
     def get_surface_mapped_rect(self, transform_surface):
@@ -72,21 +74,23 @@ class Stats():
         self.image = src_image.convert()
         self.image = pygame.transform.scale(self.image, (config.SIDEBAR_WIDTH - (2*config.SIDEBAR_PADDING), config.STATS_HEIGHT))
 
-        self.font = pygame.font.Font(None, 32)
+        self.font = pygame.font.Font(None, config.STATS_FONT_SIZE)
 
     def update(self, character):
-        self.text_health = self.font.render("Health:        " + str(character.health), 1,(255,255,255))
-        self.text_thirst = self.font.render("Hydration:     " + str(character.thirst), 1,(255,255,255))
-        self.text_hunger = self.font.render("Hunger:        " + str(character.hunger), 1,(255,255,255))
-        self.text_action = self.font.render("Action Points: " + str(character.remaining_actions), 1,(255,255,255))
-        self.text_turn   = self.font.render("turn number:   " + str(character.turn_survd), 1,(255,255,255))
+        self.text_health = self.font.render("Health:        " + str(character.health), 1, config.COLOR_LIGHTEST)
+        self.text_thirst = self.font.render("Hydration:     " + str(character.thirst), 1, config.COLOR_LIGHTEST)
+        self.text_hunger = self.font.render("Hunger:        " + str(character.hunger), 1, config.COLOR_LIGHTEST)
+        self.text_action = self.font.render("Action Points: " + str(character.remaining_actions), 1, config.COLOR_LIGHTEST)
+        self.text_turn   = self.font.render("turn number:   " + str(character.turn_survd), 1, config.COLOR_LIGHTEST)
 
     def draw(self, character):
         self.update(character)
 
-        pygame.draw.rect(self.surface, (255,255,255), self.rect, config.STATS_OUTLINE)
+        pygame.draw.rect(self.surface, config.COLOR_LIGHTEST, self.rect, config.STATS_OUTLINE)
+        self.surface.fill(config.COLOR_DARKEST, self.rect)
 
-        self.surface.blit(self.image, self.rect)
+        # self.surface.blit(self.image, self.rect)
+
         tmp = pygame.Rect(self.rect)
         self.surface.blit(self.text_health, tmp)
         tmp.top += config.TEXT_PADDING
@@ -113,12 +117,13 @@ class Console():
         self.update_font()
 
     def update_font(self):
-        self.text_1 = self.font.render(self.string_1, 1,(255,255,255))
-        self.text_2 = self.font.render(self.string_2, 1,(128,128,128))
-        self.text_3 = self.font.render(self.string_3, 1,(64,64,64))
+        self.text_1 = self.font.render(self.string_1, 1, config.COLOR_LIGHTEST)
+        self.text_2 = self.font.render(self.string_2, 1, config.COLOR_LIGHT)
+        self.text_3 = self.font.render(self.string_3, 1, config.COLOR_DARK)
 
     def draw(self):
-        pygame.draw.rect(self.surface, (255,255,255), self.rect, config.CONSOLE_OUTLINE)
+        pygame.draw.rect(self.surface, config.COLOR_LIGHTEST, self.rect, config.CONSOLE_OUTLINE)
+        self.surface.fill(config.COLOR_DARKEST, self.rect)
         tmp = pygame.Rect(self.rect)
         tmp.top += 10
         tmp.left += 10
@@ -139,18 +144,40 @@ class DirectionButtons():
         self.surface = surface
         src_image = pygame.image.load(image)
         self.image = src_image.convert()
+        self.font = pygame.font.Font(None, 42)
         z = config.DIRBTN_SIZE
         p = config.DIRBTN_PADDING
-        self.n_rect = pygame.Rect(x + z + p, y, z, z)
-        self.w_rect = pygame.Rect(x, y + z + p, z, z)
-        self.s_rect = pygame.Rect(x + z + p, y + (z * 2) + p, z, z)
-        self.e_rect = pygame.Rect(x + (z * 2) + (2 * p), y + z + p, z, z)
+        self.n_rect = pygame.Rect(x + z + p,                y,                  z, z)
+        self.w_rect = pygame.Rect(x,                        y + z + p,          z, z)
+        self.s_rect = pygame.Rect(x + z + p,                y + (z * 2) + p,    z, z)
+        self.e_rect = pygame.Rect(x + (z * 2) + (2 * p),    y + z + p,          z, z)
 
     def draw(self):
-        pygame.draw.rect(self.surface, (255,255,255), self.n_rect, config.DIRBTN_OUTLINE)
-        pygame.draw.rect(self.surface, (255,255,255), self.w_rect, config.DIRBTN_OUTLINE)
-        pygame.draw.rect(self.surface, (255,255,255), self.s_rect, config.DIRBTN_OUTLINE)
-        pygame.draw.rect(self.surface, (255,255,255), self.e_rect, config.DIRBTN_OUTLINE)
+        self.text_n = self.font.render("N", 1, config.DIRBTN_TEXT_COLOR)
+        self.text_s = self.font.render("S", 1, config.DIRBTN_TEXT_COLOR)
+        self.text_e = self.font.render("E", 1, config.DIRBTN_TEXT_COLOR)
+        self.text_w = self.font.render("W", 1, config.DIRBTN_TEXT_COLOR)
+
+        pygame.draw.rect(self.surface, config.DIRBTN_OUTLINE_COLOR, self.n_rect, config.DIRBTN_OUTLINE)
+        pygame.draw.rect(self.surface, config.DIRBTN_OUTLINE_COLOR, self.s_rect, config.DIRBTN_OUTLINE)
+        pygame.draw.rect(self.surface, config.DIRBTN_OUTLINE_COLOR, self.e_rect, config.DIRBTN_OUTLINE)
+        pygame.draw.rect(self.surface, config.DIRBTN_OUTLINE_COLOR, self.w_rect, config.DIRBTN_OUTLINE)
+
+        nr = self.n_rect.copy()
+        sr = self.s_rect.copy()
+        er = self.e_rect.copy()
+        wr = self.w_rect.copy()
+        
+        z = 5
+        nr.left += z
+        sr.left += z
+        er.left += z
+        wr.left += z
+
+        self.surface.blit(self.text_n, nr)
+        self.surface.blit(self.text_s, sr)
+        self.surface.blit(self.text_e, er)
+        self.surface.blit(self.text_w, wr)
         
     def get_north_rect(self):
         return self.n.rect
