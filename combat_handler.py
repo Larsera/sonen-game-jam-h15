@@ -24,7 +24,10 @@ class combat():
             win = pygame.event.Event(config.WIN)
             pygame.event.post(win)
         else:
-            if self.char.remaining_actions == 0 and self.mon.remaining_actions == 0:
+            if self.char.remaining_actions == 0:
+                while not self.mon.remaining_actions == 0:
+                    self.combat_turn(0)
+
                 newturn = pygame.event.Event(config.NEWTURN)
                 pygame.event.post(newturn)
                 self.mon.update()
@@ -51,6 +54,19 @@ class combat():
         elif char_damage < 0 and mon_damage < 0:
             string = "You lock eyes with the " + self.mon.name + ". Neiher of you makes a move."
             self.console.push_text(string)
+        elif char_damage == 0:
+            if mon_damage == 1:
+                string = "You stand quite and watches as the  " + self.mon.name + " saunters off."
+                self.console.push_text(string)
+            elif mon_damage == 0:
+                string = "Both you and the " + self.mon.name + " looks strangly at each others laughable attempt to escape."
+                self.console.push_text(string)
+            elif mon_damage > 0:
+                string = "The " + self.mon.name + " looks on as you stumble around trying to escape."
+                self.console.push_text(string)
+            else:
+                string = "While you try to escape the " + self.mon.name + " hits you for " + mon_damage + "damage."
+                self.char.take_damage(mon_damage-1, self.mon.get_venom())
         elif char_damage > 1:
             if mon_damage == 1:
                 if self.mon.flee():
