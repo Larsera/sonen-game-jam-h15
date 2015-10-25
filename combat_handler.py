@@ -19,6 +19,8 @@ class combat():
             gameover = pygame.event.Event(config.GAMEOVER)
             pygame.event.post(gameover)
         elif not self.mon.is_alive():
+            string = "You defeated the " + self.mon.name + "!"
+            self.console.push_text(string)
             win = pygame.event.Event(config.WIN)
             pygame.event.post(win)
         else:
@@ -46,6 +48,9 @@ class combat():
             string = "The " + self.mon.name + " hits you for " + str(mon_damage-2+char_damage) + " damage."
             self.console.push_text(string)
             self.char.take_damage(mon_damage-2+char_damage)
+        elif char_damage < 0 and mon_damage < 0:
+            string = "You lock eyes with the " + self.mon.name + ". Neiher of you makes a move."
+            self.console.push_text(string)
         elif char_damage > 1:
             if mon_damage == 1:
                 if self.mon.flee():
@@ -56,7 +61,7 @@ class combat():
                 string = "You hit the " + self.mon.name + " for " + str(char_damage-2+mon_damage) + " damage."
                 self.console.push_text(string)
                 self.mon.take_damage(char_damage-2+mon_damage)
-            elif mon_damage > 1:
+            else:
                 string = "You hit the " + self.mon.name + " for " + str(char_damage-2) + " damage."
                 self.console.push_text(string)
                 self.mon.take_damage(char_damage-2)

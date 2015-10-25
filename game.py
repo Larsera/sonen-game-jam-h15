@@ -6,6 +6,7 @@ from gui import *
 from sounds import *
 from combat_handler import *
 from tiles import get_tile
+import text
 import config
 
 RES_X = 1366
@@ -50,24 +51,24 @@ class Game():
             if self.state == "normal":
                 if self.button_search.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
                     curtile = self.world.get_cur_tile(self.character.position)
-                    self.character.search(curtile)
-                    self.console.push_text("Clicked search")
+                    self.console.push_text("You search the area around you...")
+                    self.character.search(curtile, self.console)
 
                 elif self.button_drink_antidote.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
                     print "Clicked: drink_antidote"
                     self.console.push_text("Antidote")
 
                 elif self.dirbtn.n_rect.collidepoint(clicked_pos):
-                    self.character.move('N', self.world)
+                    self.character.move('N', self.world, self.console)
 
                 elif self.dirbtn.s_rect.collidepoint(clicked_pos):
-                    self.character.move('S', self.world)
+                    self.character.move('S', self.world, self.console)
 
                 elif self.dirbtn.e_rect.collidepoint(clicked_pos):
-                    self.character.move('E', self.world)
+                    self.character.move('E', self.world, self.console)
 
                 elif self.dirbtn.w_rect.collidepoint(clicked_pos):
-                    self.character.move('W', self.world)
+                    self.character.move('W', self.world, self.console)
 
             elif self.state == "combat":
                 if self.button_attack.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
@@ -84,16 +85,16 @@ class Game():
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
             elif event.key == pygame.K_w or event.key == pygame.K_UP:
-                self.character.move('N', self.world.get_cur_tile(self.character.position))
+                self.character.move('N', self.world, self.console)
 
             elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
-                self.character.move('S', self.world.get_cur_tile(self.character.position))
+                self.character.move('S', self.world, self.console)
 
             elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
-                self.character.move('E', self.world.get_cur_tile(self.character.position))
+                self.character.move('E', self.world, self.console)
 
             elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
-                self.character.move('W', self.world.get_cur_tile(self.character.position))
+                self.character.move('W', self.world, self.console)
 
         for event in event_list:
             if event.type == pygame.MOUSEBUTTONUP:
@@ -113,6 +114,9 @@ class Game():
                 self.state = "gameover"
             elif event.type == config.NEWTURN:
                 self.newturn()
+            elif event.type == config.WIN:
+                self.state = "normal"
+                self.combat = None
 
     def newturn(self):
         self.character.update(self.world.get_cur_tile(self.character.position))
