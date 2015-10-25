@@ -36,7 +36,7 @@ class Game():
         self.sidebar                = Sidebar(_screen, config.SIDEBAR) 
         self.button_search          = Button(self.sidebar, 5, config.BUTTON, "Search")
         self.button_drink_antidote  = Button(self.sidebar, 6, config.BUTTON, "Drink antidote")
-        self.button_end_turn        = Button(self.sidebar, 7, config.BUTTON, "end turn")
+        self.button_end_turn        = Button(self.sidebar, 7, config.BUTTON, "End turn")
         self.button_attack          = Button(self.sidebar, 5, config.BUTTON, "Attack")
         self.button_defend          = Button(self.sidebar, 6, config.BUTTON, "Defend")
         self.button_flee            = Button(self.sidebar, 7, config.BUTTON, "Flee")
