@@ -39,7 +39,10 @@ class Character():
         self.turn_survd += 1
 
         self.hunger -= config.HUNGER_DEC
-        self.thirst -= config.WATER_DEC
+        if curtile.shadow:
+            self.thirst -= config.WATER_DEC-5
+        else:
+            self.thirst -= config.WATER_DEC
 
         if self.thirst < 0:
             self.thirst = 0
