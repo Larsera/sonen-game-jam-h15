@@ -19,6 +19,8 @@ class combat():
             gameover = pygame.event.Event(config.GAMEOVER)
             pygame.event.post(gameover)
         elif not self.mon.is_alive():
+            string = "You defeated the " + self.mon.name + "!"
+            self.console.push_text(string)
             win = pygame.event.Event(config.WIN)
             pygame.event.post(win)
         else:
