@@ -11,7 +11,7 @@ def get_weapon(ident):
         "sharp_rock" : weapon("Sharp rock", dmg=2),
         "pointy_stick" : weapon("Pointy stick", dmg=3),
         "plusone_mace" : weapon("+1 Mace", dmg=4),
-        "warped_blade" : weapon("Warped blade", dmg=5)}.get(ident)
+        "warped_blade" : weapon("Warped Blade", dmg=5)}.get(ident)
 
 class item_hydration():
 
