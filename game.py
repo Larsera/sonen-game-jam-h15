@@ -5,6 +5,7 @@ from character import *
 from gui import *
 from sounds import *
 from combat_handler import *
+from cloud import *
 from tiles import get_tile
 from items import get_foodstuff
 import text
@@ -39,6 +40,11 @@ class Game():
         self.button_defend          = Button(self.sidebar, 6, config.BUTTON, "Defend")
         self.button_flee            = Button(self.sidebar, 7, config.BUTTON, "Flee")
         self.stats                  = Stats(self.sidebar, 1, config.STATS)
+        self.cloud1                 = Cloud(self.screen)
+        self.cloud2                 = Cloud(self.screen)
+        self.cloud3                 = Cloud(self.screen)
+
+        
 
 
 # downbar = Downbar(_screen,os.path.join('img', 'tileset_old.jpg'))
@@ -128,7 +134,6 @@ class Game():
                 self.character.find_food(get_foodstuff("raw_meat"))
             elif event.type == pygame.QUIT:
                 self.running = False
-
     def newturn(self):
         self.character.update(self.world.get_cur_tile(self.character.position))
 
@@ -153,11 +158,14 @@ class Game():
             #button3.draw()
             self.stats.draw(self.character)
             self.character.draw()
+            self.cloud1.draw()
+            self.cloud2.draw()
+            self.cloud3.draw()
             self.sidebar.blit()
-
+            
             # downbar.draw()
             # downbar.blit()
-
+            
             self.dirbtn.draw()
             self.console.draw()
             _screen.blit(self.screen, (0, 0))
