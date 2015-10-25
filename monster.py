@@ -49,6 +49,14 @@ class Monster():
         random.seed()
         return random.randint(0, self.venomous)
 
+    def get_action(self):
+        if self.name == "Skink" or self.name == "Road Runner":
+            return 3
+        elif self.name == "Camel":
+            return 2
+        else:
+            return 1
+
 def get_monster(ident):
     return {"rattlesnake" : Monster(name="Rattlesnake", hp=20, ven=7, dmg_min=1, dmg_max=5, rarity=5, acp=3),
             "small_scorpion" : Monster(name="Small Scorpion", hp=5, dmg_min=1, dmg_max=2, ven=10, rarity=7),
