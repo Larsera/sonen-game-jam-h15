@@ -48,9 +48,9 @@ class combat():
                 self.console.push_text("You flee from the fight!")
                 return True
         elif char_damage < 0 and mon_damage > 1:
-            string = "The " + self.mon.name + " hits you for " + str(mon_damage-2+char_damage) + " damage."
+            string = "The " + self.mon.name + " hits you for " + str(mon_damage-2 + char_damage) + " damage."
             self.console.push_text(string)
-            self.char.take_damage(mon_damage-2+char_damage, self.mon.get_venom())
+            self.char.take_damage(mon_damage-2 + char_damage, self.mon.get_venom())
         elif char_damage < 0 and mon_damage < 0:
             string = "You lock eyes with the " + self.mon.name + ". Neiher of you makes a move."
             self.console.push_text(string)
@@ -78,20 +78,20 @@ class combat():
                     self.console.push_text(string)
                     return True
             elif mon_damage < 0:
-                a = char_damage-2+mon_damage
-                if a > 0:
+                a = char_damage-2 + self.char.weapon.dmg + mon_damage
+                if a < 0:
                     a = 0
                 string = "You hit the " + self.mon.name + " for " + str(a) + " damage."
                 self.console.push_text(string)
                 self.mon.take_damage(a)
             elif mon_damage == 0:
-                string = "You hit the " + self.mon.name + " for " + str(char_damage-2) + " damage, while it tries to run away. "
+                string = "You hit the " + self.mon.name + " for " + str(char_damage-2 + self.char.weapon.dmg) + " damage, while it tries to run away. "
                 self.console.push_text(string)
-                self.mon.take_damage(char_damage-2)
+                self.mon.take_damage(char_damage-2 + self.char.weapon.dmg)
             else:
-                string = "You hit the " + self.mon.name + " for " + str(char_damage-2) + " damage."
+                string = "You hit the " + self.mon.name + " for " + str(char_damage-2 + self.char.weapon.dmg) + " damage."
                 self.console.push_text(string)
-                self.mon.take_damage(char_damage-2)
+                self.mon.take_damage(char_damage-2 + self.char.weapon.dmg)
                 string = "The " + self.mon.name + " hits you for " + str(mon_damage-2) + " damage."
                 self.console.push_text(string)
                 venom = self.mon.get_venom()

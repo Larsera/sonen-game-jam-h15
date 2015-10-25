@@ -1,5 +1,5 @@
 intro = ["\"Get on and I'll show you all the sights of the desert!\" the old ",
-        "man proclaimed as he becons you to climbed onto his tired-looking camel.", 
+        "man proclaimed as he beckoned you to climb onto his tired-looking camel.", 
         "That was five hours ago. Now you can only watch as the old man rides away.",
         "Leaving you stranded in the middle of this barren wasteland.",
         "",

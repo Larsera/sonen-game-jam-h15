@@ -117,7 +117,6 @@ def create_touples(curlist, mod):
     out = []
     random.seed()
     for item in curlist:
-        print item.name
         ant = random.randint(0, 10)
         if ant > item.rarity - mod:
             out.append((11 - ant, item))
