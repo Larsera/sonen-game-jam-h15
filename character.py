@@ -54,7 +54,7 @@ class Character():
             self.hunger = 0
 
         if self.poisoned > 0:
-            self.console.push_text("You feel your life drain away as the poison slowly courser through your veins.")
+            self.console.push_text("You feel your life drain away as the poison slowly courses through your veins.")
             if self.poisoned < 5:
                 self.take_damage(self.poisoned, 0)
                 self.poisoned = 0
@@ -74,10 +74,10 @@ class Character():
             self.remaining_actions = self.actions-4
 
         if curtile.water_amount == -1:
-            self.console.push_text("You drink from the oasis untill you feel refreshed.")
+            self.console.push_text("You drink from the oasis until you feel refreshed.")
             self.thirst = 100
         elif curtile.water_amount > 0:
-            self.console.push_text("You drink from the water source, trying to make it last as long as possible.")
+            self.console.push_text("You drink from the water source, trying to mmake it last as long as possible.")
             nw = 100 - self.thirst
             nw = nw/10
             while curtile.water_amount > 0 and nw > 0:
@@ -214,7 +214,7 @@ class Character():
 
     def search(self, tile):
         if tile.searches_left == 0: 
-            self.console.push_text("There is nothing left to find here")
+            self.console.push_text("The area has been thoroughly searched.")
             return
         else:
             self.dec_rem_act(1)
@@ -307,5 +307,5 @@ class Character():
                 else:
                     self.poisoned -= config.ANTIDOTE_EFFECT
             else:
-                self.console.push_text("The only effect of drinking some antidote is that your stomach feels sligthly off.")
+                self.console.push_text("The only effect of the antidote is that your stomach feels sligthly off.")
 
