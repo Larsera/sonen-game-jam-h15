@@ -50,7 +50,7 @@ class Button():
         self.image = src_image.convert()
         self.image = pygame.transform.scale(self.image, (config.SIDEBAR_WIDTH - (2*config.SIDEBAR_PADDING), config.BUTTON_HEIGHT))
 
-        self.font = pygame.font.Font(None, config.BUTTON_FONT_SIZE)
+        self.font = pygame.font.Font(config.FONT, config.BUTTON_FONT_SIZE)
         self.text = self.font.render(text, 1,config.BUTTON_TEXT_COLOR)
 
     def draw(self):
@@ -74,7 +74,7 @@ class Stats():
         self.image = src_image.convert()
         self.image = pygame.transform.scale(self.image, (config.SIDEBAR_WIDTH - (2*config.SIDEBAR_PADDING), config.STATS_HEIGHT))
 
-        self.font = pygame.font.Font(None, config.STATS_FONT_SIZE)
+        self.font = pygame.font.Font(config.FONT, config.STATS_FONT_SIZE)
 
     def update(self, character):
         self.text_health = self.font.render("Health:        " + str(character.health), 1, config.COLOR_LIGHTEST)
@@ -113,7 +113,7 @@ class Console():
                 config.CONSOLE_WIDTH,
                 config.DOWNBAR_HEIGHT - config.CONSOLE_PADDING * 2)
 
-        self.font = pygame.font.Font(None, config.CONSOLE_FONT_SIZE)
+        self.font = pygame.font.Font(config.FONT, config.CONSOLE_FONT_SIZE)
         self.update_font()
 
     def update_font(self):
@@ -144,7 +144,7 @@ class DirectionButtons():
         self.surface = surface
         src_image = pygame.image.load(image)
         self.image = src_image.convert()
-        self.font = pygame.font.Font(None, 42)
+        self.font = pygame.font.Font(config.FONT, 42)
         z = config.DIRBTN_SIZE
         p = config.DIRBTN_PADDING
         self.n_rect = pygame.Rect(x + z + p,                y,                  z, z)
