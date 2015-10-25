@@ -18,15 +18,17 @@ _screen = pygame.display.set_mode((RES_X, RES_Y))
 class Game():
 # This is the surface we are rendering to
 
-    def init(self):
-        self.screen = pygame.Surface((RES_X - config.SIDEBAR_WIDTH, RES_Y - config.DOWNBAR_HEIGHT))
-        self.clock = pygame.time.Clock()
+    def __init__(self):
+        self.screen                 = pygame.Surface((RES_X - config.SIDEBAR_WIDTH, RES_Y - config.DOWNBAR_HEIGHT))
+        self.clock                  = pygame.time.Clock()
+        self.running                = True
+        self.console                = Console(_screen)
 
         self.TILE_GRID_WIDTH        = self.screen.get_width()/config.TILE_W
         self.TILE_GRID_HEIGHT       = self.screen.get_height()/config.TILE_H
         self.sounds                 = sound_player()
         self.world                  = World(self.TILE_GRID_HEIGHT, self.TILE_GRID_WIDTH, TILES, self.screen)
-        self.character              = Character(os.path.join('img', 'character.png'), (10, 10), self.screen)
+        self.character              = Character(os.path.join('img', 'character.png'), (10, 10), self.screen, self.console)
         self.combat                 = None
 
         self.sidebar                = Sidebar(_screen, config.SIDEBAR) 
@@ -37,7 +39,7 @@ class Game():
         self.button_defend          = Button(self.sidebar, 6, config.BUTTON, "Defend")
         self.button_flee            = Button(self.sidebar, 7, config.BUTTON, "Flee")
         self.stats                  = Stats(self.sidebar, 1, config.STATS)
-        self.console                = Console(_screen)
+
 
 # downbar = Downbar(_screen,os.path.join('img', 'tileset_old.jpg'))
         self.dirbtn = DirectionButtons(_screen, 50,
@@ -54,11 +56,10 @@ class Game():
                 if self.button_search.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
                     curtile = self.world.get_cur_tile(self.character.position)
                     self.console.push_text("You search the area around you...")
-                    self.character.search(curtile, self.console)
+                    self.character.search(curtile)
 
                 elif self.button_drink_antidote.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
-                    print "Clicked: drink_antidote"
-                    self.console.push_text("Antidote")
+                    self.character.use_antidote()
 
                 elif self.button_end_turn.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
                     self.console.push_text("Tired, you make the decision to rest for a while")
@@ -89,7 +90,7 @@ class Game():
 
         def handleKeyEvent(event):
             if event.key == pygame.K_ESCAPE:
-                pygame.quit()
+                self.running = False
             elif self.state == "normal":
                 if event.key == pygame.K_w or event.key == pygame.K_UP:
                     self.character.move('N', self.world, self.console)
@@ -125,14 +126,15 @@ class Game():
                 self.state = "normal"
                 self.combat = None
                 self.character.find_food(get_foodstuff("raw_meat"))
+            elif event.type == pygame.QUIT:
+                self.running = False
 
     def newturn(self):
         self.character.update(self.world.get_cur_tile(self.character.position))
 
     def run(self):
-        running = 1
         self.state = "normal" 
-        while running:
+        while self.running:
             self.clock.tick()
             # print "Fps :", self.clock.get_fps()
             self.screen.fill(config.COLOR_DARK)
@@ -164,5 +166,4 @@ class Game():
         pygame.quit()
 
 game = Game()
-game.init()
 game.run()

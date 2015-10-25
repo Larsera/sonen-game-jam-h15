@@ -88,6 +88,8 @@ class Stats():
             self.text_weapon    = self.font.render("Weapon: " + str(character.weapon.name), 1, config.COLOR_LIGHTEST)
         else:
             self.text_weapon    = self.font.render("Weapon: Bare hands", 1, config.COLOR_LIGHTEST)
+        self.text_poison = self.font.render("Poison:        " + str(character.poisoned), 1, config.COLOR_LIGHTEST)
+        self.text_antidote = self.font.render("Antidote left: " + str(character.antidote), 1, config.COLOR_LIGHTEST)
 
     def draw(self, character):
         self.update(character)
@@ -106,6 +108,10 @@ class Stats():
         tmp.top += config.TEXT_PADDING
         self.surface.blit(self.text_action, tmp)
         tmp.top += config.TEXT_PADDING
+        self.surface.blit(self.text_antidote, tmp)
+        tmp.top += config.TEXT_PADDING
+        self.surface.blit(self.text_poison, tmp)
+        tmp.top += config.TEXT_PADDING
         self.surface.blit(self.text_turn, tmp)
         tmp.top += config.TEXT_PADDING
         self.surface.blit(self.text_weapon, tmp)
@@ -116,6 +122,7 @@ class Console():
         self.string_1 = "Try find some water, ya old baboon!"
         self.string_2 = "Old text"
         self.string_3 = "Olderest text"
+        self.string_4 = "Aincent text"
         self.rect = pygame.Rect(self.surface.get_width() - config.SIDEBAR_WIDTH - config.CONSOLE_WIDTH - config.CONSOLE_PADDING,
                 self.surface.get_height() - config.DOWNBAR_HEIGHT + config.CONSOLE_PADDING,
                 config.CONSOLE_WIDTH,
@@ -127,7 +134,8 @@ class Console():
     def update_font(self):
         self.text_1 = self.font.render(self.string_1, 1, config.COLOR_LIGHTEST)
         self.text_2 = self.font.render(self.string_2, 1, config.COLOR_LIGHT)
-        self.text_3 = self.font.render(self.string_3, 1, config.COLOR_DARK)
+        self.text_3 = self.font.render(self.string_3, 1, config.COLOR_LIGHT)
+        self.text_4 = self.font.render(self.string_4, 1, config.COLOR_LIGHT)
 
     def draw(self):
         pygame.draw.rect(self.surface, config.COLOR_LIGHTEST, self.rect, config.CONSOLE_OUTLINE)
@@ -140,8 +148,11 @@ class Console():
         self.surface.blit(self.text_2, tmp)
         tmp.top += config.CONSOLE_TEXT_PADDING
         self.surface.blit(self.text_3, tmp)
+        tmp.top += config.CONSOLE_TEXT_PADDING
+        self.surface.blit(self.text_4, tmp)
     
     def push_text(self, string):
+        self.string_4 = self.string_3
         self.string_3 = self.string_2
         self.string_2 = self.string_1
         self.string_1 = string

@@ -24,6 +24,8 @@ DEFAULT_WEAPON_LIST = [get_weapon("stick"), get_weapon("sharp_rock"),
 CHANCE_DEC = 20
 WATER_DEC = 10
 HUNGER_DEC = 10
+POISON_DAMAGE = 5
+ANTIDOTE_EFFECT = 10
 
 # Gui:
 SIDEBAR_WIDTH = 256

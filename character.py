@@ -7,7 +7,7 @@ from combat_handler import combat
 
 class Character():
 
-    def __init__(self, image, position, screen):
+    def __init__(self, image, position, screen, console):
         self.screen = screen
         src_image = pygame.image.load(image)
         # self.image = src_image.convert()
@@ -26,7 +26,9 @@ class Character():
         self.food = []
         self.drink = []
         self.medicine = []
+        self.antidote = 0
         self.turn_survd = 1
+        self.console = console
 
         self.position = position
 
@@ -50,6 +52,15 @@ class Character():
 
         if self.hunger < 0:
             self.hunger = 0
+
+        if self.poisoned > 0:
+            self.console.push_text("You feel your life drain away as the poison slowly courser through your veins.")
+            if self.poisoned < 5:
+                self.take_damage(self.poisoned, 0)
+                self.poisoned = 0
+            else:
+                self.take_damage(config.POISON_DAMAGE, 0)
+                self.poisoned -= config.POISON_DAMAGE
 
         if self.hunger >= 70:
             self.remaining_actions = self.actions
@@ -195,9 +206,9 @@ class Character():
     def get_actions(self):
         return self.remaining_actions
 
-    def search(self, tile, console):
+    def search(self, tile):
         if tile.searches_left == 0: 
-            console.push_text("There is nothing left to find here")
+            self.console.push_text("There is nothing left to find here")
             return
         else:
             self.dec_rem_act(1)
@@ -209,16 +220,16 @@ class Character():
 
         if not tile.shadow and chance >= 100 - tile.shadow_chance*10:
             tile.found_shadow()
-            console.push_text("You found shade!")
+            self.console.push_text("You found shade!")
             chance -= config.CHANCE_DEC
 
         if tile.water_amount != -1 and chance >= 100 - tile.water_chance*10:
             self.found_water(tile)
-            console.push_text("You found a source of water!")
+            self.console.push_text("You found a source of water!")
             chance -= config.CHANCE_DEC
 
         if chance >= 100 - tile.item_chance*10:
-            self.found_item(tile, console)
+            self.found_item(tile)
             chance -= config.CHANCE_DEC
 
         if chance >= 100 - tile.danger_chance*10:
@@ -232,14 +243,17 @@ class Character():
         self.drink.append(hydration)
 
     def find_medicine(self, medication):
-        self.medicine.append(medication)
+        if medication.antidote:
+            self.antidote += 1
+        else:
+            self.medicine.append(medication)
 
-    def find_weapon(self, weapon, console):
+    def find_weapon(self, weapon):
         if self.weapon == None or self.weapon.dmg < weapon.dmg:
-            console.push_text(text.item[weapon.name])
+            self.console.push_text(text.item[weapon.name])
             self.weapon = weapon
         else:
-            console.push_text("You found a potential weapon, but the one you have is better.")
+            self.console.push_text("You found a potential weapon, but the one you have is better.")
 
 
     def found_danger(self, tile):
@@ -253,25 +267,39 @@ class Character():
         else:
             tile.water_amount -= 1
 
-    def found_item(self, tile, console):
+#TODO: if time rewrite
+    def found_item(self, tile):
         random.seed()
         if tile.name == "abandoned camp":
             result = random.randint(1, 4)
             if result == 1:
-                console.push_text("You found some food!")
+                self.console.push_text("You found some food!")
                 self.find_food(config.CAMP_FOOD_LIST[random.randint(0, 1)])
             elif result == 2:
-                console.push_text("You found a bottle of water!")
+                self.console.push_text("You found a bottle of water!")
                 self.find_drink(items.get_water("water_bottle"))
             elif result == 3:
-                console.push_text(text.item["antidote"])
+                self.console.push_text(text.item["antidote"])
                 self.find_medicine(items.get_medicine("antidote"))
             elif result == 4:
-                self.find_weapon(config.CAMP_WEAPON_LIST[random.randint(0, 1)], console)
+                self.find_weapon(config.CAMP_WEAPON_LIST[random.randint(0, 1)])
         else:
             result = random.randint(1, 2)
             if result == 1:
-                console.push_text(text.item["cactus_piece"])
+                self.console.push_text(text.item["cactus_piece"])
                 self.find_food(items.get_foodstuff("cactus_piece"))
             else:
-                self.find_weapon(config.DEFAULT_WEAPON_LIST[random.randint(0, 2)], console)
+                self.find_weapon(config.DEFAULT_WEAPON_LIST[random.randint(0, 2)])
+
+    def use_antidote(self):
+        if self.antidote > 0:
+            self.antidote -= 1
+            if self.poisoned > 0:
+                self.console.push_text("After drinking some antidote your body starts to feel a little better.")
+                if self.poisoned < config.ANTIDOTE_EFFECT:
+                    self.poisoned = 0
+                else:
+                    self.poisoned -= config.ANTIDOTE_EFFECT
+            else:
+                self.console.push_text("The only effect of drinking some antidote is that your stomach feels sligthly off.")
+
