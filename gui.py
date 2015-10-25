@@ -135,7 +135,7 @@ class Console():
         self.text_1 = self.font.render(self.string_1, 1, config.COLOR_LIGHTEST)
         self.text_2 = self.font.render(self.string_2, 1, config.COLOR_LIGHT)
         self.text_3 = self.font.render(self.string_3, 1, config.COLOR_LIGHT)
-        self.text_4 = self.font.render(self.string_4, 1, config.COLOR_LIGHT)
+        self.text_4 = self.font.render(self.string_4, 1, config.COLOR_DARK)
 
     def draw(self):
         pygame.draw.rect(self.surface, config.COLOR_LIGHTEST, self.rect, config.CONSOLE_OUTLINE)
