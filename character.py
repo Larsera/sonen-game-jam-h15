@@ -39,7 +39,16 @@ class Character():
         self.turn_survd += 1
 
         self.hunger -= config.HUNGER_DEC
-        self.thirst -= config.WATER_DEC
+        if curtile.shadow:
+            self.thirst -= config.WATER_DEC-5
+        else:
+            self.thirst -= config.WATER_DEC
+
+        if self.thirst < 0:
+            self.thirst = 0
+
+        if self.hunger < 0:
+            self.hunger = 0
 
         if self.hunger >= 70:
             self.remaining_actions = self.actions
@@ -183,15 +192,22 @@ class Character():
         return self.remaining_actions
 
     def search(self, tile, console):
+        if tile.searches_left == 0: 
+            console.push_text("There is nothing left to find here")
+            return
+        else:
+            tile.searches_left -= 1
         random.seed()
+
         chance = random.randint(0, 100)
 
-        if chance >= 100 - tile.shadow_chance*10:
+
+        if not tile.shadow and chance >= 100 - tile.shadow_chance*10:
             tile.found_shadow()
             console.push_text("You found shade!")
             chance -= config.CHANCE_DEC
 
-        if chance >= 100 - tile.water_chance*10:
+        if tile.water_amount != -1 and chance >= 100 - tile.water_chance*10:
             self.found_water(tile)
             console.push_text("You found a source of water!")
             chance -= config.CHANCE_DEC
@@ -214,6 +230,14 @@ class Character():
     def find_medicine(self, medication):
         self.medicine.append(medication)
 
+    def find_weapon(self, weapon, console):
+        if self.weapon == None or self.weapon.dmg < weapon.dmg:
+            console.push_text(text.item[weapon.name])
+            self.weapon = weapon
+        else:
+            console.push_text("You found a potential weapon, but the one you have is better.")
+
+
     def found_danger(self, tile):
         combatevent = pygame.event.Event(config.COMBAT)
         pygame.event.post(combatevent)
@@ -225,3 +249,25 @@ class Character():
         else:
             tile.water_amount -= 1
 
+    def found_item(self, tile, console):
+        random.seed()
+        if tile.name == "abandoned camp":
+            result = random.randint(1, 4)
+            if result == 1:
+                console.push_text("You found some food!")
+                find_food(CAMP_FOOD_LIST[random.randint(0, 1)])
+            elif result == 2:
+                console.push_text("You found a bottle of water!")
+                find_water(get_water("water_bottle"))
+            elif result == 3:
+                console.push_text(text.item["antidote"])
+                find_medicine(get_medicine("antidote"))
+            elif result == 4:
+                find_weapon(CAMP_WEAPON_LIST[random.randint(0, 1)], console)
+        else:
+            result = random.randint(1, 2)
+            if result == 1:
+                console.push_text(text.item["cactus_piece"])
+                find_food(items.get_foodstuff("cactus_piece"))
+            else:
+                find_weapon(DEFAULT_WEAPON_LIST[random.randint(0, 2)], console)

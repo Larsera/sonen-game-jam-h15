@@ -56,16 +56,16 @@ class combat():
             self.console.push_text(string)
         elif char_damage == 0:
             if mon_damage == 1:
-                string = "You stand quite and watches as the  " + self.mon.name + " saunters off."
+                string = "You stand still, watching as the  " + self.mon.name + " saunters off."
                 self.console.push_text(string)
             elif mon_damage == 0:
-                string = "Both you and the " + self.mon.name + " looks strangly at each others laughable attempt to escape."
+                string = "Both you and the " + self.mon.name + " look strangly at each other's laughable attempt to escape."
                 self.console.push_text(string)
             elif mon_damage > 0:
                 string = "The " + self.mon.name + " looks on as you stumble around trying to escape."
                 self.console.push_text(string)
             else:
-                string = "While you try to escape the " + self.mon.name + " hits you for " + mon_damage + "damage."
+                string = "While you try to escape, the " + self.mon.name + " hits you for " + mon_damage + " damage."
                 self.char.take_damage(mon_damage-1, self.mon.get_venom())
         elif char_damage > 1:
             if mon_damage == 1:

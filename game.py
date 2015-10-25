@@ -31,6 +31,7 @@ class Game():
         self.sidebar                = Sidebar(_screen, config.SIDEBAR) 
         self.button_search          = Button(self.sidebar, 5, config.BUTTON, "Search")
         self.button_drink_antidote  = Button(self.sidebar, 6, config.BUTTON, "Drink antidote")
+        self.button_end_turn        = Button(self.sidebar, 7, config.BUTTON, "end turn")
         self.button_attack          = Button(self.sidebar, 5, config.BUTTON, "Attack")
         self.button_defend          = Button(self.sidebar, 6, config.BUTTON, "Defend")
         self.button_flee            = Button(self.sidebar, 7, config.BUTTON, "Flee")
@@ -58,6 +59,10 @@ class Game():
                     print "Clicked: drink_antidote"
                     self.console.push_text("Antidote")
 
+                elif self.button_end_turn.get_surface_mapped_rect(_screen).collidepoint(clicked_pos):
+                    self.console.push_text("Tired, you make the decision to rest for a while")
+                    self.newturn()
+
                 elif self.dirbtn.n_rect.collidepoint(clicked_pos):
                     self.character.move('N', self.world, self.console)
 
@@ -84,17 +89,18 @@ class Game():
         def handleKeyEvent(event):
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
-            elif event.key == pygame.K_w or event.key == pygame.K_UP:
-                self.character.move('N', self.world, self.console)
+            elif self.state == "normal":
+                if event.key == pygame.K_w or event.key == pygame.K_UP:
+                    self.character.move('N', self.world, self.console)
 
-            elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
-                self.character.move('S', self.world, self.console)
+                elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
+                    self.character.move('S', self.world, self.console)
 
-            elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
-                self.character.move('E', self.world, self.console)
+                elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+                    self.character.move('E', self.world, self.console)
 
-            elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
-                self.character.move('W', self.world, self.console)
+                elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
+                    self.character.move('W', self.world, self.console)
 
         for event in event_list:
             if event.type == pygame.MOUSEBUTTONUP:
@@ -133,6 +139,7 @@ class Game():
             if self.state == "normal":
                 self.button_search.draw()
                 self.button_drink_antidote.draw()
+                self.button_end_turn.draw()
             elif self.state == "combat":
                 self.button_attack.draw()
                 self.button_defend.draw()
