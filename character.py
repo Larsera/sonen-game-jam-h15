@@ -199,7 +199,7 @@ class Character():
         chance = random.randint(0, 100)
 
 
-        if not tile.shade and chance >= 100 - tile.shadow_chance*10:
+        if not tile.shadow and chance >= 100 - tile.shadow_chance*10:
             tile.found_shadow()
             console.push_text("You found shade!")
             chance -= config.CHANCE_DEC
