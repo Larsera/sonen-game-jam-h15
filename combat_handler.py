@@ -46,6 +46,9 @@ class combat():
             string = "The " + self.mon.name + " hits you for " + str(mon_damage-2+char_damage) + " damage."
             self.console.push_text(string)
             self.char.take_damage(mon_damage-2+char_damage)
+        elif char_damage < 0 and mon_damage < 0:
+            string = "You lock eyes with the " + self.mon.name + ". Neiher of you makes a move."
+            self.console.push_text(string)
         elif char_damage > 1:
             if mon_damage == 1:
                 if self.mon.flee():
