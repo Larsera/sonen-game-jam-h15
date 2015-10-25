@@ -131,6 +131,8 @@ class Game():
         running = 1
         self.state = "normal" 
         while running:
+            self.clock.tick()
+            print "Fps :", self.clock.get_fps()
             self.screen.fill(config.COLOR_DARK)
             _screen.fill(config.COLOR_DARK)
             self.handleEvents()
