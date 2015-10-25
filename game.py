@@ -6,6 +6,7 @@ from gui import *
 from sounds import *
 from combat_handler import *
 from cloud import *
+from splash import *
 from tiles import get_tile
 from items import get_foodstuff
 import text
@@ -43,6 +44,7 @@ class Game():
         self.cloud1                 = Cloud(self.screen)
         self.cloud2                 = Cloud(self.screen)
         self.cloud3                 = Cloud(self.screen)
+        self.splash                 = Splashscreen(_screen)
 
         
 
@@ -169,6 +171,7 @@ class Game():
             self.dirbtn.draw()
             self.console.draw()
             _screen.blit(self.screen, (0, 0))
+            self.splash.draw()
             pygame.display.flip()
 
         pygame.quit()
