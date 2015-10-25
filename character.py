@@ -176,23 +176,26 @@ class Character():
     def get_actions(self):
         return self.remaining_actions
 
-    def search(self, tile):
+    def search(self, tile, console):
         random.seed()
         chance = random.randint(0, 100)
         print "search"
 
         if chance >= 100 - tile.shadow_chance*10:
             tile.found_shadow()
+            console.push_text("You found shade!")
             print "shadow"
             chance -= config.CHANCE_DEC
 
         if chance >= 100 - tile.water_chance*10:
             self.found_water(tile)
+            console.push_text("You found a source of water!")
             print "water"
             chance -= config.CHANCE_DEC
 
         if chance >= 100 - tile.item_chance*10:
             #found_item()
+            console.push_text("You found an item!")
             print "item"
             chance -= config.CHANCE_DEC
 
