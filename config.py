@@ -1,8 +1,12 @@
 import os
 import pygame
+from monster import get_monster
 
 #Tile
 TILE_W = TILE_H = 32
+DEFAULT_MONSTER_LIST = [get_monster("rattlesnake"), get_monster("small_scorpion"),
+        get_monster("big_scorpion"), get_monster("road_runner"),
+        get_monster("coyote"), get_monster("camel"), get_monster("skink")]
 
 #Character:
 CHANCE_DEC = 20

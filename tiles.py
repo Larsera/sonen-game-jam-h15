@@ -1,4 +1,5 @@
 import random
+import config
 from monster import Monster
 
 
@@ -45,7 +46,7 @@ class Tile():
         self.shadow = True
 
 
-def get_tile(ident, monster_list=[Monster()]):
+def get_tile(ident, monster_list=config.DEFAULT_MONSTER_LIST):
     return {0 : Tile((1, 3, 2, 2, 1), "empty desert", monster_list),
             1 : Tile((2, 5, 10, 3, 2), "big rock", monster_list),
             2 : Tile((2, 4, 5, 3, 3), "small rock", monster_list),
@@ -64,3 +65,4 @@ def create_monster_touples(monster_list, d):
             ml.append((11 - ant, mon))
 
     return ml
+
