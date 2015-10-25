@@ -142,6 +142,7 @@ class Console():
         self.surface.blit(self.text_3, tmp)
     
     def push_text(self, string):
+        print "CONSOLE: ", string
         self.string_3 = self.string_2
         self.string_2 = self.string_1
         self.string_1 = string
