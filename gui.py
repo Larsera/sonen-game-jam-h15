@@ -120,9 +120,9 @@ class Console():
     def __init__(self, surface):
         self.surface = surface
         self.string_1 = "Try find some water, ya old baboon!"
-        self.string_2 = "Old text"
-        self.string_3 = "Olderest text"
-        self.string_4 = "Aincent text"
+        self.string_2 = ""
+        self.string_3 = ""
+        self.string_4 = ""
         self.rect = pygame.Rect(self.surface.get_width() - config.SIDEBAR_WIDTH - config.CONSOLE_WIDTH - config.CONSOLE_PADDING,
                 self.surface.get_height() - config.DOWNBAR_HEIGHT + config.CONSOLE_PADDING,
                 config.CONSOLE_WIDTH,
@@ -135,7 +135,7 @@ class Console():
         self.text_1 = self.font.render(self.string_1, 1, config.COLOR_LIGHTEST)
         self.text_2 = self.font.render(self.string_2, 1, config.COLOR_LIGHT)
         self.text_3 = self.font.render(self.string_3, 1, config.COLOR_LIGHT)
-        self.text_4 = self.font.render(self.string_4, 1, config.COLOR_LIGHT)
+        self.text_4 = self.font.render(self.string_4, 1, config.COLOR_DARK)
 
     def draw(self):
         pygame.draw.rect(self.surface, config.COLOR_LIGHTEST, self.rect, config.CONSOLE_OUTLINE)
