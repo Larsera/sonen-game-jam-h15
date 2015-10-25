@@ -77,7 +77,7 @@ class Character():
             self.console.push_text("You drink from the oasis until you feel refreshed.")
             self.thirst = 100
         elif curtile.water_amount > 0:
-            self.console.push_text("You drink from the water source, trying to mmake it last as long as possible.")
+            self.console.push_text("You drink from the water source, trying to make it last as long as possible.")
             nw = 100 - self.thirst
             nw = nw/10
             while curtile.water_amount > 0 and nw > 0:

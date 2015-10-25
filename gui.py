@@ -120,9 +120,9 @@ class Console():
     def __init__(self, surface):
         self.surface = surface
         self.string_1 = "Try find some water, ya old baboon!"
-        self.string_2 = "Old text"
-        self.string_3 = "Olderest text"
-        self.string_4 = "Aincent text"
+        self.string_2 = ""
+        self.string_3 = ""
+        self.string_4 = ""
         self.rect = pygame.Rect(self.surface.get_width() - config.SIDEBAR_WIDTH - config.CONSOLE_WIDTH - config.CONSOLE_PADDING,
                 self.surface.get_height() - config.DOWNBAR_HEIGHT + config.CONSOLE_PADDING,
                 config.CONSOLE_WIDTH,

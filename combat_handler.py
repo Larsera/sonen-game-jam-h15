@@ -67,7 +67,10 @@ class combat():
                 self.console.push_text(string)
             else:
                 string = "While you try to escape, the " + self.mon.name + " hits you for " + str(mon_damage-2) + " damage."
-                self.char.take_damage(mon_damage-2, self.mon.get_venom())
+                venom = self.mon.get_venom()
+                self.char.take_damage(mon_damage-2, venom)
+                if venom > 0:
+                    self.console.push_text("You've been poisoned!")
         elif char_damage > 1:
             if mon_damage == 1:
                 if self.mon.flee():
@@ -91,7 +94,10 @@ class combat():
                 self.mon.take_damage(char_damage-2)
                 string = "The " + self.mon.name + " hits you for " + str(mon_damage-2) + " damage."
                 self.console.push_text(string)
-                self.char.take_damage(mon_damage-2, self.mon.get_venom())
+                venom = self.mon.get_venom()
+                self.char.take_damage(mon_damage-2, venom)
+                if venom > 0:
+                    self.console.push_text("You've been poisoned!")
 
         return False
 
