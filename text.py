@@ -38,7 +38,7 @@ item = {"raw_meat" : "You strip some raw meat from the dead animal. It's better 
         "Stick" : "You find an old, dry stick lying on the ground.",
         "Sharp Rock" : "You pick up a rock with a sharp edge. It fits perfectly in your hand.",
         "Pointy Stick" : "You find a pointy stick. Perfect for poking animals in the face.",
-        "Mace +1" : "A can of mace...? Why would anyone bring that out here?",
+        "+1 Mace" : "A can of mace...? Why would anyone bring that out here?",
         "Warped Blade" : "You find a twisted piece of metal, sharp enough to be considered a blade."}
 
 

@@ -2,6 +2,7 @@ import random
 import pygame
 import config
 import text
+import items
 from combat_handler import combat
 
 class Character():
@@ -77,8 +78,8 @@ class Character():
                 self.food.remove(i)
 
         for i in self.drink:
-            if self.thirst + i.hdr <= 100:
-                self.thirst += i.hdr
+            if self.thirst + i.hydration <= 100:
+                self.thirst += i.hydration
                 self.drink.remove(i)
 
         if self.thirst == 0:
@@ -213,8 +214,7 @@ class Character():
             chance -= config.CHANCE_DEC
 
         if chance >= 100 - tile.item_chance*10:
-            #found_item()
-            console.push_text("You found an item!")
+            self.found_item(tile, console)
             chance -= config.CHANCE_DEC
 
         if chance >= 100 - tile.danger_chance*10:
@@ -255,19 +255,19 @@ class Character():
             result = random.randint(1, 4)
             if result == 1:
                 console.push_text("You found some food!")
-                find_food(CAMP_FOOD_LIST[random.randint(0, 1)])
+                self.find_food(config.CAMP_FOOD_LIST[random.randint(0, 1)])
             elif result == 2:
                 console.push_text("You found a bottle of water!")
-                find_water(get_water("water_bottle"))
+                self.find_drink(items.get_water("water_bottle"))
             elif result == 3:
                 console.push_text(text.item["antidote"])
-                find_medicine(get_medicine("antidote"))
+                self.find_medicine(items.get_medicine("antidote"))
             elif result == 4:
-                find_weapon(CAMP_WEAPON_LIST[random.randint(0, 1)], console)
+                self.find_weapon(config.CAMP_WEAPON_LIST[random.randint(0, 1)], console)
         else:
             result = random.randint(1, 2)
             if result == 1:
                 console.push_text(text.item["cactus_piece"])
                 find_food(items.get_foodstuff("cactus_piece"))
             else:
-                find_weapon(DEFAULT_WEAPON_LIST[random.randint(0, 2)], console)
+                find_weapon(config.DEFAULT_WEAPON_LIST[random.randint(0, 2)], console)
