@@ -50,7 +50,7 @@ class combat():
         elif char_damage < 0 and mon_damage > 1:
             string = "The " + self.mon.name + " hits you for " + str(mon_damage-2+char_damage) + " damage."
             self.console.push_text(string)
-            self.char.take_damage(mon_damage-2+char_damage)
+            self.char.take_damage(mon_damage-2+char_damage, self.mon.get_venom())
         elif char_damage < 0 and mon_damage < 0:
             string = "You lock eyes with the " + self.mon.name + ". Neiher of you makes a move."
             self.console.push_text(string)
