@@ -31,16 +31,15 @@ class Tile():
     def get_monster(self):
         random.seed()
         c = random.randint(1, self.tot_monster_chance)
+        print self.monster_dict.get(c).name
         return self.monster_dict.get(c)
 
     def create_monster_id_dict(self, monster_list):
         for c, m in monster_list:
-            cnt = 0
-            while cnt < c:
-                cnt += 1
-                self.monster_dict[self.tot_monster_chance + cnt] = m
-
-            self.tot_monster_chance += c
+            while c >  0:
+                c -= 1
+                self.tot_monster_chance += 1
+                self.monster_dict[self.tot_monster_chance] = m
 
     def found_shadow(self):
         self.shadow = True

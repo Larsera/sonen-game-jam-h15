@@ -218,5 +218,5 @@ class Character():
         if tile.water_chance < 10:
             tile.water_amount = random.randint(1, tile.water_chance)
         else:
-            tile.water_amount(-1)
+            tile.water_amount -= 1
 
