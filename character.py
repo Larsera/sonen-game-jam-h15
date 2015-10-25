@@ -1,6 +1,7 @@
 import random
 import pygame
 import config
+import text
 from combat_handler import combat
 
 class Character():
@@ -103,9 +104,10 @@ class Character():
         else:
             return 0
 
-    def move(self, direction, world):
+    def move(self, direction, world, console):
         out = False
         x, y = self.position
+        src = world.world[x][y]
         if direction == 'N':
             y -= 1
             if y < 0:
@@ -146,6 +148,10 @@ class Character():
                     out = True
                 else:
                     x -= 1
+
+        if out:
+            if world.world[x][y] != src:
+                console.push_text(text.biome[world.world[x][y]])
 
         self.position = x, y
         self.draw()
