@@ -64,7 +64,7 @@ class Monster():
             return 3
 
 def get_monster(ident):
-    return {"rattlesnake" : Monster(name="Rattlesnake", hp=20, ven=7, dmg_min=1, dmg_max=5, rarity=5, acp=3, attack=7),
+    return {"rattlesnake" : Monster(name="Rattlesnake", hp=20, ven=7, dmg_min=1, dmg_max=5, rarity=5, acp=3, attack=14),
             "small_scorpion" : Monster(name="Small Scorpion", hp=5, dmg_min=1, dmg_max=2, ven=10, rarity=7, attack=10),
             "big_scorpion" : Monster(name="Big Scorpion", hp=15, dmg_min=3, dmg_max=5, rarity=3, acp=5, attack=5),
             "road_runner" : Monster(name="Road Runner", hp=7, rarity=6, acp=15, flee=10),
