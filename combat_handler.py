@@ -1,4 +1,5 @@
 import pygame
+from monster import Monster
 import config
 import text
 
@@ -8,7 +9,9 @@ class combat():
         self.char = char
         self.mon = mon
         self.console = console
-        console.push_text(text.monster[mon.name])
+        print "MONSTER? ",
+        print(type(mon))
+        console.push_text(text.monster[self.mon.name])
 
     def do_combat_turn(self, cmd):
         self.combat_turn(cmd)
