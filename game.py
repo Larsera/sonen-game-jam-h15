@@ -6,6 +6,7 @@ from gui import *
 from sounds import *
 from combat_handler import *
 from tiles import get_tile
+from items import get_foodstuff
 import text
 import config
 
@@ -123,6 +124,7 @@ class Game():
             elif event.type == config.WIN:
                 self.state = "normal"
                 self.combat = None
+                self.character.find_food(get_foodstuff("raw_meat"))
 
     def newturn(self):
         self.character.update(self.world.get_cur_tile(self.character.position))
