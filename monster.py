@@ -12,10 +12,10 @@ class Monster():
         self.name = name
         self.alive = True
         self.rarity = rarity
-        self.attack = attack
-        self.defend = defend
-        self.flee = flee
-        self.tot = attack+defend+flee
+        self.ai_attack = attack
+        self.ai_defend = defend
+        self.ai_flee = flee
+        self.ai_tot = attack+defend+flee
 
     def update(self):
         self.remaining_actions = self.action_points
@@ -55,10 +55,10 @@ class Monster():
 
     def get_action(self):
         random.seed()
-        a = random.randint(1, self.tot)
-        if 1 <= a <= self.flee:
+        a = random.randint(1, self.ai_tot)
+        if 1 <= a <= self.ai_flee:
             return 1
-        elif a <= self.defend:
+        elif a <= self.ai_defend:
             return 2
         else:
             return 3
