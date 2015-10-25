@@ -197,6 +197,7 @@ class Character():
             console.push_text("There is nothing left to find here")
             return
         else:
+            self.dec_rem_act(1)
             tile.searches_left -= 1
         random.seed()
 
