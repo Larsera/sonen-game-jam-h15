@@ -268,6 +268,6 @@ class Character():
             result = random.randint(1, 2)
             if result == 1:
                 console.push_text(text.item["cactus_piece"])
-                find_food(items.get_foodstuff("cactus_piece"))
+                self.find_food(items.get_foodstuff("cactus_piece"))
             else:
-                find_weapon(config.DEFAULT_WEAPON_LIST[random.randint(0, 2)], console)
+                self.find_weapon(config.DEFAULT_WEAPON_LIST[random.randint(0, 2)], console)
