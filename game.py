@@ -136,6 +136,7 @@ class Game():
                 self.state = "normal"
                 self.combat = None
                 self.character.find_food(get_foodstuff("raw_meat"))
+                self.console.push_text("You harvest som meat")
             elif event.type == pygame.QUIT:
                 self.running = False
     def newturn(self):
