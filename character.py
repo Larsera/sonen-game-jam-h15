@@ -3,6 +3,7 @@ import pygame
 import config
 import text
 import items
+from items import weapon
 from combat_handler import combat
 
 class Character():
@@ -21,7 +22,7 @@ class Character():
         self.max_damage = 10
         self.min_damage = 5
         self.actions = 5
-        self.weapon = None
+        self.weapon = weapon("Bare Hands", dmg=0)
         self.remaining_actions = self.actions
         self.food = []
         self.drink = []
@@ -247,13 +248,9 @@ class Character():
             chance -= config.CHANCE_DEC
 
     def find_food(self, foodstuff):
-        string = "You found some " + foodstuff.name + "."
-        self.console.push_text(string)
         self.food.append(foodstuff)
 
     def find_drink(self, hydration):
-        string = "You found some " + hydration.name + "."
-        self.console.push_text(string)
         self.drink.append(hydration)
 
     def find_medicine(self, medication):
