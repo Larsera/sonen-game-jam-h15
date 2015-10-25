@@ -42,28 +42,43 @@ class Tile():
 
     def get_monster(self):
         random.seed()
-        c = random.randint(1, self.tot_monster_chance)
-        return self.monster_dict.get(c)
+        if self.tot_monster_chance > 1:
+            c = random.randint(1, self.tot_monster_chance)
+            return self.monster_dict.get(c)
+        else:
+            return self.monster_dict.get(1)
 
     def get_hydration(self):
         random.seed()
-        c = random.randint(1, self.tot_hydration_chance)
-        return self.hydration_dict.get(c)
+        if self.tot_hydration_chance > 1:
+            c = random.randint(1, self.tot_hydration_chance)
+            return self.hydration_dict.get(c)
+        else:
+            return self.hydration_dict.get(1)
 
     def get_foodstuff(self):
         random.seed()
-        c = random.randint(1, self.tot_foodstuff_chance)
-        return self.foodstuff_dict.get(c)
+        if self.tot_foodstuff_chance > 1:
+            c = random.randint(1, self.tot_foodstuff_chance)
+            return self.foodstuff_dict.get(c)
+        else:
+            return self.foodstuff_dict.get(1)
 
     def get_medicine(self):
         random.seed()
-        c = random.randint(1, self.tot_medicine_chance)
-        return self.medicine_dict.get(c)
+        if self.tot_medicine_chance > 1:
+            c = random.randint(1, self.tot_medicine_chance)
+            return self.medicine_dict.get(c)
+        else:
+            return self.medicine_dict.get(1)
 
     def get_weapon(self):
         random.seed()
-        c = random.randint(1, self.tot_weapon_chance)
-        return self.weapon_dict.get(c)
+        if self.tot_weapon_chance > 1:
+            c = random.randint(1, self.tot_weapon_chance)
+            return self.weapon_dict.get(c)
+        else:
+            return self.weapon_dict.get(1)
 
     def create_monster_id_dict(self, monster_list):
         for c, m in monster_list:
